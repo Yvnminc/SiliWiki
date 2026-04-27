@@ -28,10 +28,11 @@ Results:
 - Content validation: pass — 2 wiki packs (`demo`, `siliwiki-v1`), 0 errors, 0 warnings.
 - Unit tests: pass — 8 tests, 8 pass, 0 fail.
 - Build: pass — lint + typecheck + validate + tests all passed.
-- Package smoke: pass — `npm run pack:check` produced `siliwiki-0.1.0.tgz`, 28 packaged files, package size ~27.0 kB.
+- Package smoke: pass — `npm run pack:check` produced `siliwiki-0.1.0.tgz`, 28 packaged files, package size ~34.5 kB.
 - Server smoke: pass — local server served health, library (2 wiki packs), and demo wiki API.
 - Doctor: pass — Node >= 20, content dir exists, wiki packs validate.
-- Browser smoke: pass — `http://localhost:3123` rendered the shelf; `/wiki/siliwiki-v1` rendered reader UI, glossary overlay, navigation, diagrams, and no browser console errors.
+- Browser smoke: pass — `http://100.77.32.114:3123/wiki/siliwiki-v1` rendered with the NTU-style wiki reader shell: warm background, sticky sidebar, logo block, glossary/export controls, search, diagrams, and no browser console errors.
+- UI interaction smoke: pass — Glossary overlay opens with 6 entries; export menu opens; search for `架构` returns 3 results.
 - Security scan: pass — no secret-looking files or token patterns found outside `node_modules` / `.git`.
 
 Known limitations:
