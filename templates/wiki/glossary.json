@@ -1,0 +1,30 @@
+{
+  "version": "v0.1",
+  "updated": "{{DATE}}",
+  "description": "Canonical terms for {{TITLE}}.",
+  "categories": [
+    { "key": "core", "title": "Core concepts", "color": "#5b3df5" }
+  ],
+  "keywords": [
+    {
+      "slug": "wiki",
+      "display": "Wiki",
+      "aliases": ["local wiki", "content pack"],
+      "category": "core",
+      "short": "A durable local knowledge object rendered by SiliWiki.",
+      "definition": "In SiliWiki, a wiki is a folder under content/wikis/<slug> containing meta.json, content.md, optional glossary.json, and optional raw evidence or images.",
+      "related": ["glossary"],
+      "sources": ["raw/sources.md#local-note"]
+    },
+    {
+      "slug": "glossary",
+      "display": "Glossary",
+      "aliases": ["term registry", "词条"],
+      "category": "core",
+      "short": "A canonical term registry for one wiki.",
+      "definition": "A glossary standardizes terms, aliases, definitions, relationships, and sources so humans and agents use the same vocabulary.",
+      "related": ["wiki"],
+      "sources": ["raw/sources.md#local-note"]
+    }
+  ]
+}

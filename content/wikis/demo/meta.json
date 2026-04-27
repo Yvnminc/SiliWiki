@@ -1,0 +1,42 @@
+{
+  "slug": "demo",
+  "title": "SiliWiki Demo · 硅基笔记示例",
+  "sub": "Local-first agent-generated wiki workflow · 2026-04",
+  "description": "A safe sample wiki showing how SiliWiki turns agent-written Markdown and glossary files into a local reader UI.",
+  "logoText": "Si",
+  "version": "v0.1",
+  "updated": "2026-04-27",
+  "accent": "#5b3df5",
+  "accentSoft": "#ece8ff",
+  "accentDark": "#3720c9",
+  "disclaimer": "Demo content only. Your real generated content stays on localhost unless you choose to share it.",
+  "nav": [
+    {
+      "chip": "1",
+      "title": "User flow",
+      "open": true,
+      "children": [
+        { "anchor": "what-is-siliwiki", "title": "What is SiliWiki" },
+        { "anchor": "three-step-loop", "title": "Three-step loop" }
+      ]
+    },
+    {
+      "chip": "2",
+      "title": "Content model",
+      "open": true,
+      "children": [
+        { "anchor": "wiki-definition", "title": "Wiki definition" },
+        { "anchor": "glossary-definition", "title": "Glossary definition" }
+      ]
+    },
+    {
+      "chip": "3",
+      "title": "Agent harness",
+      "open": true,
+      "children": [
+        { "anchor": "skill-as-harness", "title": "Skill as harness" },
+        { "anchor": "next-actions", "title": "Next actions" }
+      ]
+    }
+  ]
+}

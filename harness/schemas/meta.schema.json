@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://siliwiki.local/schemas/meta.schema.json",
+  "title": "SiliWiki meta.json",
+  "type": "object",
+  "required": ["title"],
+  "properties": {
+    "slug": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+    "title": { "type": "string", "minLength": 1 },
+    "sub": { "type": "string" },
+    "description": { "type": "string" },
+    "logoText": { "type": "string", "minLength": 1, "maxLength": 6 },
+    "version": { "type": "string" },
+    "updated": { "type": "string" },
+    "accent": { "type": "string", "pattern": "^#[0-9a-fA-F]{3,8}$" },
+    "accentSoft": { "type": "string", "pattern": "^#[0-9a-fA-F]{3,8}$" },
+    "accentDark": { "type": "string", "pattern": "^#[0-9a-fA-F]{3,8}$" },
+    "disclaimer": { "type": "string" },
+    "nav": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/navItem" }
+    }
+  },
+  "$defs": {
+    "navItem": {
+      "type": "object",
+      "properties": {
+        "chip": { "type": "string" },
+        "title": { "type": "string" },
+        "open": { "type": "boolean" },
+        "color": { "type": "string" },
+        "anchor": { "type": "string" },
+        "children": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/navItem" }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

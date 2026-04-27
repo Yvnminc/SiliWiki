@@ -1,0 +1,69 @@
+{
+  "slug": "siliwiki-v1",
+  "title": "SiliWiki V1 使用说明与样例",
+  "sub": "硅基笔记第一版 · Agent 生成内容 → 本地 Wiki UI · 2026-04",
+  "description": "一份可直接打开的中文使用说明，展示 SiliWiki 第一版应该长什么样、怎么安装、怎么把 skill 给本地 agent、怎么生成 wiki/glossary 内容包。",
+  "logoText": "V1",
+  "version": "v0.1",
+  "updated": "2026-04-27",
+  "accent": "#a63d00",
+  "accentSoft": "#f4e9df",
+  "accentDark": "#7a2d00",
+  "disclaimer": "这是 SiliWiki 第一版产品样例和使用说明。所有内容默认运行在 localhost，本地文件由用户自己管理。",
+  "nav": [
+    {
+      "chip": "0",
+      "title": "先看结论",
+      "open": true,
+      "children": [
+        { "anchor": "what-you-get", "title": "你会得到什么" },
+        { "anchor": "v1-product-shape", "title": "V1 长什么样" }
+      ]
+    },
+    {
+      "chip": "1",
+      "title": "使用流程",
+      "open": true,
+      "color": "accent",
+      "children": [
+        { "anchor": "install-and-run", "title": "安装并启动" },
+        { "anchor": "give-skill-to-agent", "title": "把 Skill 给 Agent" },
+        { "anchor": "generate-content-pack", "title": "生成内容包" },
+        { "anchor": "preview-and-validate", "title": "预览与校验" }
+      ]
+    },
+    {
+      "chip": "2",
+      "title": "内容规范",
+      "open": true,
+      "color": "green",
+      "children": [
+        { "anchor": "wiki-spec", "title": "什么是 Wiki" },
+        { "anchor": "glossary-spec", "title": "什么是 Glossary" },
+        { "anchor": "source-registry", "title": "什么是来源登记" }
+      ]
+    },
+    {
+      "chip": "3",
+      "title": "架构",
+      "open": true,
+      "color": "blue",
+      "children": [
+        { "anchor": "system-architecture", "title": "系统架构图" },
+        { "anchor": "generation-sequence", "title": "生成链路" },
+        { "anchor": "folder-map", "title": "文件结构" }
+      ]
+    },
+    {
+      "chip": "4",
+      "title": "样例与边界",
+      "open": true,
+      "color": "purple",
+      "children": [
+        { "anchor": "example-prompt", "title": "给 Agent 的样例 prompt" },
+        { "anchor": "v1-scope", "title": "V1 范围" },
+        { "anchor": "next-steps", "title": "下一步" }
+      ]
+    }
+  ]
+}

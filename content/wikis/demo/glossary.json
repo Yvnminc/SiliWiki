@@ -1,0 +1,41 @@
+{
+  "version": "v0.1",
+  "updated": "2026-04-27",
+  "description": "Core terms used by the SiliWiki demo.",
+  "categories": [
+    { "key": "core", "title": "Core model", "color": "#5b3df5" },
+    { "key": "agent", "title": "Agent workflow", "color": "#0b6e4f" }
+  ],
+  "keywords": [
+    {
+      "slug": "wiki",
+      "display": "Wiki",
+      "aliases": ["content pack", "local wiki", "硅基笔记条目"],
+      "category": "core",
+      "short": "A local folder containing structured knowledge files.",
+      "definition": "In SiliWiki, a wiki is a local content pack under content/wikis/<slug> with meta.json, content.md, optional glossary.json, and optional raw evidence or images.",
+      "related": ["glossary", "skill"],
+      "sources": ["raw/sources.md#siliwiki-design-note"]
+    },
+    {
+      "slug": "glossary",
+      "display": "Glossary",
+      "aliases": ["词条", "term registry", "canonical terms"],
+      "category": "core",
+      "short": "The canonical term registry for one wiki.",
+      "definition": "A glossary standardizes terms, aliases, definitions, relationships, and sources. It helps readers understand the domain and helps agents keep vocabulary stable.",
+      "related": ["wiki", "skill"],
+      "sources": ["raw/sources.md#siliwiki-design-note"]
+    },
+    {
+      "slug": "skill",
+      "display": "Skill",
+      "aliases": ["agent harness", "写作说明书", "content harness"],
+      "category": "agent",
+      "short": "Instructions that constrain a local agent's writing behavior.",
+      "definition": "The SiliWiki skill describes how an agent should create, validate, and maintain a wiki content pack. It is the bridge between conversation and local files.",
+      "related": ["wiki", "glossary"],
+      "sources": ["raw/sources.md#siliwiki-design-note"]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "siliwiki",
+  "version": "0.1.0",
+  "description": "SiliWiki / 硅基笔记: a local-first agent-generated wiki workbench.",
+  "type": "module",
+  "bin": {
+    "siliwiki": "./bin/siliwiki.mjs"
+  },
+  "scripts": {
+    "dev": "node bin/siliwiki.mjs dev",
+    "new": "node bin/siliwiki.mjs new",
+    "validate": "node bin/siliwiki.mjs validate",
+    "skill": "node bin/siliwiki.mjs skill",
+    "doctor": "node bin/siliwiki.mjs doctor",
+    "lint": "node scripts/lint.mjs",
+    "typecheck": "node scripts/typecheck.mjs",
+    "test": "node --test",
+    "build": "npm run lint && npm run typecheck && npm run validate && npm test",
+    "smoke": "node scripts/smoke.mjs",
+    "pack:check": "npm pack --dry-run"
+  },
+  "keywords": [
+    "wiki",
+    "local-first",
+    "agent",
+    "glossary",
+    "knowledge-base",
+    "markdown"
+  ],
+  "author": "WhiteMirror AI Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "public/",
+    "content/wikis/demo/",
+    "templates/",
+    "skills/",
+    "harness/",
+    "docs/",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "express": "^4.19.2",
+    "marked": "^12.0.2"
+  },
+  "devDependencies": {}
+}
