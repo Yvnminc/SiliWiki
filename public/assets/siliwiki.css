@@ -667,7 +667,7 @@ body.drawer-open { overflow: hidden; }
 
 @media (max-width: 900px) {
   .container { grid-template-columns: minmax(0, 1fr); }
-  main { padding: 20px 18px 40px; max-width: 100%; min-width: 0; overflow-x: hidden; }
+  main { padding: 20px 18px 40px; max-width: 100%; min-width: 0; overflow-x: visible; }
   table { display: block; overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; }
   pre { max-width: 100%; overflow-x: auto; }
   h1 { font-size: 26px; padding-bottom: 12px; }
@@ -1173,18 +1173,22 @@ pre.mermaid-lite {
   border-radius: 12px;
   padding: 18px 14px 16px;
   white-space: normal;
-  overflow-x: auto;
+  overflow-x: hidden;
+  max-width: 100%;
   box-shadow: inset 0 0 0 1px rgba(122, 68, 35, .06);
 }
 pre.mermaid-lite .m-figure {
   display: block;
   margin: 0;
-  min-width: max-content;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 .m-graph {
   display: block;
   width: 100%;
-  min-width: 720px;
+  max-width: 100%;
+  min-width: 0;
   height: auto;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Noto Sans Mono CJK SC", monospace;
 }
@@ -1237,7 +1241,9 @@ pre.mermaid-lite .m-figure {
 .m-lite.m-sequence {
   display: grid;
   gap: 10px;
-  min-width: 680px;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
 }
 .m-sequence .m-step {
   display: grid;
@@ -1254,6 +1260,10 @@ pre.mermaid-lite .m-figure {
   color: #95532f;
   font-size: 18px;
   text-align: center;
+}
+.m-sequence .m-step span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .m-sequence .m-step em {
   grid-column: 1 / -1;

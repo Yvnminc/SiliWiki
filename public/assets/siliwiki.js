@@ -419,7 +419,7 @@ function assignFlowTypes(nodes, edges) {
   }
 }
 
-function layoutFlowNodes(graph) {
+function getFlowGroups(graph) {
   const nodes = Array.from(graph.nodes.values()).sort((a, b) => a.order - b.order);
   const levels = new Map(nodes.map(node => [node.id, 0]));
   for (let i = 0; i < nodes.length; i += 1) {
@@ -435,6 +435,11 @@ function layoutFlowNodes(graph) {
     groups.get(level).push(node);
   }
   const orderedLevels = Array.from(groups.keys()).sort((a, b) => a - b);
+  return { groups, orderedLevels };
+}
+
+function layoutFlowNodes(graph) {
+  const { groups, orderedLevels } = getFlowGroups(graph);
   const isLR = /^LR|RL$/i.test(graph.direction);
   const maxGroup = Math.max(1, ...orderedLevels.map(level => groups.get(level).length));
   const levelCount = Math.max(1, orderedLevels.length);
@@ -471,17 +476,64 @@ function layoutFlowNodes(graph) {
     });
   }
 
-  return { width, height, nodes: positioned, isLR };
+  return { width, height, nodes: positioned, isLR, compact: false };
+}
+
+function shouldUseCompactFlowLayout(graph) {
+  if (!graph || graph.nodes.size <= 2) return false;
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return false;
+  return window.matchMedia('(max-width: 560px)').matches;
+}
+
+function layoutCompactFlowNodes(graph) {
+  const { groups, orderedLevels } = getFlowGroups(graph);
+  const nodeW = 144;
+  const appW = 144;
+  const nodeH = 58;
+  const diamondW = 142;
+  const diamondH = 76;
+  const width = 342;
+  const marginY = 26;
+  const levelGap = 44;
+  const rowGap = 18;
+  const columnGap = 14;
+  const positioned = new Map();
+  let cursorY = marginY;
+
+  for (const level of orderedLevels) {
+    const group = groups.get(level);
+    const columns = group.length === 1 ? 1 : 2;
+    const rowHeight = Math.max(...group.map(node => node.shape === 'diamond' ? diamondH : nodeH));
+    const cellW = Math.max(nodeW, appW, diamondW);
+    const gridW = columns * cellW + (columns - 1) * columnGap;
+    const startX = width / 2 - gridW / 2 + cellW / 2;
+
+    group.forEach((node, index) => {
+      const w = node.shape === 'diamond' ? diamondW : (node.type === 'app' ? appW : nodeW);
+      const h = node.shape === 'diamond' ? diamondH : nodeH;
+      const col = index % columns;
+      const row = Math.floor(index / columns);
+      const x = columns === 1 ? width / 2 : startX + col * (cellW + columnGap);
+      const y = cursorY + row * (rowHeight + rowGap) + rowHeight / 2;
+      positioned.set(node.id, { ...node, x, y, w, h, level, index });
+    });
+
+    const rows = Math.ceil(group.length / columns);
+    cursorY += rows * rowHeight + Math.max(0, rows - 1) * rowGap + levelGap;
+  }
+
+  const height = Math.max(220, cursorY - levelGap + marginY);
+  return { width, height, nodes: positioned, isLR: false, compact: true };
 }
 
 function renderFlowSvg(graph) {
-  const layout = layoutFlowNodes(graph);
-  const hash = Math.abs(hashString(Array.from(graph.nodes.keys()).join('|') + graph.edges.length)).toString(36);
+  const layout = shouldUseCompactFlowLayout(graph) ? layoutCompactFlowNodes(graph) : layoutFlowNodes(graph);
+  const hash = Math.abs(hashString(Array.from(graph.nodes.keys()).join('|') + graph.edges.length + (layout.compact ? '-m' : '-d'))).toString(36);
   const markerId = `m-arrow-${hash}`;
   const edges = graph.edges.map(edge => renderFlowEdge(edge, layout, markerId)).join('');
   const nodes = Array.from(layout.nodes.values()).map(renderNodeShape).join('');
   const caption = graph.captions.length ? `<figcaption class="m-caption">${escapeHtml(graph.captions.join(' '))}</figcaption>` : '';
-  return `<figure class="m-lite m-figure m-flowchart"><svg class="m-graph" viewBox="0 0 ${layout.width} ${layout.height}" role="img" aria-label="SiliWiki flowchart diagram"><defs><marker id="${markerId}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" class="m-arrow-head" /></marker></defs><g class="m-links">${edges}</g><g class="m-nodes">${nodes}</g></svg>${caption}</figure>`;
+  return `<figure class="m-lite m-figure m-flowchart" data-layout="${layout.compact ? 'mobile' : 'desktop'}"><svg class="m-graph" viewBox="0 0 ${layout.width} ${layout.height}" role="img" aria-label="SiliWiki flowchart diagram"><defs><marker id="${markerId}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" class="m-arrow-head" /></marker></defs><g class="m-links">${edges}</g><g class="m-nodes">${nodes}</g></svg>${caption}</figure>`;
 }
 
 function renderFlowEdge(edge, layout, markerId) {
