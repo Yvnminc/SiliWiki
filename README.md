@@ -18,12 +18,21 @@
 </p>
 
 <p align="center">
+  <a href="https://siliwiki.vercel.app/wiki/self-evolving-agentic-wiki">Live Demo</a> ·
   <a href="#quick-start">Quick Start</a> ·
   <a href="docs/USAGE_ZH.md">中文小白说明</a> ·
   <a href="docs/SELF_EVOLVING_AGENTIC_WIKI.md">Self-evolving algorithm</a> ·
   <a href="docs/CONTENT_SPEC.md">Content Spec</a> ·
   <a href="docs/ARCHITECTURE.md">Architecture</a>
 </p>
+
+---
+
+## Live Demo
+
+Try the hosted sample wiki here: **[SiliWiki self-evolving Agentic Wiki demo](https://siliwiki.vercel.app/wiki/self-evolving-agentic-wiki)**.
+
+The Vercel demo uses the bundled public sample content. SiliWiki's main workflow remains local-first: clone the repo, give the writer skill to your local agent, generate wiki files locally, then review and validate them in git.
 
 ---
 

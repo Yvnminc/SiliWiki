@@ -1,14 +1,15 @@
 # Reproducible Test Results
 
 Environment:
-- Test date: 2026-04-27 19:01 AEST
+- Test date: 2026-04-28 09:35 AEST
 - OS: macOS 26.2 (Darwin 25.2.0 arm64)
 - Node version: v24.13.0
 - Package manager: npm 11.6.2
 - Branch: `main`
-- Git base commit at test time: `c5b6758` (`docs: fix README badge rendering`)
-- Working tree under test: self-evolving Agentic Wiki workflow, CLI, docs, sample wiki, logo, README SVG diagrams
+- Git base commit at test time: `d4993e2` (`docs: simplify README diagram sections`)
+- Working tree under test: Vercel demo deployment config, README demo link, self-evolving Agentic Wiki workflow, CLI, docs, sample wiki, logo
 - Public repo: <https://github.com/Yvnminc/SiliWiki>
+- Hosted demo: <https://siliwiki.vercel.app/wiki/self-evolving-agentic-wiki>
 
 Commands:
 
@@ -21,6 +22,12 @@ npm run build
 npm run smoke
 npm run pack:check
 npm audit --omit=dev
+npx vercel --prod --yes
+# Hosted smoke checks:
+# - https://siliwiki.vercel.app/api/health
+# - https://siliwiki.vercel.app/api/library
+# - https://siliwiki.vercel.app/api/wiki/self-evolving-agentic-wiki
+# - https://siliwiki.vercel.app/wiki/self-evolving-agentic-wiki
 # Additional repository-wide secret scan for token/key/JWT/connection-string/Tailscale/Telegram patterns.
 ```
 
@@ -41,8 +48,10 @@ Results:
   - README SVG diagram assets under `docs/images/diagrams/`
   - SiliWiki logo assets under `public/assets/` and `docs/images/`
 - Security dependency check: pass — `npm audit --omit=dev` reports `found 0 vulnerabilities`.
-- Secret scan: pass — 72 text files scanned; no findings for private keys, GitHub/OpenAI/Slack tokens, JWTs, database/Redis connection strings, Tailscale IPs, or numeric Telegram targets.
+- Secret scan: pass — 71 text files scanned; no findings for private keys, GitHub/OpenAI/Slack tokens, JWTs, database/Redis connection strings, Tailscale IPs, or numeric Telegram targets.
 - CLI evolve smoke: pass — `siliwiki evolve <slug>` can emit a self-evolution plan, `--write` writes the default local plan path, and `--out` writes an explicit plan path.
+- Vercel deploy: pass — production deployment completed and was aliased to <https://siliwiki.vercel.app>.
+- Hosted demo smoke: pass — `/api/health`, `/api/library`, `/api/wiki/self-evolving-agentic-wiki`, and `/wiki/self-evolving-agentic-wiki` all returned HTTP 200; browser verification loaded the reader with no raw Mermaid blocks or stuck loading state.
 
 Representative output:
 
@@ -67,13 +76,15 @@ smoke ok: http://127.0.0.1:<ephemeral-port> served health, library (3), demo wik
 found 0 vulnerabilities
 ```
 
-Local browser verification:
+Local and hosted browser verification:
 
 ```text
-URL: http://127.0.0.1:3124/wiki/self-evolving-agentic-wiki
+Local URL: http://127.0.0.1:3124/wiki/self-evolving-agentic-wiki
+Hosted URL: https://siliwiki.vercel.app/wiki/self-evolving-agentic-wiki
 Page title: SiliWiki / 硅基笔记
-Reader shell: NTU-style local SiliWiki reader
+Reader shell: NTU-style SiliWiki reader
 Expected content: self-evolving Agentic Wiki sample pack, SiliLoop diagram, glossary, references, evolution plan
+Hosted checks: article loaded, raw Mermaid blocks = 0, loading state absent
 ```
 
 Public GitHub page verification:
