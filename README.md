@@ -1,24 +1,108 @@
 # SiliWiki / 硅基笔记
 
-> Local-first agent-generated wiki workbench: give a writing skill to your local agent, let it generate structured wiki/glossary content packs, and view the result at `localhost`.
+<p align="center">
+  <strong>把 AI 生成的内容，变成可验证、可阅读、可持续演化的本地 Wiki。</strong>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Yvnminc/SiliWiki/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Yvnminc/SiliWiki/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
+  <img alt="Node.js >= 20" src="https://img.shields.io/badge/Node.js-%3E%3D20-43853d.svg">
+  <img alt="Local First" src="https://img.shields.io/badge/local--first-yes-ffb703.svg">
+  <img alt="Agent Harness" src="https://img.shields.io/badge/agent-harness-7c3aed.svg">
+</p>
+
+<p align="center">
+  <a href="#quick-start">Quick Start</a> ·
+  <a href="docs/USAGE_ZH.md">中文小白说明</a> ·
+  <a href="docs/CONTENT_SPEC.md">Content Spec</a> ·
+  <a href="docs/ARCHITECTURE.md">Architecture</a>
+</p>
+
+---
+
+## What is SiliWiki?
+
+**SiliWiki（硅基笔记）** is a local-first wiki workbench for agent-generated knowledge.
+
+Most AI-generated articles disappear into chat history. SiliWiki turns them into a living knowledge object:
+
+- a **writing skill** that tells your local agent how to write;
+- a **plain-file wiki pack** that humans can review in git;
+- a **glossary layer** that keeps vocabulary stable;
+- a **localhost reader UI** that makes the result feel like a small product, not a pile of Markdown.
+
+> **The point:** SiliWiki is not “another note app”. It is a harness that makes agent-written knowledge structured, inspectable, local, and reusable.
 
 Built and maintained with support from the WhiteMirror AI Team.
 
+---
+
+## The core loop
+
+```mermaid
+flowchart LR
+    A["1. Clone SiliWiki"] --> B["2. Extract writer skill"]
+    B --> C["3. Give skill to your local agent"]
+    C --> D["4. Agent writes a wiki pack"]
+    D --> E["5. Validate"]
+    E --> F["6. Read on localhost"]
+    F --> G["7. Improve with git diffs"]
+
+    classDef action fill:#fff7ed,stroke:#c2410c,color:#7c2d12,stroke-width:1.5px;
+    classDef result fill:#ecfeff,stroke:#0891b2,color:#164e63,stroke-width:1.5px;
+    class A,B,C,E,F,G action;
+    class D result;
+```
+
+SiliWiki separates **generation** from **ownership**. Your agent can draft, but the output lives in your local files, passes validation, and can be reviewed like normal source code.
+
+---
+
+## Why it matters
+
+```mermaid
+flowchart TD
+    Chat["AI chat answer"] -->|usually becomes| Lost["lost context / hard to reuse"]
+    Chat -->|with SiliWiki| Skill["writing skill"]
+    Skill --> Pack["wiki pack"]
+    Pack --> Review["human review + git history"]
+    Pack --> UI["beautiful local reader"]
+    Pack --> Agent["future agents reuse the same terms"]
+
+    Lost -.->|SiliWiki prevents this| Pack
+
+    classDef bad fill:#fee2e2,stroke:#dc2626,color:#7f1d1d;
+    classDef good fill:#dcfce7,stroke:#16a34a,color:#14532d;
+    classDef neutral fill:#eef2ff,stroke:#4f46e5,color:#312e81;
+    class Lost bad;
+    class Skill,Pack,Review,UI,Agent good;
+    class Chat neutral;
+```
+
+SiliWiki is designed for people who want AI to help write serious knowledge bases without surrendering control to a cloud product or an invisible prompt chain.
+
+---
+
 ## Features
 
-- **Local-first UI** — content stays in `content/wikis/` and renders at `http://localhost:3000`.
-- **Agent harness included** — `npm run skill` prints the SiliWiki writer skill for your local agent.
-- **Structured content packs** — every wiki is a folder with `meta.json`, `content.md`, optional `glossary.json`, raw sources, and images.
-- **Glossary overlay** — canonical terms, aliases, definitions, and auto-linking.
-- **No build step UI** — Express + browser ESM + Markdown rendering.
-- **Validation and smoke tests** — catch broken nav anchors, invalid glossary entries, and secret-looking files.
-- **Open-source ready** — docs, CI, issue templates, PR template, license, contributing and security policy.
+| Area | What SiliWiki provides |
+|---|---|
+| 🧠 Agent harness | `npm run skill` prints the writer skill you can hand to Codex, Claude Code, OpenCode, Cursor, or another local agent. |
+| 📚 Wiki definition | A wiki is a local content pack with metadata, navigation, Markdown content, sources, and optional images. |
+| 🧩 Glossary definition | A glossary is the concept layer: canonical terms, aliases, definitions, related terms, and sources. |
+| 🏠 Local-first UI | Content stays in `content/wikis/` and renders in a localhost reader. No cloud backend required. |
+| ✅ Validation | Broken anchors, invalid glossary terms, missing metadata, and secret-looking files are caught before reading. |
+| 🔎 Reader experience | Library shelf, wiki reader, side navigation, search-friendly structure, glossary overlay, and responsive diagrams. |
+| 🧪 Reproducibility | Lint, typecheck, validation, tests, smoke test, package dry-run, and GitHub Actions CI. |
 
-## Installation
+---
+
+## Quick Start
 
 ```bash
-git clone <your-siliwiki-repo-url>
-cd siliwiki
+git clone https://github.com/Yvnminc/SiliWiki.git
+cd SiliWiki
 npm install
 npm run dev
 ```
@@ -29,73 +113,116 @@ Open:
 http://localhost:3000
 ```
 
-## 中文使用说明 / V1 Sample
+Try the live sample:
 
-- 中文完整使用说明：[`docs/USAGE_ZH.md`](docs/USAGE_ZH.md)
-- 本地可打开的 V1 样例：`http://localhost:3000/wiki/siliwiki-v1`
-- 样例内容包：[`content/wikis/siliwiki-v1/`](content/wikis/siliwiki-v1/)
+```text
+http://localhost:3000/wiki/siliwiki-v1
+```
 
-## Quick Start
+中文新手版：[`docs/USAGE_ZH.md`](docs/USAGE_ZH.md)
+
+---
+
+## Write your first AI-generated wiki
+
+### 1. Take out the writing skill
 
 ```bash
-# 1. Print the skill and give it to your local agent
 npm run skill > siliwiki-skill.md
+```
 
-# 2. Create a new local wiki pack
-npm run new -- my-topic --title "My Topic"
+Give `siliwiki-skill.md` to your local agent.
 
-# 3. Ask your agent to write into content/wikis/my-topic/
-# 4. Validate and preview
+### 2. Create an empty wiki pack
+
+```bash
+npm run new -- battery-recycling --title "Battery Recycling 101"
+```
+
+### 3. Ask your agent to write into the pack
+
+Example prompt:
+
+```text
+Please follow the SiliWiki writer skill.
+Write a beginner-friendly wiki about battery recycling.
+Target folder: content/wikis/battery-recycling/
+Use a glossary for important terms.
+Mark uncertain facts as TODO instead of pretending they are verified.
+```
+
+### 4. Validate and read
+
+```bash
 npm run validate
 npm run dev
 ```
 
-Your generated wiki will be available at:
+Open:
 
 ```text
-http://localhost:3000/wiki/my-topic
+http://localhost:3000/wiki/battery-recycling
 ```
 
-## User Flow
+---
+
+## What exactly is a Wiki?
+
+In SiliWiki, a **Wiki** is not a remote website. It is a small local folder that has enough structure for both humans and agents.
 
 ```mermaid
-sequenceDiagram
-    actor U as User
-    participant Repo as SiliWiki Repo
-    participant Skill as SiliWiki Writer Skill
-    participant Agent as Local Agent
-    participant Files as content/wikis/<slug>
-    participant UI as Localhost UI
+flowchart TD
+    W["content/wikis/&lt;slug&gt;/"] --> M["meta.json<br/>title, summary, navigation, theme"]
+    W --> C["content.md<br/>main readable article"]
+    W --> G["glossary.json<br/>terms, aliases, definitions"]
+    W --> R["raw/sources.md<br/>notes, evidence, source log"]
+    W --> I["images/<br/>optional local media"]
 
-    U->>Repo: git clone && npm install
-    U->>Skill: npm run skill
-    U->>Agent: Paste skill + request
-    Agent->>Files: Write meta.json, content.md, glossary.json, raw/sources.md
-    U->>Repo: npm run validate && npm run dev
-    UI->>Files: Load generated content through local API
-    UI-->>U: Render wiki, search, glossary, export
+    classDef root fill:#111827,stroke:#111827,color:#ffffff;
+    classDef file fill:#f8fafc,stroke:#475569,color:#0f172a;
+    class W root;
+    class M,C,G,R,I file;
 ```
 
-## What is a Wiki?
-
-In SiliWiki, a **Wiki** is a local content pack:
+Equivalent file tree:
 
 ```text
 content/wikis/<slug>/
-├── meta.json       # title, version, theme, navigation
+├── meta.json       # title, version, summary, theme, navigation
 ├── content.md      # main Markdown article
 ├── glossary.json   # optional canonical term registry
 ├── raw/            # optional sources, transcripts, evidence
 └── images/         # optional local images
 ```
 
-The folder is intentionally simple: agents can edit it, humans can review diffs, and git can version it.
+This shape is intentionally boring. Boring files are easy to diff, easy to validate, easy to back up, and easy for agents to edit.
 
-## What is a Glossary?
+---
 
-A **Glossary** is the concept compression layer for one wiki. It defines canonical terms and aliases so the reader and future agents use stable vocabulary.
+## What exactly is a Glossary?
 
-A term looks like this:
+A **Glossary** is the vocabulary contract for one wiki.
+
+It prevents the same idea from being called five different names across drafts. It also gives future agents a stable concept map to build on.
+
+```mermaid
+flowchart LR
+    Term["Canonical term"] --> Alias["Aliases"]
+    Term --> Definition["Short + full definition"]
+    Term --> Related["Related terms"]
+    Term --> Sources["Source references"]
+    Definition --> Reader["Reader understands faster"]
+    Sources --> Reviewer["Reviewer can verify"]
+
+    classDef term fill:#fef3c7,stroke:#d97706,color:#78350f;
+    classDef node fill:#eff6ff,stroke:#2563eb,color:#1e3a8a;
+    classDef outcome fill:#ecfdf5,stroke:#059669,color:#064e3b;
+    class Term term;
+    class Alias,Definition,Related,Sources node;
+    class Reader,Reviewer outcome;
+```
+
+Example:
 
 ```json
 {
@@ -110,45 +237,111 @@ A term looks like this:
 }
 ```
 
+---
+
 ## Architecture
 
 ```mermaid
 flowchart TD
-    subgraph Local["User machine / localhost"]
-        CLI["siliwiki CLI"]
-        Server["Express local server"]
-        UI["Browser UI"]
-        Content["content/wikis/<slug>"]
-        Skill["skills/siliwiki-writer/SKILL.md"]
+    subgraph Human["Human knowledge owner"]
+        User["User"]
+        Git["Git diffs<br/>review, commit, rollback"]
     end
 
-    Agent["User's local agent"]
+    subgraph AgentLayer["Agent layer"]
+        Skill["SiliWiki writer skill<br/>the instruction harness"]
+        Agent["Local agent<br/>Codex / Claude Code / OpenCode / Cursor"]
+    end
 
-    CLI -->|new / validate / skill| Content
+    subgraph LocalRuntime["Local SiliWiki runtime"]
+        CLI["CLI<br/>new / skill / validate / dev"]
+        Validator["Validator<br/>anchors, glossary, secrets"]
+        Server["Express localhost server"]
+        UI["Reader UI<br/>library, nav, glossary, diagrams"]
+    end
+
+    subgraph Files["Plain local files"]
+        Pack["content/wikis/&lt;slug&gt;/"]
+        Templates["templates/wiki/"]
+        Schemas["harness/schemas/"]
+    end
+
+    User --> CLI
     CLI --> Skill
+    User --> Agent
     Skill --> Agent
-    Agent -->|writes files| Content
-    Server -->|reads packs| Content
+    CLI --> Templates
+    Templates --> Pack
+    Agent -->|writes| Pack
+    CLI --> Validator
+    Validator -->|checks| Pack
+    Server -->|reads| Pack
     UI -->|GET /api/*| Server
+    User --> UI
+    Pack --> Git
+    Git --> User
+    Schemas --> Validator
+
+    classDef human fill:#fff7ed,stroke:#ea580c,color:#7c2d12;
+    classDef agent fill:#f3e8ff,stroke:#9333ea,color:#581c87;
+    classDef runtime fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e;
+    classDef files fill:#ecfdf5,stroke:#059669,color:#064e3b;
+    class User,Git human;
+    class Skill,Agent agent;
+    class CLI,Validator,Server,UI runtime;
+    class Pack,Templates,Schemas files;
 ```
 
-SiliWiki does not require a cloud backend. The server reads local files and exposes a small localhost API for the browser UI.
+**Design choice:** SiliWiki keeps the brain of the system in visible files and visible instructions. The “AI magic” is deliberately turned into a repeatable workflow.
 
-## Module Dependency Graph
+---
+
+## Generation sequence
+
+```mermaid
+sequenceDiagram
+    actor U as User
+    participant CLI as SiliWiki CLI
+    participant Skill as Writer Skill
+    participant A as Local Agent
+    participant P as Wiki Pack Files
+    participant V as Validator
+    participant UI as Localhost UI
+
+    U->>CLI: npm run skill
+    CLI-->>U: siliwiki-skill.md
+    U->>A: Paste skill + topic + target folder
+    A->>P: Write meta.json, content.md, glossary.json, raw/sources.md
+    U->>CLI: npm run validate
+    CLI->>V: validate all wiki packs
+    V->>P: check metadata, anchors, glossary, secret-looking files
+    V-->>U: pass / actionable errors
+    U->>CLI: npm run dev
+    UI->>P: load generated content through local API
+    UI-->>U: readable wiki with glossary and navigation
+```
+
+---
+
+## Module dependency graph
 
 ```mermaid
 graph LR
-    bin["bin/siliwiki.mjs"] --> server["src/server.mjs"]
-    bin --> pack["src/core/wiki-pack.mjs"]
-    bin --> validate["src/core/validate.mjs"]
-    server --> pack
-    validate --> pack
-    validate --> slug["src/core/slug.mjs"]
-    pack --> slug
-    ui["public/assets/siliwiki.js"] --> api["/api/library + /api/wiki/:slug"]
+    Bin["bin/siliwiki.mjs"] --> Server["src/server.mjs"]
+    Bin --> Pack["src/core/wiki-pack.mjs"]
+    Bin --> Validate["src/core/validate.mjs"]
+    Server --> Pack
+    Validate --> Pack
+    Validate --> Slug["src/core/slug.mjs"]
+    Pack --> Slug
+    PublicJS["public/assets/siliwiki.js"] --> API["/api/library<br/>/api/wiki/:slug"]
+    PublicCSS["public/assets/siliwiki.css"] --> UI["Browser reader"]
+    API --> Server
 ```
 
-## CLI Reference
+---
+
+## CLI reference
 
 ```bash
 siliwiki dev [--port 3000]
@@ -168,7 +361,9 @@ npm run skill
 npm run doctor
 ```
 
-## API Reference
+---
+
+## Local API
 
 When `npm run dev` is running:
 
@@ -176,19 +371,21 @@ When `npm run dev` is running:
 |---|---|
 | `GET /api/health` | Health check and version. |
 | `GET /api/library` | List wiki packs and summaries. |
-| `GET /api/wiki/:slug` | Return `meta`, Markdown `content`, optional `glossary`, and summary. |
+| `GET /api/wiki/:slug` | Return metadata, Markdown content, optional glossary, and summary. |
+
+---
 
 ## Configuration
 
-Environment variables:
-
 | Variable | Default | Description |
-|---|---|---|
+|---|---:|---|
 | `PORT` | `3000` | Local server port. |
-| `HOST` | `127.0.0.1` | Local server host. |
+| `HOST` | `127.0.0.1` | Local server host. Use `0.0.0.0` only when you intentionally want LAN/Tailscale access. |
 | `SILIWIKI_CONTENT_DIR` | `content/wikis` | Override wiki content directory. |
 
-## Testing / Reproducibility
+---
+
+## Testing / reproducibility
 
 ```bash
 npm run lint
@@ -202,13 +399,45 @@ npm run pack:check
 
 See [`docs/TEST_RESULTS.md`](docs/TEST_RESULTS.md) for the latest recorded local run.
 
+---
+
+## Roadmap ideas
+
+- More writer skills for research notes, course notes, product specs, and ontology pages.
+- Optional export to static HTML.
+- Better glossary graph visualization.
+- Theme presets for education, research, and product documentation.
+- Import adapters for existing Markdown folders.
+
+---
+
 ## Contributing
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md). Please keep content-pack changes source-backed and run `npm run build && npm run smoke` before opening a PR.
+PRs are welcome. Please keep the project simple, local-first, and agent-friendly.
+
+Before opening a PR:
+
+```bash
+npm run build
+npm run smoke
+npm run pack:check
+```
+
+Read [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`SECURITY.md`](SECURITY.md).
+
+---
 
 ## License
 
 MIT. See [`LICENSE`](LICENSE).
+
+---
+
+## Links
+
+- GitHub: <https://github.com/Yvnminc/SiliWiki>
+- X / Twitter: [@yvnminc](https://x.com/yvnminc)
+- RedBook / 小红书: `@yvnminc`
 
 ## Support
 
