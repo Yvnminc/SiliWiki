@@ -4,5 +4,6 @@
 import '../src/core/slug.mjs';
 import '../src/core/wiki-pack.mjs';
 import '../src/core/validate.mjs';
+import '../src/core/evolution.mjs';
 import '../src/server.mjs';
 console.log('typecheck ok: public ESM modules import successfully');

@@ -1,7 +1,12 @@
 # SiliWiki / 硅基笔记
 
 <p align="center">
-  <strong>把 AI 生成的内容，变成可验证、可阅读、可持续演化的本地 Wiki。</strong>
+  <img src="docs/images/siliwiki-logo.png" width="140" alt="SiliWiki logo: silicon notebook with evolving knowledge loop">
+</p>
+
+<p align="center">
+  <strong>Self-evolving Agentic Wiki · 自进化的代理笔记</strong><br>
+  把 AI 生成的内容，变成可验证、可阅读、可持续演化的本地 Wiki。
 </p>
 
 <p align="center">
@@ -9,12 +14,13 @@
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
   <img alt="Node.js 20+" src="https://img.shields.io/badge/Node.js-20%2B-43853d.svg">
   <img alt="Local First" src="https://img.shields.io/badge/local--first-yes-ffb703.svg">
-  <img alt="Agent Harness" src="https://img.shields.io/badge/agent-harness-7c3aed.svg">
+  <img alt="Self-evolving Agentic Wiki" src="https://img.shields.io/badge/self--evolving-agentic%20wiki-7c3aed.svg">
 </p>
 
 <p align="center">
   <a href="#quick-start">Quick Start</a> ·
   <a href="docs/USAGE_ZH.md">中文小白说明</a> ·
+  <a href="docs/SELF_EVOLVING_AGENTIC_WIKI.md">Self-evolving algorithm</a> ·
   <a href="docs/CONTENT_SPEC.md">Content Spec</a> ·
   <a href="docs/ARCHITECTURE.md">Architecture</a>
 </p>
@@ -23,13 +29,14 @@
 
 ## What is SiliWiki?
 
-**SiliWiki（硅基笔记）** is a local-first wiki workbench for agent-generated knowledge.
+**SiliWiki（硅基笔记）** is a local-first workbench for **self-evolving Agentic Wikis**.
 
 Most AI-generated articles disappear into chat history. SiliWiki turns them into a living knowledge object:
 
-- a **writing skill** that tells your local agent how to write;
+- a **writer skill** that tells your local agent how to write;
 - a **plain-file wiki pack** that humans can review in git;
 - a **glossary layer** that keeps vocabulary stable;
+- a **self-evolution loop** that observes gaps, retrieves relevant memories, reflects, proposes patches, and validates;
 - a **localhost reader UI** that makes the result feel like a small product, not a pile of Markdown.
 
 > **The point:** SiliWiki is not “another note app”. It is a harness that makes agent-written knowledge structured, inspectable, local, and reusable.
@@ -40,45 +47,50 @@ Built and maintained with support from the WhiteMirror AI Team.
 
 ## The core loop
 
-```mermaid
-flowchart LR
-    A["1. Clone SiliWiki"] --> B["2. Extract writer skill"]
-    B --> C["3. Give skill to your local agent"]
-    C --> D["4. Agent writes a wiki pack"]
-    D --> E["5. Validate"]
-    E --> F["6. Read on localhost"]
-    F --> G["7. Improve with git diffs"]
-
-    classDef action fill:#fff7ed,stroke:#c2410c,color:#7c2d12,stroke-width:1.5px;
-    classDef result fill:#ecfeff,stroke:#0891b2,color:#164e63,stroke-width:1.5px;
-    class A,B,C,E,F,G action;
-    class D result;
-```
+<p align="center">
+  <img src="docs/images/diagrams/core-loop.svg" alt="SiliWiki core loop: clone, extract skill, local agent writes pack, validate, read on localhost, improve with git diffs">
+</p>
 
 SiliWiki separates **generation** from **ownership**. Your agent can draft, but the output lives in your local files, passes validation, and can be reviewed like normal source code.
 
 ---
 
+## Self-evolving algorithm: SiliLoop
+
+<p align="center">
+  <img src="docs/images/diagrams/self-evolving-loop.svg" alt="SiliLoop self-evolving Agentic Wiki algorithm: observe, retrieve, reflect, plan, patch, validate">
+</p>
+
+SiliWiki implements **SiliLoop**, a lightweight self-evolution mechanism inspired by agent memory research:
+
+1. **Observe** — parse `content.md`, `glossary.json`, `meta.json`, and `raw/sources.md` into a memory stream.
+2. **Retrieve** — score memories with `0.20 recency + 0.45 importance + 0.35 relevance`, following the memory retrieval idea in Stanford-led *Generative Agents*.
+3. **Reflect** — turn high-signal gaps into verbal reflections, inspired by *Reflexion*.
+4. **Plan** — choose a safe next edit objective, similar to curriculum / skill-library loops in *Voyager*.
+5. **Patch** — ask the local agent to edit only local wiki files while preserving glossary terms and sources.
+6. **Validate** — run SiliWiki checks plus human review before treating the evolved note as final.
+
+Run it locally:
+
+```bash
+npm run evolve -- siliwiki-v1 --focus "self-evolving Agentic Wiki"
+```
+
+Write a human-reviewable plan:
+
+```bash
+npm run evolve -- siliwiki-v1 --focus "agent memory" --write
+```
+
+See [`docs/SELF_EVOLVING_AGENTIC_WIKI.md`](docs/SELF_EVOLVING_AGENTIC_WIKI.md) and the live sample wiki [`content/wikis/self-evolving-agentic-wiki/`](content/wikis/self-evolving-agentic-wiki/).
+
+---
+
 ## Why it matters
 
-```mermaid
-flowchart TD
-    Chat["AI chat answer"] -->|usually becomes| Lost["lost context / hard to reuse"]
-    Chat -->|with SiliWiki| Skill["writing skill"]
-    Skill --> Pack["wiki pack"]
-    Pack --> Review["human review + git history"]
-    Pack --> UI["beautiful local reader"]
-    Pack --> Agent["future agents reuse the same terms"]
-
-    Lost -.->|SiliWiki prevents this| Pack
-
-    classDef bad fill:#fee2e2,stroke:#dc2626,color:#7f1d1d;
-    classDef good fill:#dcfce7,stroke:#16a34a,color:#14532d;
-    classDef neutral fill:#eef2ff,stroke:#4f46e5,color:#312e81;
-    class Lost bad;
-    class Skill,Pack,Review,UI,Agent good;
-    class Chat neutral;
-```
+<p align="center">
+  <img src="docs/images/diagrams/why-it-matters.svg" alt="Why SiliWiki matters: AI chat answers become wiki packs, reviewable history, local reader, and reusable glossary">
+</p>
 
 SiliWiki is designed for people who want AI to help write serious knowledge bases without surrendering control to a cloud product or an invisible prompt chain.
 
@@ -89,12 +101,13 @@ SiliWiki is designed for people who want AI to help write serious knowledge base
 | Area | What SiliWiki provides |
 |---|---|
 | 🧠 Agent harness | `npm run skill` prints the writer skill you can hand to Codex, Claude Code, OpenCode, Cursor, or another local agent. |
+| 🔁 Self-evolution | `npm run evolve -- <slug>` creates a SiliLoop plan from the current wiki, glossary, sources, and unresolved gaps. |
 | 📚 Wiki definition | A wiki is a local content pack with metadata, navigation, Markdown content, sources, and optional images. |
 | 🧩 Glossary definition | A glossary is the concept layer: canonical terms, aliases, definitions, related terms, and sources. |
 | 🏠 Local-first UI | Content stays in `content/wikis/` and renders in a localhost reader. No cloud backend required. |
 | ✅ Validation | Broken anchors, invalid glossary terms, missing metadata, and secret-looking files are caught before reading. |
 | 🔎 Reader experience | Library shelf, wiki reader, side navigation, search-friendly structure, glossary overlay, and responsive diagrams. |
-| 🧪 Reproducibility | Lint, typecheck, validation, tests, smoke test, package dry-run, and GitHub Actions CI. |
+| 🧪 Reproducibility | Lint, typecheck, validation, tests, smoke test, package dry-run, audit, and GitHub Actions CI. |
 
 ---
 
@@ -113,10 +126,11 @@ Open:
 http://localhost:3000
 ```
 
-Try the live sample:
+Try the live samples:
 
 ```text
 http://localhost:3000/wiki/siliwiki-v1
+http://localhost:3000/wiki/self-evolving-agentic-wiki
 ```
 
 中文新手版：[`docs/USAGE_ZH.md`](docs/USAGE_ZH.md)
@@ -149,12 +163,14 @@ Write a beginner-friendly wiki about battery recycling.
 Target folder: content/wikis/battery-recycling/
 Use a glossary for important terms.
 Mark uncertain facts as TODO instead of pretending they are verified.
+After drafting, run npm run evolve -- battery-recycling --focus "battery recycling knowledge base".
 ```
 
-### 4. Validate and read
+### 4. Validate, evolve, and read
 
 ```bash
 npm run validate
+npm run evolve -- battery-recycling --focus "battery recycling knowledge base"
 npm run dev
 ```
 
@@ -170,19 +186,9 @@ http://localhost:3000/wiki/battery-recycling
 
 In SiliWiki, a **Wiki** is not a remote website. It is a small local folder that has enough structure for both humans and agents.
 
-```mermaid
-flowchart TD
-    W["content/wikis/&lt;slug&gt;/"] --> M["meta.json<br/>title, summary, navigation, theme"]
-    W --> C["content.md<br/>main readable article"]
-    W --> G["glossary.json<br/>terms, aliases, definitions"]
-    W --> R["raw/sources.md<br/>notes, evidence, source log"]
-    W --> I["images/<br/>optional local media"]
-
-    classDef root fill:#111827,stroke:#111827,color:#ffffff;
-    classDef file fill:#f8fafc,stroke:#475569,color:#0f172a;
-    class W root;
-    class M,C,G,R,I file;
-```
+<p align="center">
+  <img src="docs/images/diagrams/wiki-pack.svg" alt="SiliWiki wiki pack structure: meta.json, content.md, glossary.json, raw sources, images">
+</p>
 
 Equivalent file tree:
 
@@ -205,22 +211,9 @@ A **Glossary** is the vocabulary contract for one wiki.
 
 It prevents the same idea from being called five different names across drafts. It also gives future agents a stable concept map to build on.
 
-```mermaid
-flowchart LR
-    Term["Canonical term"] --> Alias["Aliases"]
-    Term --> Definition["Short + full definition"]
-    Term --> Related["Related terms"]
-    Term --> Sources["Source references"]
-    Definition --> Reader["Reader understands faster"]
-    Sources --> Reviewer["Reviewer can verify"]
-
-    classDef term fill:#fef3c7,stroke:#d97706,color:#78350f;
-    classDef node fill:#eff6ff,stroke:#2563eb,color:#1e3a8a;
-    classDef outcome fill:#ecfdf5,stroke:#059669,color:#064e3b;
-    class Term term;
-    class Alias,Definition,Related,Sources node;
-    class Reader,Reviewer outcome;
-```
+<p align="center">
+  <img src="docs/images/diagrams/glossary.svg" alt="SiliWiki glossary: canonical terms, aliases, definitions, related terms, and sources">
+</p>
 
 Example:
 
@@ -241,103 +234,25 @@ Example:
 
 ## Architecture
 
-```mermaid
-flowchart TD
-    subgraph Human["Human knowledge owner"]
-        User["User"]
-        Git["Git diffs<br/>review, commit, rollback"]
-    end
-
-    subgraph AgentLayer["Agent layer"]
-        Skill["SiliWiki writer skill<br/>the instruction harness"]
-        Agent["Local agent<br/>Codex / Claude Code / OpenCode / Cursor"]
-    end
-
-    subgraph LocalRuntime["Local SiliWiki runtime"]
-        CLI["CLI<br/>new / skill / validate / dev"]
-        Validator["Validator<br/>anchors, glossary, secrets"]
-        Server["Express localhost server"]
-        UI["Reader UI<br/>library, nav, glossary, diagrams"]
-    end
-
-    subgraph Files["Plain local files"]
-        Pack["content/wikis/&lt;slug&gt;/"]
-        Templates["templates/wiki/"]
-        Schemas["harness/schemas/"]
-    end
-
-    User --> CLI
-    CLI --> Skill
-    User --> Agent
-    Skill --> Agent
-    CLI --> Templates
-    Templates --> Pack
-    Agent -->|writes| Pack
-    CLI --> Validator
-    Validator -->|checks| Pack
-    Server -->|reads| Pack
-    UI -->|GET /api/*| Server
-    User --> UI
-    Pack --> Git
-    Git --> User
-    Schemas --> Validator
-
-    classDef human fill:#fff7ed,stroke:#ea580c,color:#7c2d12;
-    classDef agent fill:#f3e8ff,stroke:#9333ea,color:#581c87;
-    classDef runtime fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e;
-    classDef files fill:#ecfdf5,stroke:#059669,color:#064e3b;
-    class User,Git human;
-    class Skill,Agent agent;
-    class CLI,Validator,Server,UI runtime;
-    class Pack,Templates,Schemas files;
-```
+<p align="center">
+  <img src="docs/images/diagrams/architecture.svg" alt="SiliWiki architecture: human owner, agent layer, local runtime, and plain local files">
+</p>
 
 **Design choice:** SiliWiki keeps the brain of the system in visible files and visible instructions. The “AI magic” is deliberately turned into a repeatable workflow.
 
----
+### Generation sequence
 
-## Generation sequence
+<p align="center">
+  <img src="docs/images/diagrams/generation-sequence.svg" alt="SiliWiki generation sequence from writer skill to local reader">
+</p>
 
-```mermaid
-sequenceDiagram
-    actor U as User
-    participant CLI as SiliWiki CLI
-    participant Skill as Writer Skill
-    participant A as Local Agent
-    participant P as Wiki Pack Files
-    participant V as Validator
-    participant UI as Localhost UI
+### Module dependency graph
 
-    U->>CLI: npm run skill
-    CLI-->>U: siliwiki-skill.md
-    U->>A: Paste skill + topic + target folder
-    A->>P: Write meta.json, content.md, glossary.json, raw/sources.md
-    U->>CLI: npm run validate
-    CLI->>V: validate all wiki packs
-    V->>P: check metadata, anchors, glossary, secret-looking files
-    V-->>U: pass / actionable errors
-    U->>CLI: npm run dev
-    UI->>P: load generated content through local API
-    UI-->>U: readable wiki with glossary and navigation
-```
+<p align="center">
+  <img src="docs/images/diagrams/module-graph.svg" alt="SiliWiki module dependency graph">
+</p>
 
----
-
-## Module dependency graph
-
-```mermaid
-graph LR
-    Bin["bin/siliwiki.mjs"] --> Server["src/server.mjs"]
-    Bin --> Pack["src/core/wiki-pack.mjs"]
-    Bin --> Validate["src/core/validate.mjs"]
-    Server --> Pack
-    Validate --> Pack
-    Validate --> Slug["src/core/slug.mjs"]
-    Pack --> Slug
-    PublicJS["public/assets/siliwiki.js"] --> API["/api/library<br/>/api/wiki/:slug"]
-    PublicCSS["public/assets/siliwiki.css"] --> UI["Browser reader"]
-    API --> Server
-```
+> README diagrams are committed as static SVG images, not GitHub-rendered Mermaid blocks, so the public homepage renders reliably across GitHub, mobile browsers, and package mirrors.
 
 ---
 
@@ -347,6 +262,7 @@ graph LR
 siliwiki dev [--port 3000]
 siliwiki new <slug> [--title "My Wiki"]
 siliwiki validate
+siliwiki evolve <slug> [--focus "topic"] [--write] [--out content/wikis/<slug>/evolution/plan.md]
 siliwiki skill [--out ./siliwiki-skill.md]
 siliwiki doctor
 ```
@@ -357,9 +273,22 @@ NPM wrappers:
 npm run dev
 npm run new -- my-topic --title "My Topic"
 npm run validate
+npm run evolve -- my-topic --focus "self-evolving notes"
 npm run skill
 npm run doctor
 ```
+
+---
+
+## Agent memory references
+
+SiliLoop is an engineering implementation, not a claim that SiliWiki reproduces the full papers. It borrows the practical patterns that are useful for local wiki maintenance:
+
+- **Stanford-led Generative Agents** — Joon Sung Park et al., *Generative Agents: Interactive Simulacra of Human Behavior*, UIST 2023. Memory stream, retrieval by recency / importance / relevance, reflection, and planning. <https://doi.org/10.1145/3586183.3606763>
+- **MemGPT** — Charles Packer et al., *MemGPT: Towards LLMs as Operating Systems*, 2023. Working context + archival memory management. <https://arxiv.org/abs/2310.08560>
+- **Reflexion** — Noah Shinn et al., *Reflexion: Language Agents with Verbal Reinforcement Learning*, 2023. Verbal feedback memory for iterative improvement. <https://arxiv.org/abs/2303.11366>
+- **Voyager** — Guanzhi Wang et al., *Voyager: An Open-Ended Embodied Agent with Large Language Models*, 2023. Curriculum + reusable skill library. <https://arxiv.org/abs/2305.16291>
+- **Self-RAG** — Akari Asai et al., *Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection*, 2023. Retrieve / generate / critique loop. <https://arxiv.org/abs/2310.11511>
 
 ---
 
@@ -395,6 +324,7 @@ npm test
 npm run build
 npm run smoke
 npm run pack:check
+npm audit --omit=dev
 ```
 
 See [`docs/TEST_RESULTS.md`](docs/TEST_RESULTS.md) for the latest recorded local run.
@@ -403,6 +333,7 @@ See [`docs/TEST_RESULTS.md`](docs/TEST_RESULTS.md) for the latest recorded local
 
 ## Roadmap ideas
 
+- Apply SiliLoop patches automatically behind a review gate.
 - More writer skills for research notes, course notes, product specs, and ontology pages.
 - Optional export to static HTML.
 - Better glossary graph visualization.

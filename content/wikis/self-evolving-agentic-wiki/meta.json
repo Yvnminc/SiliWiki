@@ -1,0 +1,78 @@
+{
+  "slug": "self-evolving-agentic-wiki",
+  "title": "Self-evolving Agentic Wiki / 自进化代理笔记",
+  "sub": "SiliWiki 自进化机制 · SiliLoop · Agent memory references · 2026-04",
+  "description": "解释 SiliWiki 如何把本地 wiki、glossary、sources、writer skill 和 evolution plan 组合成可验证的自进化代理笔记。",
+  "logoText": "∞",
+  "version": "v0.2",
+  "updated": "2026-04-27",
+  "accent": "#5f7f90",
+  "accentSoft": "#e6eef3",
+  "accentDark": "#2f5265",
+  "disclaimer": "本页是 SiliWiki 自进化机制样例。它引用公开论文作为设计灵感，但不会自动替用户发布内容。",
+  "nav": [
+    {
+      "chip": "0",
+      "title": "定义",
+      "open": true,
+      "children": [
+        {
+          "anchor": "what-it-is",
+          "title": "它是什么"
+        },
+        {
+          "anchor": "why-it-matters",
+          "title": "为什么需要"
+        }
+      ]
+    },
+    {
+      "chip": "1",
+      "title": "SiliLoop",
+      "open": true,
+      "color": "accent",
+      "children": [
+        {
+          "anchor": "sili-loop",
+          "title": "自进化循环"
+        },
+        {
+          "anchor": "memory-model",
+          "title": "本地记忆模型"
+        }
+      ]
+    },
+    {
+      "chip": "2",
+      "title": "规范",
+      "open": true,
+      "color": "green",
+      "children": [
+        {
+          "anchor": "glossary-and-sources",
+          "title": "词条与来源"
+        },
+        {
+          "anchor": "cli-walkthrough",
+          "title": "CLI 使用"
+        }
+      ]
+    },
+    {
+      "chip": "3",
+      "title": "边界",
+      "open": true,
+      "color": "purple",
+      "children": [
+        {
+          "anchor": "human-review",
+          "title": "人工复查"
+        },
+        {
+          "anchor": "references",
+          "title": "References"
+        }
+      ]
+    }
+  ]
+}

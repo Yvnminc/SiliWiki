@@ -7,6 +7,7 @@ import { startServer } from '../src/server.mjs';
 import { createWikiPack, ensureProjectScaffold, getContentDir, PROJECT_ROOT } from '../src/core/wiki-pack.mjs';
 import { assertValidSlug } from '../src/core/slug.mjs';
 import { validateAll, formatValidationReport } from '../src/core/validate.mjs';
+import { analyzeWikiEvolution, formatEvolutionPlanMarkdown, readWikiPackForEvolution, writeEvolutionPlan } from '../src/core/evolution.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -37,7 +38,7 @@ function parseArgs(argv) {
 }
 
 function help() {
-  return `SiliWiki / 硅基笔记\n\nUsage:\n  siliwiki dev [--port 3000]\n  siliwiki new <slug> [--title "My Wiki"]\n  siliwiki validate\n  siliwiki skill [--out ./siliwiki-skill.md]\n  siliwiki doctor\n\nCommon npm wrappers:\n  npm run dev\n  npm run new -- my-topic --title "My Topic"\n  npm run skill > siliwiki-skill.md\n`;
+  return `SiliWiki / 硅基笔记\n\nUsage:\n  siliwiki dev [--port 3000]\n  siliwiki new <slug> [--title "My Wiki"]\n  siliwiki validate\n  siliwiki evolve <slug> [--focus "topic"] [--write] [--out content/wikis/<slug>/evolution/plan.md]\n  siliwiki skill [--out ./siliwiki-skill.md]\n  siliwiki doctor\n\nCommon npm wrappers:\n  npm run dev\n  npm run new -- my-topic --title "My Topic"\n  npm run evolve -- demo --focus "agent memory"\n  npm run skill > siliwiki-skill.md\n`;
 }
 
 async function run() {
@@ -74,6 +75,34 @@ async function run() {
     const report = await validateAll({ root: ROOT });
     console.log(formatValidationReport(report));
     if (report.errors.length) process.exitCode = 1;
+    return;
+  }
+
+  if (command === 'evolve') {
+    const slug = positional[0];
+    if (!slug) throw new Error('missing slug. Example: siliwiki evolve demo --focus "agent memory"');
+    assertValidSlug(slug);
+    const pack = await readWikiPackForEvolution(slug, { root: ROOT });
+    const plan = analyzeWikiEvolution(pack, { focus: flags.focus || flags.f, now: flags.now });
+    const markdown = formatEvolutionPlanMarkdown(plan);
+    if (flags.json) {
+      process.stdout.write(`${JSON.stringify(plan, null, 2)}\n`);
+      return;
+    }
+    const shouldWrite = flags.write || flags.out;
+    if (shouldWrite) {
+      const outPath = flags.out
+        ? path.resolve(String(flags.out))
+        : await writeEvolutionPlan(slug, markdown, { root: ROOT });
+      if (flags.out) {
+        await fsp.mkdir(path.dirname(outPath), { recursive: true });
+        await fsp.writeFile(outPath, markdown);
+      }
+      console.log(`wrote ${path.relative(process.cwd(), outPath)}`);
+      console.log(`next action: ${plan.actions[0]?.kind || 'maintenance-pass'}`);
+    } else {
+      process.stdout.write(markdown);
+    }
     return;
   }
 

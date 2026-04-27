@@ -1,81 +1,43 @@
-# SiliWiki Content Spec
+# SiliWiki Content Pack Specification
 
-## Wiki
+A SiliWiki content pack is a folder under `content/wikis/<slug>/` that can be rendered locally and improved by a local agent.
 
-A SiliWiki wiki is a local content pack under `content/wikis/<slug>`.
+## Required files
 
-Required:
+```text
+content/wikis/<slug>/
+├── meta.json
+└── content.md
+```
 
-- `meta.json`
-- `content.md`
+## Recommended files
 
-Recommended:
+```text
+content/wikis/<slug>/
+├── glossary.json
+├── raw/
+│   └── sources.md
+└── evolution/
+    └── plan.md
+```
 
-- `glossary.json`
-- `raw/sources.md`
-- `images/`
+## `meta.json`
 
-### `meta.json`
-
-`meta.json` controls display metadata and optional explicit navigation.
-
-Required field:
-
-- `title`
-
-Recommended fields:
-
-- `slug`
-- `sub`
-- `description`
-- `logoText`
-- `version`
-- `updated`
-- `accent`, `accentSoft`, `accentDark`
-- `disclaimer`
-- `nav`
-
-Every `nav` anchor must resolve to a Markdown heading generated id, an explicit `{#id}`, or an HTML `id="..."` in `content.md`.
-
-### `content.md`
-
-- One `#` title.
-- First paragraph: purpose, audience, scope.
-- `##` for major sections.
-- `###` for subsections.
-- Keep claims source-backed where possible.
-- Mark uncertainty explicitly.
-
-Supported helper components:
-
-- `<div class="tldr">...</div>`
-- `<div class="flag-blue">...</div>`
-- `<div class="flag-green">...</div>`
-- `<div class="flag-yellow">...</div>`
-- `<div class="flag-red">...</div>`
-- `<div class="card">...</div>`
-- `<div class="two-col">...</div>`
-- `<div class="stat-grid">...</div>`
-
-## Glossary
-
-A glossary is the canonical term registry for a wiki.
+Minimum:
 
 ```json
 {
-  "version": "v0.1",
+  "slug": "my-topic",
+  "title": "My Topic",
   "updated": "2026-04-27",
-  "categories": [{ "key": "core", "title": "Core" }],
-  "keywords": [
+  "nav": [
     {
-      "slug": "wiki",
-      "display": "Wiki",
-      "aliases": ["content pack"],
-      "category": "core",
-      "short": "A local knowledge object.",
-      "definition": "A folder rendered by SiliWiki.",
-      "related": ["glossary"],
-      "sources": ["raw/sources.md#design-note"]
+      "chip": "1",
+      "title": "Start",
+      "open": true,
+      "children": [
+        { "anchor": "overview", "title": "Overview" }
+      ]
     }
   ]
 }
@@ -83,26 +45,114 @@ A glossary is the canonical term registry for a wiki.
 
 Rules:
 
-- `slug` must be stable and unique.
-- `display` is the reader-facing term.
-- `aliases` capture synonyms and Chinese/English variants.
-- `category` should reference a category key.
-- `short` is a one-line explanation.
-- `definition` is the full explanation.
-- `related` links to other term slugs.
-- `sources` should point to evidence when available.
+- Folder name and `meta.slug` must match.
+- `nav[].children[].anchor` must resolve to a Markdown heading id.
+- Use explicit anchors for important sections: `## Overview {#overview}`.
+- `updated` should change when a human-reviewed content update lands.
 
-## Source Registry
+## `content.md`
 
-`raw/sources.md` is an evidence ledger. Use stable anchors and do not invent sources.
+`content.md` is the reader-facing note.
 
-Suggested entry:
+Recommended sections:
+
+- Definition / one-sentence answer.
+- Why it matters.
+- System or concept diagram.
+- How to use it.
+- Known limitations.
+- References or source notes.
+
+Use Markdown plus Mermaid when a diagram clarifies the idea:
+
+````markdown
+```mermaid
+flowchart TD
+    A[Question] --> B[Agent draft]
+    B --> C[Validate]
+```
+````
+
+## `glossary.json`
+
+Glossary entries keep words stable across agent runs.
+
+```json
+{
+  "version": "v0.1",
+  "updated": "2026-04-27",
+  "categories": [
+    { "key": "core", "title": "Core", "color": "#a63d00" }
+  ],
+  "keywords": [
+    {
+      "slug": "wiki",
+      "display": "Wiki",
+      "aliases": ["主题笔记"],
+      "category": "core",
+      "short": "A maintained topic note.",
+      "definition": "A SiliWiki wiki is a local content pack with content, glossary, sources, and validation rules.",
+      "related": ["glossary"],
+      "sources": ["raw/sources.md#siliwiki-design"]
+    }
+  ]
+}
+```
+
+Rules:
+
+- `slug` must be unique and URL-safe.
+- `aliases`, `related`, and `sources` must be arrays when present.
+- Important glossary entries should have source anchors.
+
+## `raw/sources.md`
+
+Sources make generated notes auditable.
+
+Recommended format:
 
 ```markdown
-## source-id
+# Sources
 
-- Type: paper / URL / meeting note / transcript / screenshot / local note
-- Date: YYYY-MM-DD
-- Used by: section names or glossary slugs
-- Notes: what this source supports
+## source-anchor
+- Type: paper | documentation | interview | observation | dataset
+- Title: Stable source title
+- URL: https://example.com
+- Notes: Why this source matters for this wiki.
 ```
+
+## `evolution/plan.md`
+
+`evolution/plan.md` is the self-evolution plan generated by:
+
+```bash
+npm run evolve -- <slug> --focus "topic" --write
+```
+
+It is **human-reviewable** by design. It should explain:
+
+- when the plan was generated;
+- which wiki it applies to;
+- what SiliLoop observed;
+- which memories or gaps ranked highest;
+- which local files the next agent may edit;
+- what validation commands must pass afterwards.
+
+中文规则：`evolution/plan.md` 不是自动发布脚本，而是给人和本地 AI 助手看的“下一步改进建议”。执行前要人工复查，执行后要跑验证。
+
+## Validation
+
+Run:
+
+```bash
+npm run validate
+npm test
+```
+
+Validation currently checks:
+
+- required files;
+- slug consistency;
+- nav anchor existence;
+- glossary shape;
+- secret-looking files and obvious credential patterns inside wiki packs.

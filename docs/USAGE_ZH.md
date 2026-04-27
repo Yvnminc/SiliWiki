@@ -2,6 +2,8 @@
 
 这份说明尽量不用专业词。你可以把 SiliWiki 理解成：**一个放在你电脑里的智能笔记书架**。
 
+它现在的定位是 **Self-evolving Agentic Wiki / 自进化代理笔记**：AI 助手不只是帮你写一次内容，还能根据来源、词条、目录和待补问题，生成下一轮改进计划。
+
 ## 1. 它是干什么的？
 
 你告诉 AI 助手：“我想整理一个主题。”
@@ -12,7 +14,8 @@ AI 助手按照一份固定的写作说明，把这个主题整理成一本本�
 flowchart LR
     A["你有一个想整理的主题"] --> B["AI 助手按说明写"]
     B --> C["生成一本本地笔记"]
-    C --> D["你打开网页阅读"]
+    C --> D["SiliWiki 本地打开"]
+    D --> E["检查来源、词条和下一轮改进"]
 ```
 
 ## 2. 怎么开始？
@@ -20,8 +23,8 @@ flowchart LR
 复制下面几行：
 
 ```bash
-git clone <项目地址>
-cd siliwiki
+git clone https://github.com/Yvnminc/SiliWiki.git
+cd SiliWiki
 npm install
 npm run dev
 ```
@@ -42,7 +45,7 @@ http://localhost:3000
 npm run skill > siliwiki-skill.md
 ```
 
-然后把这份 `siliwiki-skill.md` 发给你的 AI 助手，再告诉它你想整理什么。
+然后把这份 `siliwiki-skill.md` 发给你的本地 AI 助手，再告诉它你想整理什么。
 
 例子：
 
@@ -56,18 +59,20 @@ npm run skill > siliwiki-skill.md
 
 ```mermaid
 flowchart TD
-    A["一本主题笔记"] --> B["封面和目录"]
-    A --> C["正文"]
-    A --> D["词条解释"]
-    A --> E["资料来源"]
+    A["一本主题笔记"] --> B["封面和目录 meta.json"]
+    A --> C["正文 content.md"]
+    A --> D["词条表 glossary.json"]
+    A --> E["资料来源 raw/sources.md"]
+    A --> F["自进化计划 evolution/plan.md"]
 ```
 
-你不需要记住文件名，只要知道：
+你不需要记住所有文件名，只要知道：
 
 - 封面和目录：让人知道这本笔记讲什么。
 - 正文：真正解释内容。
-- 词条解释：把容易混淆的词统一说明。
+- 词条表：把容易混淆的词统一说明。
 - 资料来源：记录这些内容从哪里来。
+- 自进化计划：告诉下一个 AI 助手应该优先补什么、为什么补、补完怎么检查。
 
 ## 5. 怎么检查？
 
@@ -79,12 +84,35 @@ npm run validate
 
 这一步相当于检查：目录有没有坏、词条有没有重复、内容里有没有明显不该放的东西。
 
-## 6. 打开 V1 样例
+## 6. 怎么让笔记自己提出改进建议？
+
+运行：
+
+```bash
+npm run evolve -- self-evolving-agentic-wiki --focus "agent memory"
+```
+
+如果你想把结果保存进这本笔记：
+
+```bash
+npm run evolve -- self-evolving-agentic-wiki --focus "agent memory" --write
+```
+
+它会生成：
+
+```text
+content/wikis/self-evolving-agentic-wiki/evolution/plan.md
+```
+
+你可以把这份计划交给本地 AI 助手，让它只执行最高优先级的一小步。这样每次改动都有理由、有来源、有检查。
+
+## 7. 打开样例
 
 启动后打开：
 
 ```text
 http://localhost:3000/wiki/siliwiki-v1
+http://localhost:3000/wiki/self-evolving-agentic-wiki
 ```
 
-这本样例已经改成小白版，并且里面挂了几张 Mermaid 图，用来解释整体流程。
+第一本是小白使用说明；第二本专门解释“自进化代理笔记”机制，并带有真实 references。
