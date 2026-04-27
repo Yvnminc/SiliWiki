@@ -186,10 +186,6 @@ http://localhost:3000/wiki/battery-recycling
 
 In SiliWiki, a **Wiki** is not a remote website. It is a small local folder that has enough structure for both humans and agents.
 
-<p align="center">
-  <img src="docs/images/diagrams/wiki-pack.svg" alt="SiliWiki wiki pack structure: meta.json, content.md, glossary.json, raw sources, images">
-</p>
-
 Equivalent file tree:
 
 ```text
@@ -211,10 +207,6 @@ A **Glossary** is the vocabulary contract for one wiki.
 
 It prevents the same idea from being called five different names across drafts. It also gives future agents a stable concept map to build on.
 
-<p align="center">
-  <img src="docs/images/diagrams/glossary.svg" alt="SiliWiki glossary: canonical terms, aliases, definitions, related terms, and sources">
-</p>
-
 Example:
 
 ```json
@@ -234,10 +226,6 @@ Example:
 
 ## Architecture
 
-<p align="center">
-  <img src="docs/images/diagrams/architecture.svg" alt="SiliWiki architecture: human owner, agent layer, local runtime, and plain local files">
-</p>
-
 **Design choice:** SiliWiki keeps the brain of the system in visible files and visible instructions. The “AI magic” is deliberately turned into a repeatable workflow.
 
 ### Generation sequence
@@ -245,14 +233,6 @@ Example:
 <p align="center">
   <img src="docs/images/diagrams/generation-sequence.svg" alt="SiliWiki generation sequence from writer skill to local reader">
 </p>
-
-### Module dependency graph
-
-<p align="center">
-  <img src="docs/images/diagrams/module-graph.svg" alt="SiliWiki module dependency graph">
-</p>
-
-> README diagrams are committed as static SVG images, not GitHub-rendered Mermaid blocks, so the public homepage renders reliably across GitHub, mobile browsers, and package mirrors.
 
 ---
 
