@@ -7,7 +7,7 @@
 <p align="center">
   <a href="https://github.com/Yvnminc/SiliWiki/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Yvnminc/SiliWiki/actions/workflows/ci.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg"></a>
-  <img alt="Node.js >= 20" src="https://img.shields.io/badge/Node.js-%3E%3D20-43853d.svg">
+  <img alt="Node.js 20+" src="https://img.shields.io/badge/Node.js-20%2B-43853d.svg">
   <img alt="Local First" src="https://img.shields.io/badge/local--first-yes-ffb703.svg">
   <img alt="Agent Harness" src="https://img.shields.io/badge/agent-harness-7c3aed.svg">
 </p>
