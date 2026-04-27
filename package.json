@@ -37,6 +37,7 @@
     "src/",
     "public/",
     "content/wikis/demo/",
+    "content/wikis/siliwiki-v1/",
     "templates/",
     "skills/",
     "harness/",
@@ -47,6 +48,5 @@
   "dependencies": {
     "express": "^4.19.2",
     "marked": "^12.0.2"
-  },
-  "devDependencies": {}
+  }
 }

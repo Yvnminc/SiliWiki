@@ -1,15 +1,15 @@
 {
   "slug": "siliwiki-v1",
-  "title": "SiliWiki V1 使用说明与样例",
-  "sub": "硅基笔记第一版 · Agent 生成内容 → 本地 Wiki UI · 2026-04",
-  "description": "一份可直接打开的中文使用说明，展示 SiliWiki 第一版应该长什么样、怎么安装、怎么把 skill 给本地 agent、怎么生成 wiki/glossary 内容包。",
+  "title": "SiliWiki V1 小白使用说明",
+  "sub": "硅基笔记第一版 · AI 助手帮你做本地笔记 · 2026-04",
+  "description": "一份给普通用户看的中文说明，展示硅基笔记第一版长什么样、怎么安装、怎么把写作说明交给 AI 助手、怎么生成一本本地笔记。",
   "logoText": "V1",
   "version": "v0.1",
   "updated": "2026-04-27",
   "accent": "#a63d00",
   "accentSoft": "#f4e9df",
   "accentDark": "#7a2d00",
-  "disclaimer": "这是 SiliWiki 第一版产品样例和使用说明。所有内容默认运行在 localhost，本地文件由用户自己管理。",
+  "disclaimer": "这是 SiliWiki 第一版产品样例和使用说明。所有内容默认放在你自己的电脑里，由你自己管理。",
   "nav": [
     {
       "chip": "0",
@@ -27,9 +27,9 @@
       "color": "accent",
       "children": [
         { "anchor": "install-and-run", "title": "安装并启动" },
-        { "anchor": "give-skill-to-agent", "title": "把 Skill 给 Agent" },
-        { "anchor": "generate-content-pack", "title": "生成内容包" },
-        { "anchor": "preview-and-validate", "title": "预览与校验" }
+        { "anchor": "give-skill-to-agent", "title": "把写作说明交给 AI 助手" },
+        { "anchor": "generate-content-pack", "title": "生成一本新笔记" },
+        { "anchor": "preview-and-validate", "title": "预览与检查" }
       ]
     },
     {
@@ -38,8 +38,8 @@
       "open": true,
       "color": "green",
       "children": [
-        { "anchor": "wiki-spec", "title": "什么是 Wiki" },
-        { "anchor": "glossary-spec", "title": "什么是 Glossary" },
+        { "anchor": "wiki-spec", "title": "什么是主题笔记" },
+        { "anchor": "glossary-spec", "title": "什么是词条表" },
         { "anchor": "source-registry", "title": "什么是来源登记" }
       ]
     },
@@ -60,7 +60,7 @@
       "open": true,
       "color": "purple",
       "children": [
-        { "anchor": "example-prompt", "title": "给 Agent 的样例 prompt" },
+        { "anchor": "example-prompt", "title": "给 AI 助手的样例问题" },
         { "anchor": "v1-scope", "title": "V1 范围" },
         { "anchor": "next-steps", "title": "下一步" }
       ]

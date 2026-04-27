@@ -183,6 +183,7 @@ async function renderWiki(slug) {
     setupSearch(article);
     setupExport(article);
     setupGlossary(pack.glossary, article);
+    await setupMermaid(article);
     if (location.hash) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({ block: 'start' });
   } catch (error) {
     app.innerHTML = `<main class="shelf-page"><a href="/" data-link>← 书架</a><div class="wiki-error">${escapeHtml(error.message)}</div></main>`;
@@ -311,6 +312,253 @@ function setupScrollSpy(article) {
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+}
+
+async function setupMermaid(article) {
+  const codeBlocks = Array.from(article.querySelectorAll('pre > code.language-mermaid'));
+  if (!codeBlocks.length) return;
+
+  for (const code of codeBlocks) {
+    const pre = code.parentElement;
+    pre.className = 'mermaid-lite';
+    pre.innerHTML = renderMermaidLite(code.textContent);
+  }
+}
+
+function renderMermaidLite(source) {
+  const text = String(source || '').trim();
+  if (/^sequenceDiagram/m.test(text)) return renderSequenceLite(text);
+  return renderFlowLite(text);
+}
+
+function parseMermaidLabel(raw) {
+  const value = String(raw || '').trim().replace(/;$/, '');
+  const quoted = value.match(/[\[\(\{]"([^"]+)"[\]\)\}]/);
+  if (quoted) return quoted[1];
+  const bracket = value.match(/[\[\(\{]([^\]\)\}]+)[\]\)\}]/);
+  if (bracket) return bracket[1].replace(/^"|"$/g, '');
+  return value.replace(/^[A-Za-z0-9_\u4e00-\u9fff-]+/, '').replace(/[\[\]\(\)\{\}"]/g, '').trim() || value.trim();
+}
+
+function parseMermaidEndpoint(raw) {
+  const value = String(raw || '').trim().replace(/;$/, '');
+  const idMatch = value.match(/^([A-Za-z0-9_\u4e00-\u9fff-]+)/);
+  const id = idMatch ? idMatch[1] : value.replace(/[^A-Za-z0-9_\u4e00-\u9fff-]+/g, '_') || `node_${Math.random().toString(36).slice(2)}`;
+  const shape = new RegExp(`^${id}\\s*\\{`).test(value) ? 'diamond' : 'rect';
+  return { id, label: parseMermaidLabel(value) || id, shape };
+}
+
+function renderFlowLite(text) {
+  const graph = buildFlowGraph(text);
+  if (!graph.edges.length && graph.nodes.size <= 1) return `<code>${escapeHtml(text)}</code>`;
+  return renderFlowSvg(graph);
+}
+
+function buildFlowGraph(text) {
+  const nodes = new Map();
+  const edges = [];
+  const captions = [];
+  let direction = 'TB';
+
+  const rememberNode = node => {
+    const existing = nodes.get(node.id);
+    if (existing) {
+      if (node.label && node.label !== node.id) existing.label = node.label;
+      if (node.shape === 'diamond') existing.shape = 'diamond';
+      return existing;
+    }
+    const stored = { ...node, order: nodes.size, type: 'normal' };
+    nodes.set(node.id, stored);
+    return stored;
+  };
+
+  for (const rawLine of String(text || '').split(/\r?\n/)) {
+    const line = rawLine.trim();
+    if (!line) continue;
+    const caption = line.match(/^%%\s*caption:\s*(.+)$/i);
+    if (caption) { captions.push(caption[1].trim()); continue; }
+    if (/^%%/.test(line)) continue;
+    const dir = line.match(/^(?:flowchart|graph)\s+([A-Z]{2})/i);
+    if (dir) { direction = dir[1].toUpperCase(); continue; }
+    if (/^subgraph\s+/i.test(line) || /^end$/i.test(line)) continue;
+
+    const cleaned = line.replace(/;$/, '');
+    const edgeMatch = cleaned.match(/^(.+?)\s*(-->|---|==>|-.->)\s*(?:\|"?([^"|]+)"?\|\s*)?(.+)$/);
+    if (edgeMatch) {
+      const from = rememberNode(parseMermaidEndpoint(edgeMatch[1]));
+      const to = rememberNode(parseMermaidEndpoint(edgeMatch[4]));
+      edges.push({ from: from.id, to: to.id, label: (edgeMatch[3] || '').trim(), style: edgeMatch[2] });
+      continue;
+    }
+
+    const nodeLine = cleaned.match(/^([A-Za-z0-9_\u4e00-\u9fff-]+)\s*[\[\{\(]/);
+    if (nodeLine) rememberNode(parseMermaidEndpoint(cleaned));
+  }
+
+  assignFlowTypes(nodes, edges);
+  return { nodes, edges, captions, direction };
+}
+
+function assignFlowTypes(nodes, edges) {
+  const outgoing = new Map();
+  for (const edge of edges) {
+    if (!outgoing.has(edge.from)) outgoing.set(edge.from, []);
+    outgoing.get(edge.from).push(edge.to);
+  }
+  for (const [from, targets] of outgoing) {
+    if (targets.length >= 3) {
+      for (const target of targets) {
+        const node = nodes.get(target);
+        if (node) node.type = 'app';
+      }
+    }
+  }
+  for (const node of nodes.values()) {
+    if (/正文|词条|来源|图片|附件|资料|封面|目录/.test(node.label)) node.type = 'app';
+    if (node.shape === 'diamond') node.type = 'decision';
+  }
+}
+
+function layoutFlowNodes(graph) {
+  const nodes = Array.from(graph.nodes.values()).sort((a, b) => a.order - b.order);
+  const levels = new Map(nodes.map(node => [node.id, 0]));
+  for (let i = 0; i < nodes.length; i += 1) {
+    for (const edge of graph.edges) {
+      levels.set(edge.to, Math.max(levels.get(edge.to) || 0, (levels.get(edge.from) || 0) + 1));
+    }
+  }
+
+  const groups = new Map();
+  for (const node of nodes) {
+    const level = levels.get(node.id) || 0;
+    if (!groups.has(level)) groups.set(level, []);
+    groups.get(level).push(node);
+  }
+  const orderedLevels = Array.from(groups.keys()).sort((a, b) => a - b);
+  const isLR = /^LR|RL$/i.test(graph.direction);
+  const maxGroup = Math.max(1, ...orderedLevels.map(level => groups.get(level).length));
+  const levelCount = Math.max(1, orderedLevels.length);
+  const nodeW = 154;
+  const appW = 154;
+  const nodeH = 58;
+  const diamondW = 150;
+  const diamondH = 82;
+  const xGap = 176;
+  const yGap = 106;
+  const marginX = 80;
+  const marginY = 52;
+  const width = isLR ? Math.max(680, marginX * 2 + (levelCount - 1) * xGap + nodeW) : Math.max(740, marginX * 2 + (maxGroup - 1) * xGap + nodeW);
+  const height = isLR ? Math.max(300, marginY * 2 + (maxGroup - 1) * yGap + nodeH) : Math.max(280, marginY * 2 + (levelCount - 1) * yGap + nodeH);
+  const positioned = new Map();
+
+  for (const level of orderedLevels) {
+    const group = groups.get(level);
+    group.forEach((node, index) => {
+      const w = node.shape === 'diamond' ? diamondW : (node.type === 'app' ? appW : nodeW);
+      const h = node.shape === 'diamond' ? diamondH : nodeH;
+      let x;
+      let y;
+      if (isLR) {
+        x = marginX + level * xGap + nodeW / 2;
+        const groupHeight = (group.length - 1) * yGap;
+        y = height / 2 - groupHeight / 2 + index * yGap;
+      } else {
+        const groupWidth = (group.length - 1) * xGap;
+        x = width / 2 - groupWidth / 2 + index * xGap;
+        y = marginY + level * yGap + h / 2;
+      }
+      positioned.set(node.id, { ...node, x, y, w, h, level, index });
+    });
+  }
+
+  return { width, height, nodes: positioned, isLR };
+}
+
+function renderFlowSvg(graph) {
+  const layout = layoutFlowNodes(graph);
+  const hash = Math.abs(hashString(Array.from(graph.nodes.keys()).join('|') + graph.edges.length)).toString(36);
+  const markerId = `m-arrow-${hash}`;
+  const edges = graph.edges.map(edge => renderFlowEdge(edge, layout, markerId)).join('');
+  const nodes = Array.from(layout.nodes.values()).map(renderNodeShape).join('');
+  const caption = graph.captions.length ? `<figcaption class="m-caption">${escapeHtml(graph.captions.join(' '))}</figcaption>` : '';
+  return `<figure class="m-lite m-figure m-flowchart"><svg class="m-graph" viewBox="0 0 ${layout.width} ${layout.height}" role="img" aria-label="SiliWiki flowchart diagram"><defs><marker id="${markerId}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" class="m-arrow-head" /></marker></defs><g class="m-links">${edges}</g><g class="m-nodes">${nodes}</g></svg>${caption}</figure>`;
+}
+
+function renderFlowEdge(edge, layout, markerId) {
+  const from = layout.nodes.get(edge.from);
+  const to = layout.nodes.get(edge.to);
+  if (!from || !to) return '';
+  const a = anchorPoint(from, to, layout.isLR, true);
+  const b = anchorPoint(to, from, layout.isLR, false);
+  const path = layout.isLR
+    ? `M ${a.x} ${a.y} C ${(a.x + b.x) / 2} ${a.y}, ${(a.x + b.x) / 2} ${b.y}, ${b.x} ${b.y}`
+    : `M ${a.x} ${a.y} C ${a.x} ${(a.y + b.y) / 2}, ${b.x} ${(a.y + b.y) / 2}, ${b.x} ${b.y}`;
+  const label = edge.label ? `<text class="m-edge-label" x="${(a.x + b.x) / 2}" y="${(a.y + b.y) / 2 - 5}" text-anchor="middle">${escapeHtml(edge.label)}</text>` : '';
+  return `<path class="m-link" d="${path}" marker-end="url(#${markerId})" />${label}`;
+}
+
+function anchorPoint(node, other, isLR, isSource) {
+  if (isLR) {
+    const sign = isSource ? (other.x >= node.x ? 1 : -1) : (other.x < node.x ? -1 : 1);
+    return { x: node.x + sign * node.w / 2, y: node.y };
+  }
+  const sign = isSource ? (other.y >= node.y ? 1 : -1) : (other.y < node.y ? -1 : 1);
+  return { x: node.x, y: node.y + sign * node.h / 2 };
+}
+
+function renderNodeShape(node) {
+  const classes = `m-node ${node.type || 'normal'} ${node.shape === 'diamond' ? 'diamond' : 'rect'}`;
+  const labelLines = renderTextLines(node.label, node.x, node.y, node.shape === 'diamond' ? 12 : 11);
+  if (node.shape === 'diamond') {
+    const points = `${node.x},${node.y - node.h / 2} ${node.x + node.w / 2},${node.y} ${node.x},${node.y + node.h / 2} ${node.x - node.w / 2},${node.y}`;
+    return `<g class="${classes}"><polygon points="${points}" />${labelLines}</g>`;
+  }
+  return `<g class="${classes}"><rect x="${node.x - node.w / 2}" y="${node.y - node.h / 2}" width="${node.w}" height="${node.h}" rx="3" ry="3" />${labelLines}</g>`;
+}
+
+function renderTextLines(label, x, y, maxChars = 12) {
+  const lines = splitMermaidLabel(label, maxChars).slice(0, 3);
+  const start = y - ((lines.length - 1) * 14) / 2 + 4;
+  return `<text class="m-label" text-anchor="middle">${lines.map((line, index) => `<tspan x="${x}" y="${start + index * 15}">${escapeHtml(line)}</tspan>`).join('')}</text>`;
+}
+
+function splitMermaidLabel(label, maxChars = 12) {
+  const text = String(label || '')
+    .replace(/<br\s*\/?>(?![^<]*>)/gi, '\n')
+    .replace(/\\n/g, '\n')
+    .replace(/\s*·\s*/g, ' · ')
+    .trim();
+  const explicit = text.split(/\n+/).map(part => part.trim()).filter(Boolean);
+  const lines = [];
+  for (const part of explicit.length ? explicit : [text]) {
+    if (part.length <= maxChars) { lines.push(part); continue; }
+    const pieces = part.split(/\s+|(?=·)|(?<=·)/).filter(Boolean);
+    let current = '';
+    for (const piece of pieces) {
+      const next = current ? `${current}${piece.startsWith('·') ? ' ' : ' '}${piece}` : piece;
+      if (next.length > maxChars && current) { lines.push(current.trim()); current = piece; }
+      else current = next;
+    }
+    if (current) lines.push(current.trim());
+  }
+  return lines.length ? lines : [''];
+}
+
+function hashString(value) {
+  let hash = 0;
+  for (let i = 0; i < String(value).length; i += 1) hash = ((hash << 5) - hash + String(value).charCodeAt(i)) | 0;
+  return hash;
+}
+
+function renderSequenceLite(text) {
+  const lines = text.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+  const steps = lines.filter(line => line.includes('->>')).map(line => {
+    const m = line.match(/^(.+?)-{1,2}>>(.+?):\s*(.+)$/);
+    if (!m) return null;
+    return { from: m[1].trim(), to: m[2].trim(), label: m[3].trim() };
+  }).filter(Boolean);
+  if (!steps.length) return `<code>${escapeHtml(text)}</code>`;
+  return `<div class="m-lite m-sequence">${steps.map(step => `<div class="m-step"><span>${escapeHtml(step.from)}</span><b>→</b><span>${escapeHtml(step.to)}</span><em>${escapeHtml(step.label)}</em></div>`).join('')}</div>`;
 }
 
 function setupSearch(article) {

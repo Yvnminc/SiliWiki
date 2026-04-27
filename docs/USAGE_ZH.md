@@ -1,132 +1,85 @@
-# SiliWiki / 硅基笔记 使用说明（V1）
+# SiliWiki / 硅基笔记小白使用说明
 
-这份文档说明 SiliWiki 第一版具体怎么用，以及用户、Agent、内容包、UI 之间如何协作。
+这份说明尽量不用专业词。你可以把 SiliWiki 理解成：**一个放在你电脑里的智能笔记书架**。
 
-## 一句话
+## 1. 它是干什么的？
 
-**SiliWiki = 本地 Wiki UI + Agent 写作 Skill + 可校验内容包。**
+你告诉 AI 助手：“我想整理一个主题。”
 
-用户不需要手动写完整网站。用户把内置 skill 给本地 Agent，Agent 按规范生成 `content/wikis/<slug>`，SiliWiki 在 localhost 上渲染。
+AI 助手按照一份固定的写作说明，把这个主题整理成一本本地笔记。然后你用 SiliWiki 打开它，就像打开一个小网站一样阅读。
 
-## 1. 安装
+```mermaid
+flowchart LR
+    A["你有一个想整理的主题"] --> B["AI 助手按说明写"]
+    B --> C["生成一本本地笔记"]
+    C --> D["你打开网页阅读"]
+```
+
+## 2. 怎么开始？
+
+复制下面几行：
 
 ```bash
-git clone <your-siliwiki-repo-url>
+git clone <项目地址>
 cd siliwiki
 npm install
 npm run dev
 ```
 
-打开：
+然后打开：
 
 ```text
 http://localhost:3000
 ```
 
-## 2. 给本地 Agent 的 Skill
+如果你不懂这些命令，简单理解就是：下载、进入文件夹、准备好、打开本地页面。
 
-导出：
+## 3. 怎么让 AI 帮你写？
+
+先取出“写作说明书”：
 
 ```bash
 npm run skill > siliwiki-skill.md
 ```
 
-然后把 `siliwiki-skill.md` 粘贴给本地 Agent，并补充你的主题需求。
+然后把这份 `siliwiki-skill.md` 发给你的 AI 助手，再告诉它你想整理什么。
 
-建议 prompt：
-
-```text
-请阅读 siliwiki-skill.md，并在当前 SiliWiki 仓库中创建一本新的 wiki。
-主题：<你的主题>
-slug：<lowercase-slug>
-目标读者：<读者>
-要求：生成 meta.json、content.md、glossary.json、raw/sources.md，并运行 npm run validate。
-```
-
-## 3. 新建 Wiki 内容包
-
-```bash
-npm run new -- my-topic --title "My Topic"
-```
-
-目录：
+例子：
 
 ```text
-content/wikis/my-topic/
-├── meta.json
-├── content.md
-├── glossary.json
-└── raw/
-    └── sources.md
+请按照这份写作说明，帮我整理一本“电池回收入门笔记”。
+读者是完全不懂技术的小白。
+请写得通俗一点，重要词语做成词条，不确定的地方标注“待确认”。
 ```
 
-## 4. Agent 生成内容
-
-Agent 应写入：
-
-| 文件 | 用途 |
-|---|---|
-| `meta.json` | 标题、版本、主题色、导航 |
-| `content.md` | 正文主体 |
-| `glossary.json` | 术语、别名、定义、关联、来源 |
-| `raw/sources.md` | 来源登记和待核实点 |
-
-## 5. 校验和预览
-
-```bash
-npm run validate
-npm run smoke
-npm run dev
-```
-
-打开：
-
-```text
-http://localhost:3000/wiki/my-topic
-```
-
-## 6. 架构图
+## 4. 一本笔记里有什么？
 
 ```mermaid
 flowchart TD
-    User["User"] --> CLI["siliwiki CLI"]
-    CLI --> Skill["siliwiki-writer skill"]
-    Skill --> Agent["Local Agent"]
-    Agent --> Pack["content/wikis/<slug>"]
-    CLI --> Validator["npm run validate"]
-    Pack --> Server["Local Express Server"]
-    Server --> UI["Browser UI at localhost"]
-    UI --> Reader["Reader: nav / search / glossary / export"]
+    A["一本主题笔记"] --> B["封面和目录"]
+    A --> C["正文"]
+    A --> D["词条解释"]
+    A --> E["资料来源"]
 ```
 
-## 7. 生成链路
+你不需要记住文件名，只要知道：
 
-```mermaid
-sequenceDiagram
-    actor U as User
-    participant S as Skill
-    participant A as Local Agent
-    participant P as Content Pack
-    participant V as Validator
-    participant UI as Localhost UI
+- 封面和目录：让人知道这本笔记讲什么。
+- 正文：真正解释内容。
+- 词条解释：把容易混淆的词统一说明。
+- 资料来源：记录这些内容从哪里来。
 
-    U->>S: npm run skill
-    U->>A: Paste skill + topic
-    A->>P: Write meta/content/glossary/sources
-    U->>V: npm run validate
-    V-->>U: pass/fail report
-    U->>UI: npm run dev
-    UI->>P: read local files through API
-    UI-->>U: render wiki
+## 5. 怎么检查？
+
+AI 写完后，先运行：
+
+```bash
+npm run validate
 ```
 
-## 8. V1 样例
+这一步相当于检查：目录有没有坏、词条有没有重复、内容里有没有明显不该放的东西。
 
-仓库内置了一个中文 V1 样例：
-
-```text
-content/wikis/siliwiki-v1/
-```
+## 6. 打开 V1 样例
 
 启动后打开：
 
@@ -134,4 +87,4 @@ content/wikis/siliwiki-v1/
 http://localhost:3000/wiki/siliwiki-v1
 ```
 
-这个样例展示了 SiliWiki 第一版应该长什么样、怎么讲清楚流程、怎么定义 Wiki / Glossary、怎么放架构图和使用命令。
+这本样例已经改成小白版，并且里面挂了几张 Mermaid 图，用来解释整体流程。

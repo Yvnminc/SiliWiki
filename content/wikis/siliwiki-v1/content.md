@@ -1,366 +1,386 @@
-# SiliWiki V1 使用说明与样例
+# SiliWiki V1 小白使用说明
 
-这是一份给普通用户和本地 Agent 使用的第一版说明：你 clone 这个仓库，把内置 skill 给本地 Agent，然后让 Agent 生成 `content/wikis/<slug>` 内容包，最后用 localhost UI 阅读、搜索、打开 glossary、导出。
+这页是给第一次接触硅基笔记的人看的。你不需要懂技术，只要知道三件事：**你有一个本地笔记书架；你把写作说明交给自己的 AI 助手；AI 助手按说明把内容写成一本可以打开阅读的笔记。**
 
 <div class="tldr">
-<h4>一句话</h4>
-<strong>SiliWiki / 硅基笔记 = 本地 Wiki UI + Agent 写作 Skill + 可校验内容包。</strong><br>
-Skill 负责规定 Agent 怎么写，SiliWiki 负责把生成结果变成可读、可搜、可追溯的本地知识库。
+<h4>先记住一句话</h4>
+<strong>硅基笔记 = 一本放在你电脑里的“智能说明书书架”。</strong><br>
+你告诉 AI 助手想整理什么主题，它按固定格式写好内容；你打开网页一样的界面阅读、搜索、看词条、导出。
 </div>
 
+```mermaid
+flowchart TB
+    A["你<br/>提出一个想整理的主题"] --> B["写作说明书<br/>定义笔记、词条、来源"]
+    B --> C{"AI 助手<br/>按说明生成内容"}
+    C --> D["正文<br/>章节和重点"]
+    C --> E["词条表<br/>重要词语解释"]
+    C --> F["来源登记<br/>资料从哪里来"]
+    C --> G["图片材料<br/>保存在本地"]
+    D --> H["本地笔记文件夹<br/>一本主题一个文件夹"]
+    E --> H
+    F --> H
+    G --> H
+    H --> I["SiliWiki 阅读页面<br/>目录 · 搜索 · 词条 · 导出"]
+    I --> J["你决定<br/>本地保存或分享"]
+    %% caption: Figure — 硅基笔记的本地工作流：你给主题，AI 按写作说明生成内容，SiliWiki 把本地文件渲染成可阅读页面。
+```
+
 <div class="stat-grid">
-  <div class="stat"><div class="stat-value">3</div><div class="stat-label">核心步骤：安装 / 交给 Agent / 本地预览</div></div>
-  <div class="stat"><div class="stat-value">4</div><div class="stat-label">核心文件：meta / content / glossary / sources</div></div>
-  <div class="stat"><div class="stat-value">0</div><div class="stat-label">默认云依赖：不需要上传</div></div>
-  <div class="stat"><div class="stat-value">1</div><div class="stat-label">统一 UI：书架 + 阅读器</div></div>
+  <div class="stat"><div class="stat-value">1</div><div class="stat-label">一个本地书架</div></div>
+  <div class="stat"><div class="stat-value">1</div><div class="stat-label">一份写作说明</div></div>
+  <div class="stat"><div class="stat-value">N</div><div class="stat-label">很多本主题笔记</div></div>
+  <div class="stat"><div class="stat-value">0</div><div class="stat-label">默认不上传云端</div></div>
 </div>
 
 <h2 id="what-you-get">0.1 你会得到什么</h2>
 
-用户安装后得到的是一个可以立刻跑起来的本地知识工作台：
+你可以把 SiliWiki 想成一个**本地书架**：
 
-- 一个命令行工具：`siliwiki`
-- 一个本地服务：`http://localhost:3000`
-- 一个书架首页：展示所有本地 wiki
-- 一个阅读器：目录、搜索、glossary、导出
-- 一个 Agent 写作 skill：约束本地 Agent 如何生成内容
-- 一个内容格式：`content/wikis/<slug>`
+- 每一个主题，就是书架上的一本小书。
+- 每本小书都有正文、目录、词条解释和来源记录。
+- AI 助手负责帮你写初稿。
+- 你负责检查、修改、决定要不要分享出去。
 
 <div class="two-col">
 <div class="card">
-<h4>它不是</h4>
+<h4>以前的方式</h4>
 <ul>
-<li>不是云端 CMS</li>
-<li>不是 Notion 替代品</li>
-<li>不是只给人手写的 Markdown 模板</li>
-<li>不是一次性网页</li>
+<li>聊天记录散在各处</li>
+<li>同一个概念反复解释</li>
+<li>过几天就找不到重点</li>
+<li>AI 每次写法都不一样</li>
 </ul>
 </div>
 <div class="card">
-<h4>它是</h4>
+<h4>硅基笔记的方式</h4>
 <ul>
-<li>给 Agent 生成知识内容的 harness</li>
-<li>本地优先的 Wiki UI</li>
-<li>一套可校验的内容包规范</li>
-<li>可以被 git 管理的知识资产</li>
+<li>一个主题变成一本本地笔记</li>
+<li>目录清楚，方便阅读</li>
+<li>重要词语统一解释</li>
+<li>以后可以继续让 AI 维护</li>
 </ul>
 </div>
 </div>
 
 <h2 id="v1-product-shape">0.2 V1 长什么样</h2>
 
-第一版产品形态非常克制：**不做复杂后台，不做云同步，不做账号系统**。先把「Agent 生成内容 → 本地 UI 阅读」这个闭环做稳。
+第一版只做一个很简单的闭环：**让 AI 帮你生成一本能长期保存的本地笔记。**
 
 <div class="diagram flow-diagram">
-  <div class="flow-row">
-    <div class="flow-node user"><strong>User</strong><span>clone repo<br>提出主题</span></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-node skill"><strong>Skill</strong><span>写作说明书<br>规范 Agent</span></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-node agent"><strong>Local Agent</strong><span>生成内容<br>补 glossary</span></div>
-  </div>
-  <div class="flow-row second">
-    <div class="flow-node files"><strong>Content Pack</strong><span>meta.json<br>content.md<br>glossary.json</span></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-node runtime"><strong>SiliWiki UI</strong><span>localhost<br>目录 / 搜索 / 导出</span></div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-node reader"><strong>Reader</strong><span>阅读<br>复用<br>继续维护</span></div>
-  </div>
+<div class="diagram-title">V1 最小闭环</div>
+<div class="flow-row">
+  <div class="flow-node"><strong>AI 助手</strong><span>按写作说明生成草稿</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-node"><strong>主题笔记</strong><span>正文、目录、词条、来源</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-node"><strong>阅读页面</strong><span>打开、搜索、查看词条、导出</span></div>
+</div>
 </div>
 
-这就是 V1 的样子：**文件是数据库，Skill 是写作协议，UI 是阅读壳。**
+V1 暂时不追求复杂功能。它先把最关键的一件事做好：**把一次聊天变成一本可以反复打开的笔记。**
 
 <h2 id="install-and-run">1.1 安装并启动</h2>
 
+如果你会打开命令行，就复制下面几行：
+
 ```bash
-git clone <your-siliwiki-repo-url>
+git clone <项目地址>
 cd siliwiki
 npm install
 npm run dev
 ```
 
-打开：
+然后打开浏览器访问：
 
 ```text
-http://localhost:3000
+http://127.0.0.1:3000
 ```
 
-如果你只想换端口：
+如果你不知道这些命令是什么意思，也没关系。你可以把它理解成：
 
-```bash
-npm run dev -- --port 3123
-```
+1. 把项目下载到电脑里。
+2. 进入这个文件夹。
+3. 安装需要的东西。
+4. 打开本地预览页面。
 
-<h2 id="give-skill-to-agent">1.2 把 Skill 给 Agent</h2>
+<div class="flag-blue">
+<strong>小白理解：</strong>这不是把你的内容传到别人网站上，而是在你自己的电脑上开了一个本地阅读页面。
+</div>
 
-SiliWiki 的重点不是让用户手写所有内容，而是让用户把写作规范交给自己的本地 Agent。
+<h2 id="give-skill-to-agent">1.2 把写作说明交给 AI 助手</h2>
 
-导出 skill：
+项目里自带一份**给 AI 助手看的写作说明书**。你不用记住技术名词，只要知道：它会告诉 AI 应该怎么写一本结构清楚的主题笔记。
+
+导出这份说明书：
 
 ```bash
 npm run skill > siliwiki-skill.md
 ```
 
-然后把 `siliwiki-skill.md` 的内容贴给本地 Agent，并告诉它：
+然后把 `siliwiki-skill.md` 里的内容贴给你的 AI 助手，并告诉它你想整理什么主题。
 
-> 请根据这个 skill，在当前 SiliWiki 仓库里生成一本新的 wiki。主题是：……
+```mermaid
+sequenceDiagram
+    actor 你
+    participant 说明书 as 写作说明书
+    participant AI as AI助手
+    participant 笔记 as 一本新笔记
 
-<div class="flag-blue">
-<strong>关键点：</strong>Skill 相当于“内容说明书”。它不只是 prompt，而是规定 Agent 必须生成哪些文件、如何定义 glossary、如何记录 sources、如何校验结果。
-</div>
+    你->>说明书: 取出写作说明
+    你->>AI: 把说明书和主题发给 AI
+    AI->>笔记: 按说明写正文、目录、词条
+    笔记-->>你: 你打开本地页面阅读
+```
 
-<h2 id="generate-content-pack">1.3 生成内容包</h2>
+<h2 id="generate-content-pack">1.3 生成一本新笔记</h2>
 
-先创建一个空内容包：
+先创建一本空白笔记，例如“电池回收”：
 
 ```bash
-npm run new -- battery-recycling --title "Battery Recycling Wiki"
+npm run new -- battery-recycling --title "电池回收笔记"
 ```
 
-生成后目录大概是：
+然后让 AI 助手往这本笔记里填内容。
 
-```text
-content/wikis/battery-recycling/
-├── meta.json
-├── content.md
-├── glossary.json
-└── raw/
-    └── sources.md
-```
+你不需要记住很多文件名，只要理解这四样东西：
 
-接下来 Agent 应该编辑这些文件：
-
-| 文件 | Agent 要做什么 | 用户为什么需要它 |
+| 部分 | 像什么 | 作用 |
 |---|---|---|
-| `meta.json` | 写标题、版本、主题色、导航 | UI 根据它生成书架卡片和左侧目录 |
-| `content.md` | 写正文、章节、表格、图示 | 这是 wiki 的主体内容 |
-| `glossary.json` | 写术语、别名、定义、关联 | 统一概念，避免同义词混乱 |
-| `raw/sources.md` | 记录来源、证据、待核实点 | 让内容可追溯，方便二次维护 |
+| 标题和目录 | 一本书的封面和目录 | 告诉读者这本书讲什么 |
+| 正文 | 书的章节 | 真正解释主题内容 |
+| 词条 | 书后的术语解释 | 解释容易混淆的词 |
+| 来源 | 参考资料清单 | 记录内容从哪里来 |
 
-<h2 id="preview-and-validate">1.4 预览与校验</h2>
+<h2 id="preview-and-validate">1.4 预览与检查</h2>
 
-每次 Agent 写完后，先跑：
+AI 写完后，先检查一下有没有明显问题：
 
 ```bash
 npm run validate
-npm run smoke
 ```
 
-通过后再启动 UI：
+再打开本地页面：
 
 ```bash
 npm run dev
 ```
 
-打开：
+如果你的笔记名字是 `battery-recycling`，就打开：
 
 ```text
-http://localhost:3000/wiki/battery-recycling
+http://127.0.0.1:3000/wiki/battery-recycling
 ```
 
-校验会检查：
-
-- wiki slug 是否安全
-- 是否缺 `meta.json` / `content.md`
-- `meta.nav` 里的 anchor 是否真的存在
-- `glossary.json` 是否能解析
-- glossary term slug 是否重复
-- glossary category 是否引用了不存在的分类
-- 内容包里是否出现 `.env`、private key、明显 token 等敏感文件
-
-<h2 id="wiki-spec">2.1 什么是 Wiki</h2>
-
-在 SiliWiki 里，Wiki 不是一个网页，也不是数据库里的一条记录，而是一个本地文件夹：
-
-```text
-content/wikis/<slug>/
-```
-
-它至少包含：
-
-- `meta.json`
-- `content.md`
-
-推荐包含：
-
-- `glossary.json`
-- `raw/sources.md`
-- `images/`
-
-<div class="card">
-<h4>判断一本 wiki 是否合格</h4>
-<p>如果一个陌生人只看这一个文件夹，就能知道它讲什么、术语怎么定义、内容依据来自哪里、如何继续维护，那么它就是合格的 SiliWiki 内容包。</p>
+<div class="flag-green">
+<strong>推荐习惯：</strong>每次让 AI 改完内容，都先检查，再打开页面看。这样不容易留下坏链接、坏目录或混乱词条。
 </div>
 
-<h2 id="glossary-spec">2.2 什么是 Glossary</h2>
+<h2 id="wiki-spec">2.1 什么是主题笔记</h2>
 
-Glossary 是概念压缩层。它解决的是长期内容最容易坏掉的问题：**同一个东西有很多叫法，不同 Agent 写着写着就散了。**
+在 SiliWiki 里，**主题笔记** 可以先理解成“一本可以长期维护的小书”。
 
-一个 term 的结构：
+它不是临时聊天，也不是一次性文章。它更像：
 
-```json
-{
-  "slug": "content-pack",
-  "display": "Content Pack",
-  "aliases": ["内容包", "wiki folder"],
-  "category": "core",
-  "short": "一份可被 SiliWiki 渲染的本地 wiki 文件夹。",
-  "definition": "Content Pack 是 SiliWiki 的基本内容单位，通常包含 meta.json、content.md、glossary.json、raw/sources.md 和 images/。",
-  "related": ["wiki", "glossary"],
-  "sources": ["raw/sources.md#siliwiki-v1-design"]
-}
+- 一本小手册
+- 一个主题档案夹
+- 一份能不断更新的知识说明书
+
+```mermaid
+flowchart TD
+    A["一本主题笔记"] --> B["标题和目录"]
+    A --> C["正文"]
+    A --> D["词条解释"]
+    A --> E["来源记录"]
 ```
 
-Glossary 同时服务三类对象：
+判断一本主题笔记好不好，看这几个问题：
 
-1. **读者**：不懂术语时可以点开看解释。
-2. **Agent**：下次维护时沿用同一套词汇。
-3. **系统**：自动链接正文中的术语，形成概念网络。
+1. 一个陌生人能不能看懂它在讲什么？
+2. 重要词语有没有解释清楚？
+3. 内容来源有没有记录？
+4. 下次 AI 能不能接着维护，而不是重头再写？
+
+<h2 id="glossary-spec">2.2 什么是词条表</h2>
+
+**词条表**就是一本笔记里的“统一解释表”。你可以直接把它理解成“重要词语解释”。
+
+比如一本关于电池的笔记里，可能会反复出现这些词：
+
+- 回收
+- 梯次利用
+- 正极材料
+- 生命周期
+- 碳排放
+
+如果每次都重新解释，会很乱。所以我们把它们放进词条表里：
+
+```mermaid
+flowchart LR
+    A["正文里出现一个词"] --> B["点一下"]
+    B --> C["看到统一解释"]
+    C --> D["以后 AI 也按这个说法写"]
+```
+
+<div class="card">
+<h4>为什么词条很重要？</h4>
+<p>长期笔记最怕“同一个词有很多叫法”。词条表能把叫法统一起来，让人和 AI 都不容易跑偏。</p>
+</div>
 
 <h2 id="source-registry">2.3 什么是来源登记</h2>
 
-`raw/sources.md` 是证据登记簿。它不需要很漂亮，但必须诚实。
+来源登记就是“这句话从哪里来的”。
 
-推荐写法：
+它可以记录：
 
-```markdown
-## siliwiki-v1-design
+- 一篇文章
+- 一份报告
+- 一次会议纪要
+- 一张截图
+- 你自己的一段观察
 
-- Type: local product design note
-- Date: 2026-04-27
-- Used by: content.md, glossary.json
-- Notes: Defines SiliWiki V1 flow: clone repo → hand skill to agent → render locally.
+```mermaid
+flowchart TD
+    A["资料或会议"] --> B["AI 助手整理"]
+    B --> C["写进正文"]
+    B --> D["把来源记下来"]
+    D --> E["以后可以追溯"]
 ```
 
 <div class="flag-yellow">
-<strong>原则：</strong>Agent 可以总结，但不能伪造来源。没有来源就写“待核实”，不要装作已经引用。
+<strong>重要原则：</strong>AI 可以帮你总结，但不能假装有来源。没有来源就写“待确认”。
 </div>
 
-<h2 id="system-architecture">3.1 系统架构图</h2>
+<h2 id="system-architecture">3.1 整体图：这件事怎么运转</h2>
 
-<div class="diagram architecture-diagram">
-  <div class="arch-layer">
-    <div class="arch-box frontend"><strong>Browser UI</strong><span>书架 / Reader / Search / Glossary / Export</span></div>
-  </div>
-  <div class="arch-arrow">↓ GET /api/library · GET /api/wiki/:slug</div>
-  <div class="arch-layer">
-    <div class="arch-box backend"><strong>Local Express Server</strong><span>localhost only · static assets · JSON API</span></div>
-    <div class="arch-box cli"><strong>SiliWiki CLI</strong><span>dev / new / validate / skill / doctor</span></div>
-  </div>
-  <div class="arch-arrow">↓ read / write local files</div>
-  <div class="arch-layer">
-    <div class="arch-box data"><strong>Content Packs</strong><span>content/wikis/&lt;slug&gt;</span></div>
-    <div class="arch-box harness"><strong>Agent Harness</strong><span>skills + schemas + templates</span></div>
-  </div>
-  <div class="arch-arrow">↔ user-controlled local agent</div>
-</div>
+下面这张图用最简单的话说明：人、AI 助手、笔记、阅读页面之间是什么关系。
 
-架构重点：
-
-- UI 不直接操作云服务，只读 localhost API。
-- Server 不需要数据库，只读本地文件。
-- CLI 负责创建、校验、导出 skill。
-- Agent 不需要懂 UI，只要按内容包规范写文件。
-
-<h2 id="generation-sequence">3.2 生成链路</h2>
-
-<div class="diagram sequence-diagram">
-  <div><strong>User</strong><span>npm run skill</span></div>
-  <div><strong>Agent</strong><span>读取 skill + 用户主题</span></div>
-  <div><strong>CLI</strong><span>npm run new -- slug</span></div>
-  <div><strong>Files</strong><span>写 meta/content/glossary/sources</span></div>
-  <div><strong>Validator</strong><span>npm run validate</span></div>
-  <div><strong>UI</strong><span>localhost 渲染</span></div>
-</div>
-
-对应的实际命令：
-
-```bash
-npm run skill > siliwiki-skill.md
-npm run new -- my-topic --title "My Topic"
-# agent writes content/wikis/my-topic/*
-npm run validate
-npm run dev
+```mermaid
+flowchart TB
+    U["你<br/>提出主题 · 提供资料"] --> S["写作说明书<br/>规定什么叫笔记、词条、来源"]
+    S --> A{"AI 助手<br/>按规则写草稿"}
+    A --> M["正文<br/>标题 · 目录 · 章节"]
+    A --> G["词条表<br/>统一解释关键词"]
+    A --> R["来源登记<br/>引用和待确认"]
+    A --> X["图片/附件<br/>放进本地文件夹"]
+    M --> L["本地笔记文件夹<br/>content/wikis/一本笔记"]
+    G --> L
+    R --> L
+    X --> L
+    L --> V["本地检查<br/>目录 · 链接 · 安全文件"]
+    V --> P["SiliWiki 阅读页面<br/>像 NTU wiki 一样阅读"]
+    P --> O["你<br/>继续修改 · 导出 · 分享"]
+    %% caption: Figure — SiliWiki 系统架构：写作说明约束 AI，AI 生成本地笔记文件夹，检查通过后由 SiliWiki 阅读页面渲染。
 ```
 
-<h2 id="folder-map">3.3 文件结构</h2>
+这张图里最重要的是：**内容先放在你电脑里。你想分享时再分享，不想分享就只是本地笔记。**
 
-<div class="file-tree">
-<pre><code>siliwiki/
-├── bin/siliwiki.mjs                 # CLI 入口
-├── src/server.mjs                   # localhost server + API
-├── src/core/                        # slug / wiki pack / validation
-├── public/                          # 无构建前端 UI
-├── content/wikis/                   # 用户和 Agent 生成的 wiki
-│   ├── demo/                        # 英文/双语 demo
-│   └── siliwiki-v1/                 # 本说明：第一版样例
-├── templates/wiki/                  # npm run new 使用的模板
-├── skills/siliwiki-writer/SKILL.md  # 给本地 Agent 的写作 skill
-├── harness/schemas/                 # meta/glossary JSON schema
-└── docs/                            # 架构、内容规范、测试结果</code></pre>
-</div>
+<h2 id="generation-sequence">3.2 从想法到笔记的过程</h2>
 
-<h2 id="example-prompt">4.1 给 Agent 的样例 prompt</h2>
+```mermaid
+sequenceDiagram
+    actor 你
+    participant AI as AI助手
+    participant 笔记 as 本地笔记
+    participant 页面 as 阅读页面
 
-你可以这样对本地 Agent 说：
+    你->>AI: 我想整理一个主题
+    AI->>笔记: 写标题、目录、正文、词条
+    你->>笔记: 检查有没有问题
+    笔记->>页面: 显示成好看的阅读页面
+    你->>页面: 阅读、搜索、导出
+```
+
+如果把它说得更白话一点：
+
+> 你说需求，AI 写草稿，硅基笔记把草稿变成一本能看的小书。
+
+<h2 id="folder-map">3.3 这本小书里面有什么</h2>
+
+你可以不用记英文文件名，只要知道一本笔记大概分四层：
+
+```mermaid
+flowchart TD
+    A["一本主题笔记"] --> B["封面和目录"]
+    A --> C["正文内容"]
+    A --> D["词语解释"]
+    A --> E["资料来源"]
+```
+
+如果你真的打开文件夹，会看到类似这样：
 
 ```text
-请阅读 siliwiki-skill.md，并在当前仓库里创建一本 SiliWiki。
-主题：AI Agent Memory Frameworks
-slug：agent-memory
-目标读者：想快速理解长期记忆架构的产品经理和工程师
-要求：
-1. 生成 content/wikis/agent-memory/meta.json
-2. 生成 content/wikis/agent-memory/content.md
-3. 生成 content/wikis/agent-memory/glossary.json
-4. 生成 content/wikis/agent-memory/raw/sources.md
-5. 至少包含：概念地图、框架比较表、术语表、待核实问题
-6. 跑 npm run validate，并修复所有错误
+一本笔记/
+├── 标题和目录
+├── 正文
+├── 词条解释
+└── 来源记录
 ```
 
-Agent 完成后，用户只需要打开：
+<h2 id="role-map">3.4 角色分工图</h2>
+
+这张图专门说明：你、AI 助手和 SiliWiki 各自做什么，避免把所有事情都丢给 AI。
+
+```mermaid
+flowchart LR
+    A["你<br/>决定主题 · 检查结果"] --> B["AI 助手<br/>按说明生成草稿"]
+    B --> C["SiliWiki<br/>装订成可读页面"]
+    C --> D["你<br/>阅读 · 修改 · 分享"]
+    %% caption: Figure — 角色分工：人负责判断，AI 负责草稿，SiliWiki 负责把本地文件装订成书。
+```
+
+<h2 id="example-prompt">4.1 给 AI 助手的例子</h2>
+
+你可以这样说：
 
 ```text
-http://localhost:3000/wiki/agent-memory
+请按照硅基笔记的写作说明，帮我做一本“AI 记忆系统入门”的笔记。
+目标读者是完全不懂技术的人。
+请写得像一本小白手册：先解释是什么，再解释为什么有用，最后告诉我怎么继续学习。
+请加上词条解释和来源记录。
+写完后帮我检查一遍。
 ```
 
-<h2 id="v1-scope">4.2 V1 范围</h2>
+更生活化一点，你也可以这样说：
 
-V1 做：
+```text
+我有一堆关于电池回收的资料，你帮我整理成一本小白能看懂的笔记。
+不要写得像论文，要像给朋友解释。
+重要词语单独做词条。
+不确定的地方标注“待确认”。
+```
 
-- 本地书架
-- 本地 reader UI
-- Markdown 渲染
-- Glossary overlay / auto-link
-- 导出 Markdown / HTML / Print
-- CLI 创建新 wiki
-- CLI 导出 skill
-- 内容包校验
-- demo / V1 样例
+<h2 id="v1-scope">4.2 第一版做什么，不做什么</h2>
 
-V1 暂不做：
+第一版先做这些：
 
-- 账号系统
-- 云同步
-- 多人权限
-- 内置 AI API 调用
-- 在线发布平台
-- 所见即所得编辑器
+- 打开本地书架
+- 阅读一本主题笔记
+- 搜索当前笔记
+- 查看词条解释
+- 导出内容
+- 让 AI 按说明生成新笔记
+
+第一版暂时不做这些：
+
+- 账号登录
+- 多人协作
+- 云端同步
+- 在线发布市场
+- 复杂编辑器
 
 <div class="flag-green">
-<strong>为什么这么切：</strong>先把“用户自己的 Agent 能稳定生成本地 Wiki”跑通，再考虑云端协作和发布。这样开源项目边界清楚，用户也更容易信任。
-</div>
+<strong>为什么先这样做：</strong>越简单，越容易让用户理解，也越容易保证内容还在自己手里。</div>
 
 <h2 id="next-steps">4.3 下一步</h2>
 
-建议下一版优先做：
+下一步可以继续做：
 
-1. **Mermaid runtime 渲染**：正文里的 `mermaid` code block 直接显示成图。
-2. **内容包 diff view**：让用户看到 Agent 改了哪些内容。
-3. **Agent adapter 示例**：给 Codex / Claude Code / OpenCode 各写一份操作教程。
-4. **导入器**：从一组 Markdown / transcript / PDF 摘要生成 wiki 初稿。
-5. **Theme presets**：让每本 wiki 快速选择不同视觉风格。
+1. 让页面里的图更漂亮。
+2. 让 AI 改完后自动告诉你改了哪里。
+3. 给不同 AI 助手准备不同使用示例。
+4. 支持把会议记录、文章、资料一键整理成一本笔记。
+5. 增加更多主题样式，让每本笔记更像一本独立的小书。
 
-最终目标不是做一个重 CMS，而是让用户觉得：
+最终目标很简单：
 
-> “我只需要把说明书给 Agent，它就能把一个主题整理成一本可以长期维护的本地 Wiki。”
+> 你只要说“我想整理这个主题”，AI 就能帮你生成一本结构清楚、词条统一、可以长期维护的本地笔记。
