@@ -1,0 +1,434 @@
+{
+  "version": "v0.1",
+  "updated": "2026-05-06",
+  "description": "Canonical terms for the Agentic LCA literature review wiki.",
+  "categories": [
+    {
+      "key": "core",
+      "title": "Core LCA concepts",
+      "color": "#0f766e"
+    },
+    {
+      "key": "agentic-methods",
+      "title": "Agentic AI methods",
+      "color": "#5b3df5"
+    },
+    {
+      "key": "dynamic-systems",
+      "title": "Dynamic and multi-agent systems",
+      "color": "#a16207"
+    },
+    {
+      "key": "evidence",
+      "title": "Evidence and review",
+      "color": "#7c2d12"
+    }
+  ],
+  "keywords": [
+    {
+      "slug": "agentic-lca",
+      "display": "Agentic LCA",
+      "aliases": [
+        "代理式生命周期评价",
+        "AI-agent LCA"
+      ],
+      "category": "core",
+      "short": "LCA workflows assisted or executed by AI agents or multi-agent systems.",
+      "definition": "Agentic LCA uses task-decomposing, tool-calling, evidence-tracking AI agents or multi-agent simulations to support one or more LCA stages from goal/scope through interpretation.",
+      "related": [
+        "life-cycle-assessment",
+        "llm-agent",
+        "agent-based-modeling",
+        "provenance"
+      ],
+      "sources": [
+        "raw/sources.md#search-method",
+        "raw/sources.md#preuss-2024",
+        "raw/sources.md#davis-2009"
+      ]
+    },
+    {
+      "slug": "life-cycle-assessment",
+      "display": "Life Cycle Assessment",
+      "aliases": [
+        "LCA",
+        "生命周期评价"
+      ],
+      "category": "core",
+      "short": "A method for assessing environmental impacts across a product or system life cycle.",
+      "definition": "Life Cycle Assessment evaluates inputs, outputs, and potential environmental impacts across defined life-cycle stages, typically following goal/scope, inventory, impact assessment, and interpretation phases.",
+      "related": [
+        "life-cycle-inventory",
+        "life-cycle-impact-assessment"
+      ],
+      "sources": [
+        "raw/sources.md#preuss-2024",
+        "raw/sources.md#brightway-2017"
+      ]
+    },
+    {
+      "slug": "life-cycle-inventory",
+      "display": "Life Cycle Inventory",
+      "aliases": [
+        "LCI",
+        "清单分析"
+      ],
+      "category": "core",
+      "short": "The inventory of flows needed to calculate LCA impacts.",
+      "definition": "LCI is the phase where input and output flows, quantities, units, technologies, and locations are collected and modeled for the product system.",
+      "related": [
+        "background-matching",
+        "provenance",
+        "uncertainty-propagation"
+      ],
+      "sources": [
+        "raw/sources.md#tu-2024",
+        "raw/sources.md#kumar-2025",
+        "raw/sources.md#gkousis-2025"
+      ]
+    },
+    {
+      "slug": "life-cycle-impact-assessment",
+      "display": "Life Cycle Impact Assessment",
+      "aliases": [
+        "LCIA"
+      ],
+      "category": "core",
+      "short": "The step that converts inventory flows into impact indicators.",
+      "definition": "LCIA applies characterization methods to inventory flows to calculate indicators such as climate change, acidification, eutrophication, toxicity, or resource depletion.",
+      "related": [
+        "brightway",
+        "openlca"
+      ],
+      "sources": [
+        "raw/sources.md#preuss-2024",
+        "raw/sources.md#activity-browser-2020"
+      ]
+    },
+    {
+      "slug": "llm-agent",
+      "display": "LLM agent",
+      "aliases": [
+        "large language model agent",
+        "大语言模型代理"
+      ],
+      "category": "agentic-methods",
+      "short": "An LLM-based system that can plan, retrieve, call tools, and generate structured outputs.",
+      "definition": "In Agentic LCA, an LLM agent may retrieve literature, extract LCI data, query databases, call LCA software, write reports, and request expert review for uncertain decisions.",
+      "related": [
+        "retrieval-augmented-generation",
+        "text2sql",
+        "human-in-the-loop"
+      ],
+      "sources": [
+        "raw/sources.md#zhang-2025",
+        "raw/sources.md#aria-2025"
+      ]
+    },
+    {
+      "slug": "retrieval-augmented-generation",
+      "display": "Retrieval-Augmented Generation",
+      "aliases": [
+        "RAG",
+        "检索增强生成"
+      ],
+      "category": "agentic-methods",
+      "short": "A method that grounds model outputs in retrieved sources.",
+      "definition": "RAG retrieves relevant documents or database records before generation, helping LCA agents ground answers, reduce hallucination, and preserve citations.",
+      "related": [
+        "provenance",
+        "llm-agent",
+        "knowledge-graph"
+      ],
+      "sources": [
+        "raw/sources.md#zhang-2025",
+        "raw/sources.md#kumar-2025",
+        "raw/sources.md#cole-2025"
+      ]
+    },
+    {
+      "slug": "text2sql",
+      "display": "Text2SQL",
+      "aliases": [
+        "natural language database query"
+      ],
+      "category": "agentic-methods",
+      "short": "Converting natural language questions into SQL queries.",
+      "definition": "Text2SQL lets an LCA agent translate a user's natural language request into an executable query over an LCI or carbon footprint database.",
+      "related": [
+        "llm-agent",
+        "life-cycle-inventory"
+      ],
+      "sources": [
+        "raw/sources.md#zhang-2025"
+      ]
+    },
+    {
+      "slug": "knowledge-graph",
+      "display": "Knowledge graph",
+      "aliases": [
+        "KG",
+        "知识图谱"
+      ],
+      "category": "agentic-methods",
+      "short": "A semantic graph for grounding LCA data and recommendations.",
+      "definition": "A knowledge graph can represent LCA flows, processes, geography, technology, and relationships so agents can recommend background datasets more consistently than keyword search alone.",
+      "related": [
+        "ontology",
+        "background-matching",
+        "provenance"
+      ],
+      "sources": [
+        "raw/sources.md#peng-2024",
+        "raw/sources.md#janowicz-2015"
+      ]
+    },
+    {
+      "slug": "ontology",
+      "display": "Ontology",
+      "aliases": [
+        "本体"
+      ],
+      "category": "agentic-methods",
+      "short": "A formal vocabulary and relationship model for LCA concepts.",
+      "definition": "Ontology helps agents distinguish process, flow, unit, geography, technology, and time scope, reducing semantic mismatch in LCA modeling.",
+      "related": [
+        "knowledge-graph",
+        "background-matching"
+      ],
+      "sources": [
+        "raw/sources.md#janowicz-2015",
+        "raw/sources.md#yan-2015"
+      ]
+    },
+    {
+      "slug": "background-matching",
+      "display": "Background matching",
+      "aliases": [
+        "background dataset matching",
+        "背景数据库匹配"
+      ],
+      "category": "core",
+      "short": "Mapping foreground flows to background LCI datasets.",
+      "definition": "Background matching selects representative database processes for foreground flows, considering names, units, geography, technology, temporal scope, and system boundary fit.",
+      "related": [
+        "life-cycle-inventory",
+        "knowledge-graph",
+        "provenance"
+      ],
+      "sources": [
+        "raw/sources.md#tu-2024",
+        "raw/sources.md#aria-2025",
+        "raw/sources.md#peng-2024"
+      ]
+    },
+    {
+      "slug": "agent-based-modeling",
+      "display": "Agent-Based Modeling",
+      "aliases": [
+        "ABM",
+        "基于主体建模"
+      ],
+      "category": "dynamic-systems",
+      "short": "A simulation approach that models heterogeneous actors and their interactions.",
+      "definition": "ABM represents decision-makers such as consumers, farmers, firms, facilities, or policymakers as agents whose interactions create dynamic system behavior that can feed LCA inventories.",
+      "related": [
+        "multi-agent-system",
+        "dynamic-lca",
+        "prospective-lca"
+      ],
+      "sources": [
+        "raw/sources.md#davis-2009",
+        "raw/sources.md#marvuglia-2018",
+        "raw/sources.md#lan-yao-2019"
+      ]
+    },
+    {
+      "slug": "multi-agent-system",
+      "display": "Multi-agent system",
+      "aliases": [
+        "MAS",
+        "多主体系统"
+      ],
+      "category": "dynamic-systems",
+      "short": "A system of interacting agents used to simulate dynamic environmental assessment contexts.",
+      "definition": "In MAS-LCA, interacting agents such as people, buildings, climate, supply-chain actors, or waste facilities generate dynamic foreground flows for LCA or DLCA.",
+      "related": [
+        "agent-based-modeling",
+        "dynamic-lca"
+      ],
+      "sources": [
+        "raw/sources.md#su-2025",
+        "raw/sources.md#pcf-rwkv-2025"
+      ]
+    },
+    {
+      "slug": "dynamic-lca",
+      "display": "Dynamic LCA",
+      "aliases": [
+        "DLCA",
+        "动态生命周期评价"
+      ],
+      "category": "dynamic-systems",
+      "short": "LCA that accounts for temporal dynamics rather than static averages.",
+      "definition": "Dynamic LCA incorporates time-varying foreground or background conditions, enabling environmental impacts to respond to changing behavior, technologies, or systems.",
+      "related": [
+        "prospective-lca",
+        "agent-based-modeling"
+      ],
+      "sources": [
+        "raw/sources.md#su-2025",
+        "raw/sources.md#fuortes-2025"
+      ]
+    },
+    {
+      "slug": "prospective-lca",
+      "display": "Prospective LCA",
+      "aliases": [
+        "前瞻性 LCA",
+        "ex ante LCA"
+      ],
+      "category": "dynamic-systems",
+      "short": "LCA for future technologies, scenarios, or transitions.",
+      "definition": "Prospective LCA models future systems and can benefit from agents that simulate technology adoption, policy response, and changing background systems.",
+      "related": [
+        "dynamic-lca",
+        "agent-based-modeling",
+        "pathways"
+      ],
+      "sources": [
+        "raw/sources.md#pathways-2024",
+        "raw/sources.md#fuortes-2025"
+      ]
+    },
+    {
+      "slug": "provenance",
+      "display": "Provenance",
+      "aliases": [
+        "来源链",
+        "证据链"
+      ],
+      "category": "evidence",
+      "short": "The traceable source trail for each claim, flow, mapping, and result.",
+      "definition": "Provenance records where each LCA datum, assumption, database mapping, and interpretation came from so the agentic workflow remains auditable.",
+      "related": [
+        "human-in-the-loop",
+        "uncertainty-propagation",
+        "source-anchor"
+      ],
+      "sources": [
+        "raw/sources.md#search-method",
+        "raw/sources.md#cole-2025"
+      ]
+    },
+    {
+      "slug": "uncertainty-propagation",
+      "display": "Uncertainty propagation",
+      "aliases": [
+        "不确定性传播"
+      ],
+      "category": "evidence",
+      "short": "Carrying data and model uncertainty through the LCA calculation.",
+      "definition": "Uncertainty propagation tracks how extraction confidence, mapping ambiguity, database quality, and scenario uncertainty influence final LCIA results.",
+      "related": [
+        "life-cycle-inventory",
+        "provenance",
+        "human-in-the-loop"
+      ],
+      "sources": [
+        "raw/sources.md#tan-2025",
+        "raw/sources.md#fuortes-2025"
+      ]
+    },
+    {
+      "slug": "human-in-the-loop",
+      "display": "Human-in-the-loop",
+      "aliases": [
+        "人工复核",
+        "专家在环"
+      ],
+      "category": "evidence",
+      "short": "A trust boundary where experts review agent outputs before acceptance.",
+      "definition": "Human-in-the-loop review is essential in Agentic LCA because system boundaries, tacit knowledge, negative evidence weighting, and stakeholder perspectives often require expert judgment.",
+      "related": [
+        "provenance",
+        "agentic-lca",
+        "social-lca"
+      ],
+      "sources": [
+        "raw/sources.md#cole-2025",
+        "raw/sources.md#nwagwu-2025"
+      ]
+    },
+    {
+      "slug": "social-lca",
+      "display": "Social LCA",
+      "aliases": [
+        "S-LCA",
+        "社会生命周期评价"
+      ],
+      "category": "core",
+      "short": "Assessment of social impacts across product life cycles.",
+      "definition": "Social LCA evaluates social topics such as labor practices, human rights, and community impacts; LLM agents can assist but must manage stakeholder perspective and tacit knowledge limitations.",
+      "related": [
+        "human-in-the-loop",
+        "llm-agent"
+      ],
+      "sources": [
+        "raw/sources.md#cole-2025"
+      ]
+    },
+    {
+      "slug": "brightway",
+      "display": "Brightway",
+      "aliases": [
+        "Brightway2"
+      ],
+      "category": "agentic-methods",
+      "short": "An open-source Python framework for LCA computation.",
+      "definition": "Brightway provides a programmable LCA backend that agents can call for inventory modeling, LCIA, sensitivity analysis, and reproducible workflows.",
+      "related": [
+        "activity-browser",
+        "life-cycle-impact-assessment"
+      ],
+      "sources": [
+        "raw/sources.md#brightway-2017",
+        "raw/sources.md#aria-2025"
+      ]
+    },
+    {
+      "slug": "openlca",
+      "display": "openLCA",
+      "aliases": [
+        "OpenLCA"
+      ],
+      "category": "agentic-methods",
+      "short": "An open-source LCA software ecosystem usable for automated modeling and calculation.",
+      "definition": "openLCA can act as a calculation and database environment for LCA automation, including KG-based dataset recommendation workflows.",
+      "related": [
+        "background-matching",
+        "knowledge-graph"
+      ],
+      "sources": [
+        "raw/sources.md#peng-2024"
+      ]
+    },
+    {
+      "slug": "source-anchor",
+      "display": "Source anchor",
+      "aliases": [
+        "来源锚点"
+      ],
+      "category": "evidence",
+      "short": "A stable anchor in raw/sources.md for evidence-backed wiki claims.",
+      "definition": "A source anchor is a durable evidence link such as raw/sources.md#preuss-2024 that future agents can preserve when editing the wiki.",
+      "related": [
+        "provenance",
+        "human-in-the-loop"
+      ],
+      "sources": [
+        "raw/sources.md#search-method"
+      ]
+    }
+  ]
+}

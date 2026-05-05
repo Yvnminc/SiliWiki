@@ -1,0 +1,90 @@
+{
+  "slug": "agentic-lca",
+  "title": "Agentic LCA Literature Review / 代理式生命周期评价文献综述",
+  "sub": "LLM agents · ABM/MAS-LCA · ontology-grounded LCA · 2026-05",
+  "description": "系统梳理 Agentic AI、LLM agents、multi-agent systems 与 Life Cycle Assessment 的交叉研究，形成可审计的 SiliWiki 文献综述。",
+  "logoText": "LCA",
+  "version": "v0.1",
+  "updated": "2026-05-06",
+  "accent": "#0f766e",
+  "accentSoft": "#d9f4ef",
+  "accentDark": "#064e45",
+  "disclaimer": "本页是基于公开文献与检索结果整理的研究综述。论文题名、DOI、arXiv 与工具信息见 raw/sources.md；用于正式论文前仍需人工复核全文、版本与引用格式。",
+  "nav": [
+    {
+      "chip": "0",
+      "title": "结论",
+      "open": true,
+      "children": [
+        {
+          "anchor": "executive-summary",
+          "title": "结论先行"
+        },
+        {
+          "anchor": "definition-scope",
+          "title": "定义与范围"
+        }
+      ]
+    },
+    {
+      "chip": "1",
+      "title": "文献版图",
+      "open": true,
+      "color": "green",
+      "children": [
+        {
+          "anchor": "landscape-map",
+          "title": "研究地图"
+        },
+        {
+          "anchor": "llm-ai-agents",
+          "title": "LLM / AI agents"
+        },
+        {
+          "anchor": "abm-mas-lca",
+          "title": "ABM / MAS + LCA"
+        },
+        {
+          "anchor": "enabling-infrastructure",
+          "title": "基础设施"
+        }
+      ]
+    },
+    {
+      "chip": "2",
+      "title": "综合",
+      "open": true,
+      "color": "purple",
+      "children": [
+        {
+          "anchor": "synthesis-gaps",
+          "title": "研究缺口"
+        },
+        {
+          "anchor": "proposed-architecture",
+          "title": "系统架构"
+        },
+        {
+          "anchor": "research-agenda",
+          "title": "研究议程"
+        }
+      ]
+    },
+    {
+      "chip": "3",
+      "title": "证据",
+      "open": true,
+      "color": "accent",
+      "children": [
+        {
+          "anchor": "how-to-use",
+          "title": "如何使用"
+        },
+        {
+          "anchor": "references",
+          "title": "代表文献"
+        }
+      ]
+    }
+  ]
+}
