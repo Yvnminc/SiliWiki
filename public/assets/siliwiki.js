@@ -171,6 +171,22 @@ async function renderWiki(slug) {
           <div class="gloss-cat-nav" id="wikiGlossCats"></div>
           <div id="wikiGlossList"></div>
         </div>
+      </div>
+      <div class="ai-assistant" id="wikiAiAssistant">
+        <button class="ai-fab" id="wikiAiToggle" type="button" aria-expanded="false" aria-controls="wikiAiPanel">
+          <span class="ai-fab-mark">AI</span><span class="ai-fab-label">问答助手</span>
+        </button>
+        <section class="ai-panel" id="wikiAiPanel" aria-label="SiliWiki AI 问答助手">
+          <header class="ai-head">
+            <div><strong>SiliWiki AI</strong><span>${escapeHtml(configAiModelLabel())}</span></div>
+            <button type="button" class="ai-close" id="wikiAiClose" aria-label="收起 AI 问答助手">✕</button>
+          </header>
+          <div class="ai-messages" id="wikiAiMessages" aria-live="polite"></div>
+          <form class="ai-form" id="wikiAiForm">
+            <textarea id="wikiAiInput" rows="2" maxlength="4000" placeholder="基于这本 Wiki 提问…（Enter 发送，Shift+Enter 换行）"></textarea>
+            <button type="submit" id="wikiAiSend">发送</button>
+          </form>
+        </section>
       </div>`;
 
     const article = document.getElementById('wikiArticle');
@@ -183,6 +199,7 @@ async function renderWiki(slug) {
     setupSearch(article);
     setupExport(article);
     setupGlossary(pack.glossary, article);
+    setupAiAssistant(pack);
     await setupMermaid(article);
     if (location.hash) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({ block: 'start' });
   } catch (error) {
@@ -740,6 +757,115 @@ function autoLinkGlossary(article, terms) {
       break;
     }
   }
+}
+
+function configAiModelLabel() {
+  return 'DeepSeek v4 flash · 基于当前 Wiki';
+}
+
+function sanitizeAiHtml(html) {
+  const template = document.createElement('template');
+  template.innerHTML = String(html || '');
+  const blockedTags = new Set(['SCRIPT', 'STYLE', 'IFRAME', 'OBJECT', 'EMBED', 'LINK', 'META', 'FORM', 'INPUT', 'BUTTON']);
+  const elements = Array.from(template.content.querySelectorAll('*'));
+  for (const el of elements) {
+    if (blockedTags.has(el.tagName)) {
+      el.remove();
+      continue;
+    }
+    for (const attr of Array.from(el.attributes)) {
+      const name = attr.name.toLowerCase();
+      const value = String(attr.value || '').trim();
+      if (name.startsWith('on')) el.removeAttribute(attr.name);
+      if (['href', 'src', 'xlink:href'].includes(name) && /^(javascript:|data:text\/html)/i.test(value)) el.removeAttribute(attr.name);
+      if (name === 'style') el.removeAttribute(attr.name);
+    }
+    if (el.tagName === 'A') {
+      el.setAttribute('target', '_blank');
+      el.setAttribute('rel', 'noopener noreferrer');
+    }
+  }
+  return template.innerHTML;
+}
+
+function renderAiMarkdown(value) {
+  marked.setOptions({ gfm: true, breaks: true });
+  return sanitizeAiHtml(marked.parse(String(value || '')));
+}
+
+function renderAiMessage(message) {
+  const role = message.role === 'user' ? '你' : 'AI';
+  const body = message.role === 'user' ? `<p>${escapeHtml(message.content)}</p>` : renderAiMarkdown(message.content);
+  return `<div class="ai-msg ${message.role}${message.error ? ' error' : ''}"><div class="ai-msg-role">${role}</div><div class="ai-msg-body">${body}</div></div>`;
+}
+
+function setupAiAssistant(pack) {
+  const widget = document.getElementById('wikiAiAssistant');
+  const toggle = document.getElementById('wikiAiToggle');
+  const close = document.getElementById('wikiAiClose');
+  const panel = document.getElementById('wikiAiPanel');
+  const form = document.getElementById('wikiAiForm');
+  const input = document.getElementById('wikiAiInput');
+  const send = document.getElementById('wikiAiSend');
+  const list = document.getElementById('wikiAiMessages');
+  if (!widget || !toggle || !panel || !form || !input || !send || !list) return;
+
+  const messages = [{ role: 'assistant', content: `你好，我是 SiliWiki AI 问答助手。可以基于《${pack.meta?.title || pack.slug}》回答问题。` }];
+  let loading = false;
+
+  const setOpen = open => {
+    widget.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) setTimeout(() => input.focus(), 80);
+  };
+  const renderMessages = () => {
+    const pending = loading ? '<div class="ai-msg assistant pending"><div class="ai-msg-role">AI</div><div class="ai-msg-body"><p>正在读取这本 Wiki 并生成回答…</p></div></div>' : '';
+    list.innerHTML = messages.map(renderAiMessage).join('') + pending;
+    list.scrollTop = list.scrollHeight;
+  };
+  const setLoading = value => {
+    loading = value;
+    send.disabled = value;
+    input.disabled = value;
+    renderMessages();
+  };
+
+  toggle.addEventListener('click', () => setOpen(!widget.classList.contains('open')));
+  close?.addEventListener('click', () => setOpen(false));
+  input.addEventListener('keydown', event => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      form.requestSubmit();
+    }
+  });
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    const question = input.value.trim();
+    if (!question || loading) return;
+    messages.push({ role: 'user', content: question });
+    input.value = '';
+    setLoading(true);
+    try {
+      const response = await fetch('/api/ai/ask', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          slug: pack.slug,
+          question,
+          history: messages.slice(-8).map(item => ({ role: item.role, content: item.content }))
+        })
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(payload.error || response.statusText);
+      messages.push({ role: 'assistant', content: payload.answer || 'DeepSeek 返回了空回答。' });
+    } catch (error) {
+      messages.push({ role: 'assistant', content: `请求失败：${error.message}\n\n如果是线上部署，请确认 Vercel/服务器已配置 \`DEEPSEEK_API_KEY\`。`, error: true });
+    } finally {
+      setLoading(false);
+    }
+  });
+
+  renderMessages();
 }
 
 render();

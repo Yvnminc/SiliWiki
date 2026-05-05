@@ -4,7 +4,7 @@ SiliWiki / 硅基笔记 is a local-first wiki workbench for agent-generated cont
 
 1. **Content harness** — file conventions and validation rules for wiki packs.
 2. **Agent harness** — the portable writer skill that tells a local agent how to write and evolve packs.
-3. **Reader harness** — the NTU-style local web UI that renders wiki, glossary, sources, and diagrams.
+3. **Reader harness** — the NTU-style local web UI that renders wiki, glossary, sources, diagrams, and optional AI Q&A.
 
 ## System architecture
 
@@ -18,9 +18,13 @@ flowchart TD
     P --> A
     W --> R[Local SiliWiki reader]
     R --> L[localhost UI]
+    L --> Q[AI Q&A widget]
+    Q --> API[src/server.mjs /api/ai/ask]
+    API --> W
+    API --> D[DeepSeek v4 flash]
 ```
 
-The UI is local. The project does not require a hosted database or a cloud publishing pipeline.
+The UI remains local-first. The optional AI Q&A path is server-side: the browser sends a question to SiliWiki, SiliWiki reads the current wiki pack, then calls DeepSeek with `DEEPSEEK_API_KEY` kept in server/Vercel environment variables.
 
 ## Runtime modules
 
@@ -32,12 +36,16 @@ graph LR
     CLI --> Evolution[src/core/evolution.mjs]
     Server --> Reader[public/assets/siliwiki.js]
     Server --> Content[content/wikis/*]
+    Reader --> Chat[Bottom-right AI widget]
+    Chat --> Ask[POST /api/ai/ask]
+    Ask --> DeepSeek[DeepSeek chat completions]
 ```
 
+- `src/server.mjs` serves local APIs and, when configured, proxies AI assistant requests to DeepSeek without exposing API keys.
 - `src/core/wiki-pack.mjs` creates and locates wiki packs.
 - `src/core/validate.mjs` checks slugs, nav anchors, glossary structure, and secret-looking risks inside packs.
 - `src/core/evolution.mjs` converts local wiki files into a scored memory stream and writes a human-reviewable evolution plan.
-- `public/assets/siliwiki.js` renders the local reader shell, glossary panel, Markdown, and Mermaid-lite SVG diagrams.
+- `public/assets/siliwiki.js` renders the local reader shell, glossary panel, Markdown, Mermaid-lite SVG diagrams, and AI Q&A widget.
 
 ## Self-evolution data flow
 

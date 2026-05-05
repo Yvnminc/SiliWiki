@@ -116,6 +116,7 @@ SiliWiki is designed for people who want AI to help write serious knowledge base
 | 🏠 Local-first UI | Content stays in `content/wikis/` and renders in a localhost reader. No cloud backend required. |
 | ✅ Validation | Broken anchors, invalid glossary terms, missing metadata, and secret-looking files are caught before reading. |
 | 🔎 Reader experience | Library shelf, wiki reader, side navigation, search-friendly structure, glossary overlay, and responsive diagrams. |
+| 🤖 AI Q&A assistant | Optional bottom-right chat widget asks DeepSeek v4 flash questions against the current wiki context through a server-side proxy. |
 | 🧪 Reproducibility | Lint, typecheck, validation, tests, smoke test, package dry-run, audit, and GitHub Actions CI. |
 
 ---
@@ -290,6 +291,7 @@ When `npm run dev` is running:
 | `GET /api/health` | Health check and version. |
 | `GET /api/library` | List wiki packs and summaries. |
 | `GET /api/wiki/:slug` | Return metadata, Markdown content, optional glossary, and summary. |
+| `POST /api/ai/ask` | Ask the optional AI assistant a question about the current wiki. The server reads the wiki pack and proxies to DeepSeek v4 flash; the browser never receives the API key. |
 
 ---
 
@@ -300,6 +302,19 @@ When `npm run dev` is running:
 | `PORT` | `3000` | Local server port. |
 | `HOST` | `127.0.0.1` | Local server host. Use `0.0.0.0` only when you intentionally want LAN/Tailscale access. |
 | `SILIWIKI_CONTENT_DIR` | `content/wikis` | Override wiki content directory. |
+| `DEEPSEEK_API_KEY` | *(unset)* | Enables the reader AI Q&A assistant. Keep this only on the server/Vercel environment; never commit it. |
+| `DEEPSEEK_BASE_URL` | `https://api.deepseek.com` | OpenAI-compatible DeepSeek API base URL. The server posts to `<base>/chat/completions`. |
+| `DEEPSEEK_MODEL` | `deepseek-v4-flash` | Model used by the assistant. Override if your DeepSeek account exposes a different model name. |
+| `SILIWIKI_AI_ASSISTANT_ENABLED` | `true` | Set to `0`, `false`, `off`, or `no` to disable `/api/ai/ask`. |
+
+For Vercel deployments, set the same variables in Project Settings → Environment Variables, or with the Vercel CLI, before deploying to production:
+
+```bash
+HOME=/Users/yann npx vercel env add DEEPSEEK_API_KEY production
+HOME=/Users/yann npx vercel --prod --yes
+```
+
+The public reader only calls SiliWiki's `/api/ai/ask`; it does not expose provider keys to the browser.
 
 ---
 

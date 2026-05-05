@@ -116,3 +116,24 @@ http://localhost:3000/wiki/self-evolving-agentic-wiki
 ```
 
 第一本是小白使用说明；第二本专门解释“自进化代理笔记”机制，并带有真实 references。
+
+## 8. 右下角 AI 问答助手
+
+打开任意一本 Wiki 后，右下角会出现 **AI 问答助手** 按钮。点开后可以直接问这本笔记里的内容，例如：
+
+```text
+这本 Wiki 的核心观点是什么？
+帮我总结 glossary 里最重要的 5 个词。
+这篇内容有哪些待补证据？
+```
+
+它的工作方式是：浏览器把你的问题发给本地/线上 SiliWiki 服务器，服务器读取当前 `content/wikis/<slug>/` 的正文和词条，再用 DeepSeek v4 flash 生成回答。API Key 只放在服务器环境变量里，不会发到浏览器。
+
+本地启用：
+
+```bash
+export DEEPSEEK_API_KEY="你的 DeepSeek key"
+npm run dev
+```
+
+线上部署（例如 Vercel）时，把 `DEEPSEEK_API_KEY` 配到项目的 Environment Variables 后再重新部署。没有配置 key 时，按钮仍会显示，但提问会提示服务器未配置。
