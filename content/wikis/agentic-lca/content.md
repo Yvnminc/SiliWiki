@@ -210,25 +210,61 @@ flowchart TD
 
 ## 研究议程 {#research-agenda}
 
-### RQ1：LLM agents 能否显著降低 LCI compilation 的人工时间，同时保持专家级准确性？
+**Main RQ / 主研究问题：**
 
-实验可选 20–50 个公开 LCA case studies，构建 gold-standard foreground LCI；比较 expert baseline、RAG-only、KG+RAG、fine-tuned model、multi-agent pipeline。指标包括 flow recall/precision、unit accuracy、quantity error、database matching accuracy、time saved、expert correction effort。
+> **How can LLM-based agents be designed, grounded, and evaluated to support reliable, auditable, and uncertainty-aware life cycle assessment workflows?**
+>
+> 如何设计、约束和评估 LLM-based agents，使其能够支持可靠、可审计、具备不确定性意识的生命周期评价工作流？
 
-### RQ2：KG-grounded LCA agent 是否优于普通 RAG/embedding search？
+这个主问题的重点不是“让 AI 自动写一份 LCA 报告”，而是研究怎样让 agent 参与 LCA 时仍然满足专业评价需要：准确、可追溯、可复核、可解释，并能把不确定性传递到结果中。
 
-基于 Peng et al. 的 KG mapping 思路，测试 ecoinvent/openLCA/Brightway mapping。指标包括 Precision@k、MRR、top-1 accuracy、geographic/technological/temporal scope consistency。
+### Sub-RQ1：Accuracy & efficiency / 准确性与效率
 
-### RQ3：如何把 LLM-agentic LCA 与 ABM-LCA 合流？
+> **To what extent can LLM-based agents reduce the time and expert effort required for life cycle inventory compilation while maintaining expert-level accuracy?**
 
-在建筑、交通、农业、产品回收中，让 LLM agent 负责文献/报告抽取、参数生成和 LCI mapping，让 ABM 模拟 adoption/use/recycling behavior，让 LCA engine 计算 dynamic/prospective/consequential impacts。
+中文：LLM agent 在多大程度上能降低生命周期清单编制的人力和时间成本，同时保持接近专家的准确性？
 
-### RQ4：Agentic LCA 的不确定性如何建模和传递？
+实验可选 20–50 个公开 LCA case studies，构建 gold-standard foreground LCI；比较 expert baseline、RAG-only、KG+RAG、fine-tuned model、multi-agent pipeline。指标包括 flow recall/precision、unit accuracy、quantity error、missing flow detection、database matching accuracy、time saved、expert correction effort。
 
-把每个 agent 输出都作为 probabilistic artifact：抽取置信度、数据库匹配置信度、数据质量评分、scenario uncertainty，最后传入 Monte Carlo LCIA。
+### Sub-RQ2：Grounding / 本体与知识图谱约束
 
-### RQ5：Social LCA 是否适合 multi-perspective agents？
+> **Does ontology- or knowledge-graph-grounded retrieval improve foreground-to-background dataset matching compared with standard RAG or embedding-based search in LCA workflows?**
 
-基于 Cole et al.，设计 worker、local community、NGO、company、regulator、expert reviewer 等 stakeholder agents；比较 multi-agent deliberation 与人工 S-LCA 的一致性、偏差和可解释性。
+中文：基于 ontology / knowledge graph 约束的 LCA agent，是否比普通 RAG 或 embedding search 更能准确完成前景 flow 到背景数据库过程的匹配？
+
+基于 Peng et al. 的 KG mapping 思路，测试 ecoinvent/openLCA/Brightway mapping。指标包括 top-1 accuracy、Precision@k、MRR、expert preference、mapping explanation quality、geographic/technological/temporal scope consistency、mismatch rate。
+
+### Sub-RQ3：Auditability / Provenance-first 工作流
+
+> **How can provenance-first agentic workflows be designed to make LLM-assisted LCA transparent, auditable, and suitable for expert review?**
+
+中文：如何设计 provenance-first 的 agentic workflow，让 LLM 辅助 LCA 的每个数据、假设、数据库匹配和结论都可追溯、可审计、适合专家复核？
+
+这个问题关注系统设计：每个 foreground flow、quantity、unit conversion、database mapping、assumption、LCIA result 都应该有 source anchor、候选记录、选择理由和专家审核状态。没有 provenance 的数据只能进入开放问题，不能进入正式 LCIA。
+
+### Sub-RQ4：Uncertainty / 不确定性传播
+
+> **How can uncertainty from LLM-based data extraction, foreground-background matching, and data quality assessment be propagated through life cycle impact assessment results?**
+
+中文：如何把 LLM 数据抽取、前景-背景数据库匹配和数据质量评估中的不确定性，传播到最终 LCIA 结果中？
+
+可把每个 agent 输出都作为 probabilistic artifact：extraction confidence、mapping confidence、data quality score、pedigree matrix、scenario uncertainty，最后传入 Monte Carlo LCIA，输出 impact distribution、confidence interval、sensitivity ranking 与 uncertainty contribution analysis。
+
+### Sub-RQ5：Dynamics / Agentic Prospective LCA
+
+> **Can LLM-assisted agents be integrated with agent-based modeling and LCA engines to support dynamic, prospective, and consequential LCA of technology adoption and policy scenarios?**
+
+中文：LLM agent 是否可以与 agent-based modeling 和 LCA 计算引擎结合，用于技术采纳、政策情景和动态系统的 prospective / consequential LCA？
+
+在建筑、交通、农业、产品回收中，让 LLM agent 负责文献/报告抽取、参数生成、技术路径建模和 LCI mapping，让 ABM 模拟 adoption/use/recycling behavior，让 LCA engine 计算 dynamic/prospective/consequential impacts。这个方向可以命名为 **Agentic Prospective LCA**。
+
+### Optional Sub-RQ6：Social LCA / 多视角社会生命周期评价
+
+> **Can multi-perspective LLM agents improve the transparency and consistency of Social LCA while preserving stakeholder-specific judgments?**
+
+中文：多视角 LLM agents 能否提升 Social LCA 的透明度和一致性，同时保留 stakeholder-specific 判断？
+
+基于 Cole et al.，可设计 worker、local community、NGO、company、regulator、expert reviewer 等 stakeholder agents；比较 multi-agent deliberation 与人工 S-LCA 的一致性、偏差和可解释性。
 
 ## 如何使用这页 {#how-to-use}
 
@@ -271,4 +307,5 @@ flowchart TD
 
 ## Changelog
 
+- 2026-05-06: Expanded the research agenda with a formal Main RQ, five sub-RQs, and an optional Social LCA sub-RQ.
 - 2026-05-06: Imported Agentic LCA literature review into SiliWiki as a local-first content pack. Added meta navigation, glossary, source registry, and raw full review.
