@@ -1,0 +1,426 @@
+{
+  "version": "v0.1",
+  "updated": "2026-05-06",
+  "description": "Canonical terms for the Report-to-LCA Evidence Engine research proposal.",
+  "categories": [
+    {
+      "key": "core",
+      "title": "Core proposal concepts",
+      "color": "#2563eb"
+    },
+    {
+      "key": "extraction",
+      "title": "Extraction and matching",
+      "color": "#0f766e"
+    },
+    {
+      "key": "evaluation",
+      "title": "Evaluation and applicability",
+      "color": "#7c3aed"
+    },
+    {
+      "key": "audit",
+      "title": "Auditability and risk",
+      "color": "#b45309"
+    }
+  ],
+  "keywords": [
+    {
+      "slug": "report-to-lca-evidence-engine",
+      "display": "Report-to-LCA Evidence Engine",
+      "aliases": [
+        "R2L Evidence Engine",
+        "报告到 LCA 证据引擎"
+      ],
+      "category": "core",
+      "short": "An agentic pipeline that turns sustainability reports into LCA-relevant structured evidence.",
+      "definition": "A Report-to-LCA Evidence Engine extracts environmental, social and supply-chain evidence from sustainability reports, aligns it to LCA-related schemas, judges applicability, and records provenance for expert audit.",
+      "related": [
+        "sustainability-report",
+        "provenance",
+        "applicability"
+      ],
+      "sources": [
+        "raw/sources.md#user-research-direction",
+        "raw/sources.md#agentic-lca-wiki"
+      ]
+    },
+    {
+      "slug": "sustainability-report",
+      "display": "Sustainability report",
+      "aliases": [
+        "ESG report",
+        "annual sustainability report",
+        "可持续发展报告"
+      ],
+      "category": "core",
+      "short": "A corporate disclosure document containing environmental, social and governance information.",
+      "definition": "A sustainability report is a company-published document that may include emissions, energy, water, waste, supply-chain, workforce, human-rights and climate-target disclosures.",
+      "related": [
+        "report-to-lca-evidence-engine",
+        "greenwashing-risk"
+      ],
+      "sources": [
+        "raw/sources.md#gri-standards",
+        "raw/sources.md#ifrs-sustainability",
+        "raw/sources.md#esrs"
+      ]
+    },
+    {
+      "slug": "lca-relevant-evidence",
+      "display": "LCA-relevant evidence",
+      "aliases": [
+        "LCA evidence",
+        "LCA 相关证据"
+      ],
+      "category": "core",
+      "short": "A report-derived evidence object that may support LCA, Scope 3 or S-LCA analysis.",
+      "definition": "LCA-relevant evidence is a structured object extracted from a report with indicator, value, unit, boundary, year, source quote, applicability label and review status.",
+      "related": [
+        "applicability",
+        "evidence-span",
+        "provenance"
+      ],
+      "sources": [
+        "raw/sources.md#iso-14040-14044",
+        "raw/sources.md#tu-2024"
+      ]
+    },
+    {
+      "slug": "extraction",
+      "display": "Extraction",
+      "aliases": [
+        "information extraction",
+        "信息抽取"
+      ],
+      "category": "extraction",
+      "short": "Finding and structuring values, concepts and evidence spans from reports.",
+      "definition": "Extraction converts raw report text, tables and figures into structured fields such as indicator, value, unit, year, boundary, quote and confidence.",
+      "related": [
+        "evidence-span",
+        "indicator-object",
+        "small-model"
+      ],
+      "sources": [
+        "raw/sources.md#kumar-2025",
+        "raw/sources.md#zhang-2025"
+      ]
+    },
+    {
+      "slug": "evidence-span",
+      "display": "Evidence span",
+      "aliases": [
+        "证据片段",
+        "quote span"
+      ],
+      "category": "extraction",
+      "short": "The exact text, table cell or page region supporting an extracted data point.",
+      "definition": "An evidence span is the source location and quote that grounds an extracted indicator so an expert can audit whether the structured output is faithful to the report.",
+      "related": [
+        "provenance",
+        "auditability"
+      ],
+      "sources": [
+        "raw/sources.md#user-research-direction"
+      ]
+    },
+    {
+      "slug": "indicator-object",
+      "display": "Indicator object",
+      "aliases": [
+        "structured indicator",
+        "指标对象"
+      ],
+      "category": "extraction",
+      "short": "A normalized data record extracted from a report.",
+      "definition": "An indicator object contains normalized fields such as company, report year, indicator, value, unit, boundary, source, confidence, applicability and audit flags.",
+      "related": [
+        "extraction",
+        "applicability",
+        "audit-flag"
+      ],
+      "sources": [
+        "raw/sources.md#ghg-protocol-corporate-standard",
+        "raw/sources.md#ghg-protocol-scope3-standard"
+      ]
+    },
+    {
+      "slug": "ontology-alignment",
+      "display": "Ontology alignment",
+      "aliases": [
+        "concept grounding",
+        "本体对齐"
+      ],
+      "category": "extraction",
+      "short": "Mapping report language to canonical concepts and relationships.",
+      "definition": "Ontology alignment maps varied report expressions such as carbon emissions, operational emissions and Scope 2 market-based emissions to canonical indicators, boundaries and schema fields.",
+      "related": [
+        "knowledge-graph",
+        "teacher-student"
+      ],
+      "sources": [
+        "raw/sources.md#peng-2024",
+        "raw/sources.md#agentic-lca-wiki"
+      ]
+    },
+    {
+      "slug": "knowledge-graph",
+      "display": "Knowledge graph",
+      "aliases": [
+        "KG",
+        "知识图谱"
+      ],
+      "category": "extraction",
+      "short": "A semantic graph that constrains concept matching and recommendation.",
+      "definition": "A knowledge graph links indicators, units, boundaries, reporting frameworks, LCA concepts and aliases so extraction and mapping are more consistent than free-text matching alone.",
+      "related": [
+        "ontology-alignment",
+        "concept-matching"
+      ],
+      "sources": [
+        "raw/sources.md#peng-2024"
+      ]
+    },
+    {
+      "slug": "teacher-student",
+      "display": "Teacher-student pipeline",
+      "aliases": [
+        "大模型指导小模型",
+        "LLM-guided small model"
+      ],
+      "category": "extraction",
+      "short": "Using a large model to guide, label, critique or distill smaller models.",
+      "definition": "In this proposal, a large model acts as teacher for schema refinement, rationale generation, hard negatives and error diagnosis, while smaller models perform scalable extraction and classification.",
+      "related": [
+        "small-model",
+        "ontology-alignment"
+      ],
+      "sources": [
+        "raw/sources.md#user-research-direction"
+      ]
+    },
+    {
+      "slug": "small-model",
+      "display": "Small model",
+      "aliases": [
+        "compact model",
+        "小模型"
+      ],
+      "category": "extraction",
+      "short": "A lower-cost model used for high-throughput extraction and classification.",
+      "definition": "A small model can be trained or guided to extract spans, classify indicators, normalize units, tag applicability and flag audit risks at lower cost and with more reproducible behavior than a large model alone.",
+      "related": [
+        "teacher-student",
+        "benchmark"
+      ],
+      "sources": [
+        "raw/sources.md#user-research-direction"
+      ]
+    },
+    {
+      "slug": "applicability",
+      "display": "Applicability",
+      "aliases": [
+        "LCA usefulness",
+        "适用性"
+      ],
+      "category": "evaluation",
+      "short": "Whether an extracted data point is useful for a specific LCA-related task.",
+      "definition": "Applicability classifies report-derived evidence as product-LCA-ready, screening-LCA-ready, corporate-inventory-ready, Scope-3-ready, S-LCA-ready, weak-signal-only or not applicable.",
+      "related": [
+        "lca-relevant-evidence",
+        "false-ready-rate"
+      ],
+      "sources": [
+        "raw/sources.md#iso-14040-14044",
+        "raw/sources.md#user-research-direction"
+      ]
+    },
+    {
+      "slug": "false-ready-rate",
+      "display": "False-ready rate",
+      "aliases": [
+        "误判可用率"
+      ],
+      "category": "evaluation",
+      "short": "The rate at which unusable evidence is incorrectly marked as LCA-ready.",
+      "definition": "False-ready rate measures a dangerous applicability error: a system says a report-derived data point is ready for a rigorous LCA task when expert review says it is not.",
+      "related": [
+        "applicability",
+        "expert-review"
+      ],
+      "sources": [
+        "raw/sources.md#user-research-direction"
+      ]
+    },
+    {
+      "slug": "benchmark",
+      "display": "Benchmark",
+      "aliases": [
+        "评测集",
+        "evaluation benchmark"
+      ],
+      "category": "evaluation",
+      "short": "A labeled dataset and metric suite for evaluating extraction and applicability.",
+      "definition": "The benchmark pairs sustainability report evidence spans with gold labels for extracted fields, concept mappings, applicability classes and audit flags.",
+      "related": [
+        "extraction",
+        "applicability",
+        "auditability"
+      ],
+      "sources": [
+        "raw/sources.md#romeiko-2023"
+      ]
+    },
+    {
+      "slug": "auditability",
+      "display": "Auditability",
+      "aliases": [
+        "可审计性",
+        "审计可用性"
+      ],
+      "category": "audit",
+      "short": "How easily an expert can verify an agent output from source evidence.",
+      "definition": "Auditability requires every extracted claim to preserve source file, page, quote, method context, confidence, rationale and review status so an expert can accept or correct it efficiently.",
+      "related": [
+        "provenance",
+        "evidence-span",
+        "expert-review"
+      ],
+      "sources": [
+        "raw/sources.md#cole-2025",
+        "raw/sources.md#user-research-direction"
+      ]
+    },
+    {
+      "slug": "provenance",
+      "display": "Provenance",
+      "aliases": [
+        "证据链",
+        "来源链"
+      ],
+      "category": "audit",
+      "short": "The traceable source trail behind an extracted data point.",
+      "definition": "Provenance records the document, page, section, quote, table cell, extraction method and reviewer status that support a structured evidence object.",
+      "related": [
+        "auditability",
+        "evidence-span"
+      ],
+      "sources": [
+        "raw/sources.md#agentic-lca-wiki"
+      ]
+    },
+    {
+      "slug": "audit-flag",
+      "display": "Audit flag",
+      "aliases": [
+        "审计标记",
+        "risk flag"
+      ],
+      "category": "audit",
+      "short": "A reviewable signal that a disclosure may be incomplete, inconsistent or weakly evidenced.",
+      "definition": "An audit flag marks issues such as missing boundary, missing method, intensity-only disclosure, target without baseline, omitted Scope 3 categories or weak evidence.",
+      "related": [
+        "greenwashing-risk",
+        "auditability"
+      ],
+      "sources": [
+        "raw/sources.md#user-research-direction"
+      ]
+    },
+    {
+      "slug": "greenwashing-risk",
+      "display": "Greenwashing risk",
+      "aliases": [
+        "漂绿风险",
+        "disclosure risk"
+      ],
+      "category": "audit",
+      "short": "A reviewable risk signal, not a final accusation.",
+      "definition": "Greenwashing risk in this proposal means evidence-backed flags that a report may overstate sustainability performance, omit key data, use unclear boundaries or emphasize targets without verifiable progress.",
+      "related": [
+        "audit-flag",
+        "assurance",
+        "scope-3"
+      ],
+      "sources": [
+        "raw/sources.md#user-research-direction",
+        "raw/sources.md#gri-standards"
+      ]
+    },
+    {
+      "slug": "scope-3",
+      "display": "Scope 3 emissions",
+      "aliases": [
+        "value-chain emissions",
+        "范围三排放"
+      ],
+      "category": "core",
+      "short": "Indirect value-chain GHG emissions categories defined by the GHG Protocol.",
+      "definition": "Scope 3 emissions include upstream and downstream value-chain categories such as purchased goods, transport, business travel, use of sold products and end-of-life treatment.",
+      "related": [
+        "ghg-protocol",
+        "applicability"
+      ],
+      "sources": [
+        "raw/sources.md#ghg-protocol-scope3-standard"
+      ]
+    },
+    {
+      "slug": "social-lca-evidence",
+      "display": "Social LCA evidence",
+      "aliases": [
+        "S-LCA evidence",
+        "社会生命周期评价证据"
+      ],
+      "category": "core",
+      "short": "Report evidence relevant to social impacts across stakeholder categories.",
+      "definition": "Social LCA evidence includes report disclosures on workers, local communities, society, consumers and value-chain actors that can support S-LCA screening or assessment.",
+      "related": [
+        "sustainability-report",
+        "applicability"
+      ],
+      "sources": [
+        "raw/sources.md#unep-slca",
+        "raw/sources.md#cole-2025"
+      ]
+    },
+    {
+      "slug": "assurance",
+      "display": "Assurance",
+      "aliases": [
+        "third-party assurance",
+        "第三方鉴证"
+      ],
+      "category": "audit",
+      "short": "External verification status for reported sustainability information.",
+      "definition": "Assurance indicates whether selected sustainability metrics or report sections were externally checked, which affects auditability and confidence in extracted evidence.",
+      "related": [
+        "auditability",
+        "greenwashing-risk"
+      ],
+      "sources": [
+        "raw/sources.md#ifrs-sustainability",
+        "raw/sources.md#esrs"
+      ]
+    },
+    {
+      "slug": "expert-review",
+      "display": "Expert review",
+      "aliases": [
+        "专家复核",
+        "human review"
+      ],
+      "category": "audit",
+      "short": "Human validation of extraction, applicability and audit flags.",
+      "definition": "Expert review checks whether the system's extracted value, concept mapping, applicability label and risk flag are faithful to the report and useful for the research task.",
+      "related": [
+        "auditability",
+        "false-ready-rate"
+      ],
+      "sources": [
+        "raw/sources.md#user-research-direction"
+      ]
+    }
+  ]
+}

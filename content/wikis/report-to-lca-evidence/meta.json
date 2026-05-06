@@ -1,0 +1,102 @@
+{
+  "slug": "report-to-lca-evidence",
+  "title": "Report-to-LCA Evidence Engine / 可审计报告到 LCA 证据引擎",
+  "sub": "Research proposal · Sustainability reports · extraction · applicability · auditability · 2026-05",
+  "description": "一份研究计划：用大量 sustainability reports 构建可审计的 Report-to-LCA Evidence Engine，评估精准抽取、LCA 适用性、概念匹配和 greenwashing auditability。",
+  "logoText": "R2L",
+  "version": "v0.1",
+  "updated": "2026-05-06",
+  "accent": "#2563eb",
+  "accentSoft": "#dbeafe",
+  "accentDark": "#1e3a8a",
+  "disclaimer": "本 proposal 只写研究设计与公开方法论，不包含任何未授权的企业报告原文或私有数据。若后续使用内部 sustainability reports，需要在公开 benchmark 前做版权、隐私和去标识化检查。",
+  "nav": [
+    {
+      "chip": "0",
+      "title": "Proposal",
+      "open": true,
+      "children": [
+        {
+          "anchor": "proposal-overview",
+          "title": "Overview"
+        },
+        {
+          "anchor": "central-thesis",
+          "title": "Central thesis"
+        },
+        {
+          "anchor": "research-questions",
+          "title": "Research questions"
+        }
+      ]
+    },
+    {
+      "chip": "1",
+      "title": "Data & System",
+      "open": true,
+      "color": "green",
+      "children": [
+        {
+          "anchor": "dataset",
+          "title": "Dataset"
+        },
+        {
+          "anchor": "system-architecture",
+          "title": "Architecture"
+        },
+        {
+          "anchor": "teacher-student",
+          "title": "Big model guides small model"
+        }
+      ]
+    },
+    {
+      "chip": "2",
+      "title": "Evaluation",
+      "open": true,
+      "color": "purple",
+      "children": [
+        {
+          "anchor": "extraction-evaluation",
+          "title": "Extraction"
+        },
+        {
+          "anchor": "applicability-evaluation",
+          "title": "Applicability"
+        },
+        {
+          "anchor": "auditability-evaluation",
+          "title": "Auditability"
+        },
+        {
+          "anchor": "greenwashing-audit",
+          "title": "Greenwashing audit"
+        }
+      ]
+    },
+    {
+      "chip": "3",
+      "title": "Execution",
+      "open": true,
+      "color": "accent",
+      "children": [
+        {
+          "anchor": "work-packages",
+          "title": "Work packages"
+        },
+        {
+          "anchor": "deliverables",
+          "title": "Deliverables"
+        },
+        {
+          "anchor": "risks",
+          "title": "Risks"
+        },
+        {
+          "anchor": "references",
+          "title": "References"
+        }
+      ]
+    }
+  ]
+}
