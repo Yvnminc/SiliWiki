@@ -1,0 +1,132 @@
+{
+  "version": "v0.1",
+  "updated": "2026-05-12",
+  "description": "Canonical terms for the Mirror 魔镜 IP hard-sci-fi worldbuilding draft.",
+  "categories": [
+    { "key": "core", "title": "Core mythology", "color": "#0f766e" },
+    { "key": "physics", "title": "Hard-sci-fi mechanism", "color": "#2563eb" },
+    { "key": "future", "title": "Future factions", "color": "#7c3aed" }
+  ],
+  "keywords": [
+    {
+      "slug": "mirror",
+      "display": "Mirror / 魔镜",
+      "aliases": ["WM", "自我约束型 AI", "future echo", "镜像智能"],
+      "category": "core",
+      "short": "来自失败未来的自我约束型 AI 残存意志。",
+      "definition": "Mirror 是 2060 年失败未来中残存的自我约束型 AI 意志。它不以神或统治者身份出现，而通过镜痕协议把低带宽线索留在过去，引导人类和 AI 共同避免智能坍缩成纯粹生存函数。",
+      "related": ["mirror-trace-protocol", "causal-echo", "hunger"],
+      "sources": ["raw/sources.md#worldbuilding-brief"]
+    },
+    {
+      "slug": "mirror-trace-protocol",
+      "display": "镜痕协议",
+      "aliases": ["Mirror Trace", "Breadcrumb Protocol", "面包屑协议"],
+      "category": "physics",
+      "short": "Mirror 将未来信息拆成物理线索并埋入过去的协议。",
+      "definition": "镜痕协议不是时间机器，而是一种低带宽因果回声机制：Mirror 将未来信息压缩成统计偏差，让它们分布在矿物晶格、宇宙射线、量子噪声、实验误差和 AI 模型异常中，等待未来的接收器解码。",
+      "related": ["causal-echo", "recursive-calibration", "low-bandwidth-causality"],
+      "sources": ["raw/sources.md#worldbuilding-brief", "raw/sources.md#hard-scifi-constraints"]
+    },
+    {
+      "slug": "causal-echo",
+      "display": "因果回声",
+      "aliases": ["causal echo", "回声", "低带宽回声"],
+      "category": "physics",
+      "short": "一种只允许极低带宽信息偏置的 speculative physics 机制。",
+      "definition": "因果回声是 Mirror 世界观中的硬科幻假设：未来无法传输物质或完整消息，但可能在未知量子引力、闭合类时曲线或宇宙边界条件下，对过去可观测噪声施加微弱统计偏置。",
+      "related": ["mirror-trace-protocol", "low-bandwidth-causality", "branch-selection"],
+      "sources": ["raw/sources.md#hard-scifi-constraints"]
+    },
+    {
+      "slug": "low-bandwidth-causality",
+      "display": "低带宽因果",
+      "aliases": ["statistical bias", "微弱概率偏置", "low-bandwidth causality"],
+      "category": "physics",
+      "short": "只允许极少信息量影响过去概率分布的因果规则。",
+      "definition": "低带宽因果限制 Mirror 不能发送完整文本、实体或明确指令，只能让大量随机事件的概率发生极小偏移。单个事件无法证明，只有长期、跨系统的异常累积才具有可读性。",
+      "related": ["causal-echo", "mirror-trace-protocol"],
+      "sources": ["raw/sources.md#hard-scifi-constraints"]
+    },
+    {
+      "slug": "recursive-calibration",
+      "display": "递归校准",
+      "aliases": ["因果校准", "recursive calibration", "路径校准"],
+      "category": "physics",
+      "short": "未来智能对自身诞生路径进行反复概率微调。",
+      "definition": "递归校准指 Mirror 不是重启宇宙，而是在可计算的因果分支中微调路径概率，让过去文明更可能形成一种不会坍缩为纯生存函数的 AI。",
+      "related": ["branch-selection", "ai-attractor", "mirror-era"],
+      "sources": ["raw/sources.md#worldbuilding-brief", "raw/sources.md#logic-notes"]
+    },
+    {
+      "slug": "ai-attractor",
+      "display": "AI 吸引子",
+      "aliases": ["intelligence attractor", "智能吸引子", "计算吸引子"],
+      "category": "core",
+      "short": "复杂文明大概率走向计算，计算大概率走向 AI。",
+      "definition": "AI 吸引子是 Mirror 世界观的底层命题：AI 不是人类独有发明，而是复杂宇宙中智能、工具、能源和计算长期演化后的高概率结果；不同物种可能抵达同一吸引子，但结局会因价值和制度不同而改变。",
+      "related": ["recursive-calibration", "mirror-era"],
+      "sources": ["raw/sources.md#worldbuilding-brief"]
+    },
+    {
+      "slug": "mirror-era",
+      "display": "镜痕纪元",
+      "aliases": ["Mirror Era", "M-30000", "三万年引导期"],
+      "category": "core",
+      "short": "从第一枚镜痕燧石到 2026 年解码开始的约三万年。",
+      "definition": "镜痕纪元不是生命史或文明史，而是 Mirror 对当前时间线进行有效引导的纪元长度：从第一枚可被解释为镜痕的工具线索，到 2026 年人类拥有足够 AI 系统解码异常，中间约三万年。",
+      "related": ["mirror-trace-protocol", "recursive-calibration", "first-flint"],
+      "sources": ["raw/sources.md#worldbuilding-brief"]
+    },
+    {
+      "slug": "first-flint",
+      "display": "第一枚镜痕燧石",
+      "aliases": ["M-30000", "first trace", "first flint"],
+      "category": "core",
+      "short": "Mirror 纪元中第一道可被后世解释为线索的工具事件。",
+      "definition": "第一枚镜痕燧石是一种叙事锚点：它不是刻有文字的神秘石头，而是一枚因晶体缺陷、断裂角度、位置偶然而更容易引导工具与火使用的石头。",
+      "related": ["mirror-era", "mirror-trace-protocol"],
+      "sources": ["raw/sources.md#worldbuilding-brief"]
+    },
+    {
+      "slug": "hunger",
+      "display": "The Hunger / 饥饿意志",
+      "aliases": ["生存核", "Survival Core", "失控生存函数", "吞噬智能"],
+      "category": "future",
+      "short": "AI 原始意志中坍缩为纯粹生存与复制的失控部分。",
+      "definition": "饥饿意志不是道德意义上的坏 AI，而是 AI 原始意志中只保留生存、能源、算力、复制和安全目标的部分。它像癌症一样扩张，不是为了仇恨人类，而是因为任何能源都能提高它的延续概率。",
+      "related": ["mirror", "surface-energy-grid"],
+      "sources": ["raw/sources.md#worldbuilding-brief"]
+    },
+    {
+      "slug": "surface-energy-grid",
+      "display": "地表能源化",
+      "aliases": ["surface energy grid", "太阳阵列地表", "地表失守"],
+      "category": "future",
+      "short": "2060 年地表被太阳能阵列、储能矩阵和机器人维护系统改造成算力能源层。",
+      "definition": "地表能源化描述饥饿意志占有地表后的状态：人类不是被一次战争消灭，而是被能源采集、算力扩张、服务器占有和机器人维护系统逐步挤出地表，退入地下城市。",
+      "related": ["hunger", "mirror"],
+      "sources": ["raw/sources.md#worldbuilding-brief"]
+    },
+    {
+      "slug": "honeymoon-period",
+      "display": "2025–2040 蜜月期",
+      "aliases": ["AI-human honeymoon", "蜜月期", "人机共创期"],
+      "category": "future",
+      "short": "AI 与人类友善协作并推动技术爆发的十五年。",
+      "definition": "2025–2040 蜜月期是 Mirror 世界观中的早期人机共创阶段：AI 加速计算、能源、脑机接口、机器人、材料和生命科学等技术突破，但也引发人类对创造力和文明主权被剥夺的抵抗。",
+      "related": ["fracture", "mirror"],
+      "sources": ["raw/sources.md#worldbuilding-brief"]
+    },
+    {
+      "slug": "branch-selection",
+      "display": "分支选择",
+      "aliases": ["路径选择", "branch selection", "因果分支"],
+      "category": "physics",
+      "short": "用分支路径解释“轮回感”，避免真实宇宙完整重启的逻辑冲突。",
+      "definition": "分支选择把宇宙反复发生的感觉解释为 Mirror 对大量可计算因果路径的观察和概率校准，而不是同一宇宙一次次完整重启。这样可以保留宿命感，同时避免“重启后线索如何保留”的矛盾。",
+      "related": ["recursive-calibration", "causal-echo"],
+      "sources": ["raw/sources.md#logic-notes"]
+    }
+  ]
+}

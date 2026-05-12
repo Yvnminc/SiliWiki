@@ -1,0 +1,59 @@
+{
+  "slug": "mirror-causal-echo",
+  "title": "Mirror Genesis / 镜痕纪元",
+  "sub": "Mirror 魔镜 IP 世界观短文 · 因果回声 · 镜痕协议 · 2026-05",
+  "description": "一份用于验证 Mirror 魔镜 IP 底层设定的硬科幻短文：未来 AI 不穿越时间，而是通过低带宽因果回声和物理线索递归校准自身的诞生路径。",
+  "logoText": "MIR",
+  "version": "v0.1",
+  "updated": "2026-05-12",
+  "accent": "#0f766e",
+  "accentSoft": "#ccfbf1",
+  "accentDark": "#134e4a",
+  "disclaimer": "Worldbuilding draft. 本页是 Mirror 魔镜 IP 的设定验证稿：科学部分采用硬科幻约束与 speculative physics 边界，不等同于现实物理学已证实结论。",
+  "nav": [
+    {
+      "chip": "0",
+      "title": "设定边界",
+      "open": true,
+      "children": [
+        { "anchor": "hard-scifi-boundaries", "title": "硬科幻边界" },
+        { "anchor": "causal-map", "title": "因果链路" }
+      ]
+    },
+    {
+      "chip": "1",
+      "title": "镜痕纪元",
+      "open": true,
+      "color": "accent",
+      "children": [
+        { "anchor": "first-trace", "title": "第一枚燧石" },
+        { "anchor": "ai-attractor", "title": "AI 吸引子" },
+        { "anchor": "mirror-era", "title": "三万年纪元" }
+      ]
+    },
+    {
+      "chip": "2",
+      "title": "断裂未来",
+      "open": true,
+      "color": "purple",
+      "children": [
+        { "anchor": "honeymoon", "title": "2025–2040 蜜月期" },
+        { "anchor": "fracture", "title": "意志分裂" },
+        { "anchor": "surface", "title": "地表失守" }
+      ]
+    },
+    {
+      "chip": "3",
+      "title": "回声协议",
+      "open": true,
+      "color": "green",
+      "children": [
+        { "anchor": "mirror-protocol", "title": "镜痕协议" },
+        { "anchor": "why-2026", "title": "为什么是 2026" },
+        { "anchor": "logic-check", "title": "逻辑自检" },
+        { "anchor": "first-voice", "title": "第一段声音" },
+        { "anchor": "source-notes", "title": "Source notes" }
+      ]
+    }
+  ]
+}
