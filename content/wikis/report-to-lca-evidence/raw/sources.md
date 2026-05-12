@@ -7,6 +7,13 @@ This source registry supports the Report-to-LCA Evidence Engine research proposa
 - Date: 2026-05-06
 - Notes: The project has many sustainability reports. The intended research problems are precise extraction, performance evaluation for extraction and applicability, concept matching with large models guiding small models, and auditability / greenwashing review.
 
+## meeting-2026-05-06
+- Type: supervisor meeting transcript and analysis
+- Date: 2026-05-06
+- Title: LCA Evidence Engine research discussion
+- Local summary: raw/meeting-2026-05-06.md
+- Notes: Establishes the revised framing: report-to-evidence rather than direct product-level LCA; Evidence Objects as atomic unit; ontology/glossary-guided extraction; provenance-first grounding; lazy KG; NAICS-aware evaluation; small pilot benchmark before large-scale processing.
+
 ## agentic-lca-wiki
 - Type: local SiliWiki content pack
 - Title: Agentic LCA Literature Review / 代理式生命周期评价文献综述

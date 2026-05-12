@@ -1,52 +1,52 @@
 {
   "slug": "report-to-lca-evidence",
   "title": "Report-to-LCA Evidence Engine / 可审计报告到 LCA 证据引擎",
-  "sub": "Research proposal · Sustainability reports · extraction · applicability · auditability · 2026-05",
-  "description": "一份研究计划：用大量 sustainability reports 构建可审计的 Report-to-LCA Evidence Engine，评估精准抽取、LCA 适用性、概念匹配和 greenwashing auditability。",
+  "sub": "Condensed methods article · Sustainability reports · Evidence Objects · Lazy KG · Auditability · 2026-05",
+  "description": "一篇浓缩方法文章：将企业 sustainability reports 转换为带 provenance 的 LCA / Scope 3 / S-LCA 结构化证据层，并设计 extraction、matching、applicability、auditability 与 disclosure-gap 实验。",
   "logoText": "R2L",
-  "version": "v0.1",
-  "updated": "2026-05-06",
+  "version": "v0.2",
+  "updated": "2026-05-12",
   "accent": "#2563eb",
   "accentSoft": "#dbeafe",
   "accentDark": "#1e3a8a",
-  "disclaimer": "本 proposal 只写研究设计与公开方法论，不包含任何未授权的企业报告原文或私有数据。若后续使用内部 sustainability reports，需要在公开 benchmark 前做版权、隐私和去标识化检查。",
+  "disclaimer": "本页面是研究设计与方法论浓缩文章，不包含未授权企业报告原文或私有数据。Greenwashing 相关输出仅作为可复核风险信号，不构成法律或声誉判断。",
   "nav": [
     {
       "chip": "0",
-      "title": "Proposal",
+      "title": "Framing",
       "open": true,
       "children": [
         {
-          "anchor": "proposal-overview",
-          "title": "Overview"
-        },
-        {
-          "anchor": "central-thesis",
-          "title": "Central thesis"
+          "anchor": "core-positioning",
+          "title": "核心定位"
         },
         {
           "anchor": "research-questions",
-          "title": "Research questions"
+          "title": "研究问题"
+        },
+        {
+          "anchor": "data",
+          "title": "使用的数据"
         }
       ]
     },
     {
       "chip": "1",
-      "title": "Data & System",
+      "title": "System",
       "open": true,
       "color": "green",
       "children": [
         {
-          "anchor": "dataset",
-          "title": "Dataset"
+          "anchor": "architecture",
+          "title": "架构设计"
         },
         {
-          "anchor": "system-architecture",
-          "title": "Architecture"
+          "anchor": "evidence-object",
+          "title": "Evidence Object"
         },
         {
-          "anchor": "teacher-student",
-          "title": "Big model guides small model"
+          "anchor": "methods",
+          "title": "方法设计"
         }
       ]
     },
@@ -57,20 +57,16 @@
       "color": "purple",
       "children": [
         {
-          "anchor": "extraction-evaluation",
-          "title": "Extraction"
+          "anchor": "experiments",
+          "title": "实验设计"
         },
         {
-          "anchor": "applicability-evaluation",
-          "title": "Applicability"
+          "anchor": "outputs",
+          "title": "预期输出"
         },
         {
-          "anchor": "auditability-evaluation",
-          "title": "Auditability"
-        },
-        {
-          "anchor": "greenwashing-audit",
-          "title": "Greenwashing audit"
+          "anchor": "conclusions",
+          "title": "当前结论"
         }
       ]
     },
@@ -81,16 +77,12 @@
       "color": "accent",
       "children": [
         {
-          "anchor": "work-packages",
-          "title": "Work packages"
+          "anchor": "limitations",
+          "title": "边界与限制"
         },
         {
-          "anchor": "deliverables",
-          "title": "Deliverables"
-        },
-        {
-          "anchor": "risks",
-          "title": "Risks"
+          "anchor": "next-stage",
+          "title": "下一阶段"
         },
         {
           "anchor": "references",

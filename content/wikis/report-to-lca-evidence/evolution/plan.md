@@ -1,8 +1,8 @@
 # Self-Evolution Plan for Report-to-LCA Evidence Engine / 可审计报告到 LCA 证据引擎
 
-Generated: 2026-05-06
+Generated: 2026-05-12
 Wiki: `report-to-lca-evidence`
-Focus: research proposal for sustainability reports to LCA evidence extraction applicability concept matching auditability greenwashing
+Focus: condensed methods article after 2026-05-06 meeting: Evidence Objects, provenance-first extraction, lazy KG, pilot benchmark, NAICS-aware evaluation
 
 ## Algorithm: SiliLoop
 
@@ -21,40 +21,40 @@ SiliLoop turns a local wiki into a self-evolving Agentic Wiki: it observes the c
 
 - memoryCount: 63
 - actionCount: 1
-- glossaryTerms: 21
-- sections: 42
+- glossaryTerms: 26
+- sections: 37
 - unresolvedSignals: 0
 - sourceGapSignals: 0
 
 ## Reflections
 
 - Report-to-LCA Evidence Engine / 可审计报告到 LCA 证据引擎 is not static content; it is a local memory object that should expose what changed, why it changed, and what still needs evidence.
-- The next agent should retrieve the highest-scoring memories first: glossary:report-to-lca-evidence-engine, section:1:report-to-lca-evidence-engine-/-可审计报告到-lca-证据引擎, glossary:benchmark, glossary:expert-review, glossary:scope-3.
-- Dominant evolution themes: canonical-term, outline, orphan-term, glossary-weaving.
+- The next agent should retrieve the highest-scoring memories first: glossary:small-model, glossary:teacher-student, glossary:indicator-object, glossary:scope-3, section:1:report-to-lca-evidence-engine-/-可审计报告到-lca-证据引擎.
+- Dominant evolution themes: orphan-term, glossary-weaving, outline.
 - The next safe patch is: glossary-weaving; Human review required before treating generated edits as final.
 
 ## Planned actions
 
 | Priority | Kind | Target | Rationale | Agent prompt |
 | ---: | --- | --- | --- | --- |
-| 3 | glossary-weaving | content.md + glossary.json | Canonical terms exist but are not woven into the explanatory body. | Introduce or link these glossary terms in the relevant sections: Scope 3 emissions. |
+| 3 | glossary-weaving | content.md + glossary.json | Canonical terms exist but are not woven into the explanatory body. | Introduce or link these glossary terms in the relevant sections: Small model, Teacher-student pipeline, Indicator object, Scope 3 emissions. |
 
 ## Top memory stream entries
 
 | Score | Type | Summary | Tags |
 | ---: | --- | --- | --- |
-| 0.68 | glossary-term | Report-to-LCA Evidence Engine: An agentic pipeline that turns sustainability reports into LCA-relevant structured evidence. | canonical-term |
-| 0.66 | section | Section: Report-to-LCA Evidence Engine / 可审计报告到 LCA 证据引擎 | outline |
-| 0.65 | glossary-term | Benchmark: A labeled dataset and metric suite for evaluating extraction and applicability. | canonical-term |
-| 0.65 | glossary-term | Expert review: Human validation of extraction, applicability and audit flags. | canonical-term |
+| 0.66 | glossary-term | Small model: A lower-cost model used for high-throughput extraction and classification. | orphan-term, glossary-weaving |
+| 0.66 | glossary-term | Teacher-student pipeline: Using a large model to guide, label, critique or distill smaller models. | orphan-term, glossary-weaving |
+| 0.64 | glossary-term | Indicator object: A normalized data record extracted from a report. | orphan-term, glossary-weaving |
 | 0.64 | glossary-term | Scope 3 emissions: Indirect value-chain GHG emissions categories defined by the GHG Protocol. | orphan-term, glossary-weaving |
-| 0.60 | glossary-term | Applicability: Whether an extracted data point is useful for a specific LCA-related task. | canonical-term |
-| 0.60 | glossary-term | Assurance: External verification status for reported sustainability information. | canonical-term |
-| 0.60 | glossary-term | False-ready rate: The rate at which unusable evidence is incorrectly marked as LCA-ready. | canonical-term |
-| 0.60 | glossary-term | Knowledge graph: A semantic graph that constrains concept matching and recommendation. | canonical-term |
-| 0.60 | glossary-term | Small model: A lower-cost model used for high-throughput extraction and classification. | canonical-term |
-| 0.60 | glossary-term | Teacher-student pipeline: Using a large model to guide, label, critique or distill smaller models. | canonical-term |
-| 0.58 | glossary-term | Auditability: How easily an expert can verify an agent output from source evidence. | canonical-term |
+| 0.63 | section | Section: Report-to-LCA Evidence Engine / 可审计报告到 LCA 证据引擎 | outline |
+| 0.59 | glossary-term | Benchmark: A labeled dataset and metric suite for evaluating extraction and applicability. | canonical-term |
+| 0.59 | glossary-term | Lazy Knowledge Graph: A graph generated on demand from top-k evidence objects instead of pre-materializing all edges. | canonical-term |
+| 0.59 | glossary-term | NAICS-aware evaluation: Evaluating report evidence within comparable industry groups. | canonical-term |
+| 0.57 | section | Section: 3. Lazy KG visualization | outline |
+| 0.55 | glossary-term | Extraction: Finding and structuring values, concepts and evidence spans from reports. | canonical-term |
+| 0.55 | glossary-term | Knowledge graph: A semantic graph that constrains concept matching and recommendation. | canonical-term |
+| 0.55 | glossary-term | Provenance: The traceable source trail behind an extracted data point. | canonical-term |
 
 ## References
 

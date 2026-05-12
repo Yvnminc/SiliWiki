@@ -1,6 +1,6 @@
 {
-  "version": "v0.1",
-  "updated": "2026-05-06",
+  "version": "v0.2",
+  "updated": "2026-05-12",
   "description": "Canonical terms for the Report-to-LCA Evidence Engine research proposal.",
   "categories": [
     {
@@ -420,6 +420,106 @@
       ],
       "sources": [
         "raw/sources.md#user-research-direction"
+      ]
+    },
+    {
+      "slug": "evidence-object",
+      "display": "Evidence Object",
+      "aliases": [
+        "structured evidence object",
+        "证据对象",
+        "结构化证据对象"
+      ],
+      "category": "core",
+      "short": "The atomic structured record produced by the Report-to-LCA Evidence Engine.",
+      "definition": "An Evidence Object binds a report-derived concept or claim to source provenance, metadata, embedding, schema mapping, applicability, missing fields, confidence and audit flags so it can be computed and reviewed.",
+      "related": [
+        "provenance",
+        "applicability",
+        "audit-flag",
+        "lca-relevant-evidence"
+      ],
+      "sources": [
+        "raw/sources.md#meeting-2026-05-06",
+        "raw/extraction-schema.md"
+      ]
+    },
+    {
+      "slug": "lazy-knowledge-graph",
+      "display": "Lazy Knowledge Graph",
+      "aliases": [
+        "lazy KG",
+        "按需知识图谱",
+        "局部知识图谱"
+      ],
+      "category": "extraction",
+      "short": "A graph generated on demand from top-k evidence objects instead of pre-materializing all edges.",
+      "definition": "A Lazy Knowledge Graph stores evidence, embeddings, metadata and provenance first, then dynamically creates local nodes and similarity edges for a query, comparison or visualization task.",
+      "related": [
+        "knowledge-graph",
+        "evidence-object",
+        "ontology-alignment"
+      ],
+      "sources": [
+        "raw/sources.md#meeting-2026-05-06"
+      ]
+    },
+    {
+      "slug": "missing-evidence",
+      "display": "Missing evidence",
+      "aliases": [
+        "disclosure gap",
+        "缺失证据",
+        "披露缺口"
+      ],
+      "category": "audit",
+      "short": "A required or expected disclosure that is absent or insufficient in the report.",
+      "definition": "Missing evidence is recorded when a report lacks expected support for a Scope 3 category, boundary, method, baseline, activity data or other field; the system flags the gap rather than inventing a value.",
+      "related": [
+        "audit-flag",
+        "greenwashing-risk",
+        "scope-3"
+      ],
+      "sources": [
+        "raw/sources.md#meeting-2026-05-06"
+      ]
+    },
+    {
+      "slug": "naics-aware-evaluation",
+      "display": "NAICS-aware evaluation",
+      "aliases": [
+        "NAICS sector control",
+        "行业公平评估"
+      ],
+      "category": "evaluation",
+      "short": "Evaluating report evidence within comparable industry groups.",
+      "definition": "NAICS-aware evaluation groups companies by sector so extraction quality, disclosure coverage and missing-evidence patterns are compared fairly within similar industry contexts.",
+      "related": [
+        "benchmark",
+        "applicability",
+        "concept-matching"
+      ],
+      "sources": [
+        "raw/sources.md#meeting-2026-05-06"
+      ]
+    },
+    {
+      "slug": "provenance-first",
+      "display": "Provenance-first design",
+      "aliases": [
+        "source-grounded design",
+        "来源优先设计"
+      ],
+      "category": "audit",
+      "short": "A design rule that every extracted claim must retain source evidence.",
+      "definition": "Provenance-first design requires every output to keep document, page, section, quote or table-cell evidence, making unsupported claims and missing evidence visible to reviewers.",
+      "related": [
+        "provenance",
+        "auditability",
+        "evidence-object"
+      ],
+      "sources": [
+        "raw/sources.md#meeting-2026-05-06"
       ]
     }
   ]
