@@ -1,0 +1,49 @@
+{
+  "slug": "valmet-2019-lca-evidence",
+  "title": "Valmet 2019 LCA Evidence Extraction Demo",
+  "sub": "Human-readable case study · Report-to-LCA Evidence Engine · LangExtract · 2026-05",
+  "description": "A concrete SiliWiki case study showing how one markdown corporate sustainability report becomes human-readable LCA / Scope 3 / audit evidence cards instead of raw JSON.",
+  "logoText": "VAL",
+  "version": "v0.1",
+  "updated": "2026-05-13",
+  "accent": "#0f766e",
+  "accentSoft": "#ccfbf1",
+  "accentDark": "#134e4a",
+  "disclaimer": "This page is a research demonstration based on short extracted evidence snippets from one corporate sustainability report. It is not a legal assurance opinion, investment advice, or a complete product-level LCA.",
+  "nav": [
+    {
+      "chip": "0",
+      "title": "Source",
+      "open": true,
+      "children": [
+        { "anchor": "source-report", "title": "Source report" },
+        { "anchor": "what-was-extracted", "title": "What was extracted" },
+        { "anchor": "page-map", "title": "Page map" }
+      ]
+    },
+    {
+      "chip": "1",
+      "title": "Evidence",
+      "open": true,
+      "color": "green",
+      "children": [
+        { "anchor": "ghg-inventory", "title": "GHG inventory" },
+        { "anchor": "scope3-evidence", "title": "Scope 3 evidence" },
+        { "anchor": "product-use-phase", "title": "Product/use phase" },
+        { "anchor": "water-waste", "title": "Water & waste" },
+        { "anchor": "assurance", "title": "Assurance" }
+      ]
+    },
+    {
+      "chip": "2",
+      "title": "Review",
+      "open": true,
+      "color": "purple",
+      "children": [
+        { "anchor": "audit-summary", "title": "Audit summary" },
+        { "anchor": "method-observations", "title": "Method observations" },
+        { "anchor": "exp1-implications", "title": "Exp1 implications" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "version": "v0.1",
+  "updated": "2026-05-13",
+  "description": "Canonical terms for the Valmet 2019 Report-to-LCA Evidence demo.",
+  "categories": [
+    { "key": "core", "title": "Core", "color": "#0f766e" },
+    { "key": "evidence", "title": "Evidence", "color": "#2563eb" },
+    { "key": "audit", "title": "Audit", "color": "#b45309" }
+  ],
+  "keywords": [
+    {
+      "slug": "evidence-card",
+      "display": "Evidence card",
+      "aliases": ["human-readable evidence", "证据卡片"],
+      "category": "core",
+      "short": "A readable summary of one evidence group.",
+      "definition": "An evidence card converts machine extraction results into a compact human-readable explanation with values, source pages, applicability and limitations.",
+      "related": ["evidence-object", "auditability"],
+      "sources": ["raw/sources.md#valmet-2019-report"]
+    },
+    {
+      "slug": "scope3-evidence",
+      "display": "Scope 3 evidence",
+      "aliases": ["value-chain emissions evidence", "范围三证据"],
+      "category": "evidence",
+      "short": "Report evidence mapped to GHG Protocol Scope 3 categories.",
+      "definition": "Scope 3 evidence records category-level value-chain emissions, such as purchased goods, transportation, business travel and downstream distribution.",
+      "related": ["corporate-inventory-ready", "scope3-evidence-ready"],
+      "sources": ["raw/sources.md#ghg-protocol-scope3"]
+    },
+    {
+      "slug": "screening-lca-ready",
+      "display": "screening_lca_ready",
+      "aliases": ["screening-level evidence", "筛查型 LCA 证据"],
+      "category": "evidence",
+      "short": "Evidence usable for screening hypotheses but not rigorous product LCA.",
+      "definition": "A screening_lca_ready evidence item has a useful direction or approximate value but lacks full functional unit, product-specific inventory or method details required for rigorous product-level LCA.",
+      "related": ["weak-signal-only"],
+      "sources": ["raw/sources.md#valmet-2019-report"]
+    },
+    {
+      "slug": "corporate-inventory-ready",
+      "display": "corporate_inventory_ready",
+      "aliases": ["企业清单可用"],
+      "category": "evidence",
+      "short": "Evidence usable for company-level environmental inventory review.",
+      "definition": "Corporate inventory-ready evidence includes values such as Scope 1 and Scope 2 emissions with units and reporting year, but may still be too aggregated for product-level LCA.",
+      "related": ["scope3-evidence-ready"],
+      "sources": ["raw/sources.md#valmet-2019-report"]
+    },
+    {
+      "slug": "scope3-evidence-ready",
+      "display": "scope3_evidence_ready",
+      "aliases": ["Scope 3 可用证据"],
+      "category": "evidence",
+      "short": "Evidence ready for Scope 3 category coverage or value-chain analysis.",
+      "definition": "Scope3_evidence_ready means the report provides a category, value, unit and year that can support Scope 3 evidence mining, although not necessarily product-level LCA.",
+      "related": ["scope3-evidence"],
+      "sources": ["raw/sources.md#valmet-2019-report"]
+    },
+    {
+      "slug": "limited-assurance",
+      "display": "Limited assurance",
+      "aliases": ["independent limited assurance", "有限保证"],
+      "category": "audit",
+      "short": "External assurance with restricted scope and level of certainty.",
+      "definition": "Limited assurance indicates an external assurance provider reviewed selected information, but it does not mean every claim in the report is fully audited.",
+      "related": ["auditability"],
+      "sources": ["raw/sources.md#valmet-assurance"]
+    }
+  ]
+}
