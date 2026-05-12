@@ -1,0 +1,177 @@
+{
+  "version": "v0.1",
+  "updated": "2026-05-13",
+  "description": "Canonical terms for the Valmet five-year ontology-backed LCA case study.",
+  "categories": [
+    {
+      "key": "ontology",
+      "title": "Ontology extraction",
+      "color": "#0f766e"
+    },
+    {
+      "key": "lca",
+      "title": "LCA audit",
+      "color": "#7c3aed"
+    },
+    {
+      "key": "evidence",
+      "title": "Evidence and review",
+      "color": "#ea580c"
+    }
+  ],
+  "keywords": [
+    {
+      "slug": "evidence-object",
+      "display": "Evidence Object",
+      "aliases": [
+        "source-grounded evidence",
+        "extracted entity"
+      ],
+      "category": "evidence",
+      "short": "A typed, source-grounded extraction instance.",
+      "definition": "In this case study, an Evidence Object stores concept type, canonical concept, value, unit, year, source file, page, quote, applicability, missing fields, audit flags and review status.",
+      "related": [
+        "ontology-extraction",
+        "source-grounding"
+      ],
+      "sources": [
+        "raw/sources.md#valmet-case-output"
+      ]
+    },
+    {
+      "slug": "ontology-extraction",
+      "display": "Ontology extraction",
+      "aliases": [
+        "ontology-managed extraction",
+        "本体驱动抽取"
+      ],
+      "category": "ontology",
+      "short": "Information extraction governed by explicit ontology definitions and validation rules.",
+      "definition": "Ontology extraction compiles a meta-ontology into domain and extraction ontologies, then converts source-grounded spans into Evidence Objects that can be audited and reused.",
+      "related": [
+        "evidence-object",
+        "extraction-ontology"
+      ],
+      "sources": [
+        "raw/sources.md#framework-wiki"
+      ]
+    },
+    {
+      "slug": "extraction-ontology",
+      "display": "Extraction ontology",
+      "aliases": [
+        "task ontology",
+        "operational ontology"
+      ],
+      "category": "ontology",
+      "short": "The operational schema for a particular extraction run.",
+      "definition": "The extraction ontology defines target classes, fields, required grounding, validators and audit flags for one extraction task; here it projects LCA/GHG concepts onto Valmet 2018–2022 reports.",
+      "related": [
+        "ontology-extraction",
+        "domain-ontology"
+      ],
+      "sources": [
+        "raw/sources.md#valmet-case-output"
+      ]
+    },
+    {
+      "slug": "domain-ontology",
+      "display": "Domain ontology",
+      "aliases": [
+        "professional ontology",
+        "领域本体"
+      ],
+      "category": "ontology",
+      "short": "The stable professional concept map behind extraction.",
+      "definition": "The domain ontology defines canonical GHG/LCA concepts such as Scope 1, Scope 2 location-based, Scope 3 Category 1, LCA claim, assurance and missing disclosures.",
+      "related": [
+        "extraction-ontology"
+      ],
+      "sources": [
+        "raw/sources.md#valmet-case-output"
+      ]
+    },
+    {
+      "slug": "corporate-inventory-readiness",
+      "display": "Corporate inventory readiness",
+      "aliases": [
+        "公司碳盘查可用性"
+      ],
+      "category": "lca",
+      "short": "How usable a report is for corporate GHG inventory review.",
+      "definition": "A readiness assessment for company-level GHG inventory and disclosure trend analysis. It does not imply product-level LCA readiness.",
+      "related": [
+        "product-lca-readiness"
+      ],
+      "sources": [
+        "raw/sources.md#diagnostic-findings"
+      ]
+    },
+    {
+      "slug": "product-lca-readiness",
+      "display": "Product LCA readiness",
+      "aliases": [
+        "产品 LCA 可用性"
+      ],
+      "category": "lca",
+      "short": "Whether evidence is sufficient for product-level LCA modelling.",
+      "definition": "Product LCA readiness requires functional unit, product system boundary, foreground flows, allocation, method and source-grounded values. This Valmet case is rated low because those elements are missing.",
+      "related": [
+        "functional-unit",
+        "scope3-hotspot-screening"
+      ],
+      "sources": [
+        "raw/sources.md#diagnostic-findings"
+      ]
+    },
+    {
+      "slug": "scope3-hotspot-screening",
+      "display": "Scope 3 hotspot screening",
+      "aliases": [
+        "Scope 3 热点筛查"
+      ],
+      "category": "lca",
+      "short": "Using Scope 3 category evidence to identify likely priority areas.",
+      "definition": "The Valmet case uses Category 1/4/6/9 source-grounded rows to identify purchased goods and services as the dominant captured Scope 3 hotspot.",
+      "related": [
+        "method-missing"
+      ],
+      "sources": [
+        "raw/sources.md#diagnostic-findings"
+      ]
+    },
+    {
+      "slug": "method-missing",
+      "display": "method_missing",
+      "aliases": [
+        "method detail missing",
+        "方法缺失"
+      ],
+      "category": "evidence",
+      "short": "Audit flag for missing calculation-method detail.",
+      "definition": "An audit flag indicating that a row has values and units but lacks enough emission-factor, activity-data or calculation-method detail for direct LCI reuse.",
+      "related": [
+        "evidence-object"
+      ],
+      "sources": [
+        "raw/sources.md#valmet-case-output"
+      ]
+    },
+    {
+      "slug": "functional-unit",
+      "display": "Functional unit",
+      "aliases": [
+        "功能单位"
+      ],
+      "category": "lca",
+      "short": "The quantified reference unit of a product LCA study.",
+      "definition": "Functional unit defines the quantified performance basis for product LCA. The extracted Valmet LCA/use-phase claims do not provide a functional unit, which blocks product-LCA-ready interpretation.",
+      "related": [
+        "product-lca-readiness"
+      ],
+      "sources": [
+        "raw/sources.md#diagnostic-findings"
+      ]
+    }
+  ]
+}

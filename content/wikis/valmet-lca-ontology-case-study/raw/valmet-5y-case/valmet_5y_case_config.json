@@ -1,0 +1,13 @@
+{
+  "run_id": "valmet_5y_lca_ontology_case_2026_05_13",
+  "company": "Valmet",
+  "reports": [
+    "valmet_2018_GRI_Supplement.md",
+    "valmet_2019_GRI_Supplement.md",
+    "valmet_2020_GRI_Supplement.md",
+    "valmet_2021_GRI_Supplement.md",
+    "valmet_2022_GRI_Supplement.md"
+  ],
+  "max_chunks_per_report": 6,
+  "case_objective": "Five-year ontology-backed Report-to-LCA diagnostic case study for Valmet. Extract GHG Scope 1/2/3 metrics, Scope 3 category metrics, LCA/use-phase claims, assurance statements and missing evidence. Produce professional LCA audit findings with every diagnosis backed by extracted Evidence Object IDs."
+}

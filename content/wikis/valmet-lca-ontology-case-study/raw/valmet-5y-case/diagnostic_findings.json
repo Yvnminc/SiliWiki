@@ -1,0 +1,1040 @@
+{
+  "company": "Valmet",
+  "years": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022
+  ],
+  "metric_rows": [
+    {
+      "metric": "scope1",
+      "concept": "ghg.scope1",
+      "year": 2018,
+      "value": 17.7,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_0b0bbb6d788b",
+      "page": 22
+    },
+    {
+      "metric": "scope1",
+      "concept": "ghg.scope1",
+      "year": 2019,
+      "value": 17.6,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_d817d2cbdb8e",
+      "page": 24
+    },
+    {
+      "metric": "scope1",
+      "concept": "ghg.scope1",
+      "year": 2020,
+      "value": 19.1,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_9860caae29cb",
+      "page": 27
+    },
+    {
+      "metric": "scope1",
+      "concept": "ghg.scope1",
+      "year": 2021,
+      "value": 21.5,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_9cc64e238689",
+      "page": 27
+    },
+    {
+      "metric": "scope1",
+      "concept": "ghg.scope1",
+      "year": 2022,
+      "value": 21.1,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_e73327c18a31",
+      "page": 29
+    },
+    {
+      "metric": "scope2_location",
+      "concept": "ghg.scope2.location_based",
+      "year": 2018,
+      "value": 73.1,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_482759b0aa55",
+      "page": 22
+    },
+    {
+      "metric": "scope2_location",
+      "concept": "ghg.scope2.location_based",
+      "year": 2019,
+      "value": 69.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_5e51927f0a85",
+      "page": 24
+    },
+    {
+      "metric": "scope2_market",
+      "concept": "ghg.scope2.market_based",
+      "year": 2018,
+      "value": 95.2,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_7fd544ee8e9d",
+      "page": 22
+    },
+    {
+      "metric": "scope2_market",
+      "concept": "ghg.scope2.market_based",
+      "year": 2019,
+      "value": 83.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_1ded939a4eb8",
+      "page": 24
+    },
+    {
+      "metric": "cat1",
+      "concept": "ghg.scope3.category1.purchased_goods_and_services",
+      "year": 2018,
+      "value": 2025.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_db0c3e17538e",
+      "page": 22
+    },
+    {
+      "metric": "cat1",
+      "concept": "ghg.scope3.category1.purchased_goods_and_services",
+      "year": 2019,
+      "value": 2618.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_e4b2f83e57a3",
+      "page": 24
+    },
+    {
+      "metric": "cat1",
+      "concept": "ghg.scope3.category1.purchased_goods_and_services",
+      "year": 2020,
+      "value": 1815.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_db0474f7fb92",
+      "page": 27
+    },
+    {
+      "metric": "cat1",
+      "concept": "ghg.scope3.category1.purchased_goods_and_services",
+      "year": 2021,
+      "value": 2783.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_679bb4eee8d9",
+      "page": 27
+    },
+    {
+      "metric": "cat1",
+      "concept": "ghg.scope3.category1.purchased_goods_and_services",
+      "year": 2022,
+      "value": 2237.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_f4913df49967",
+      "page": 29
+    },
+    {
+      "metric": "cat4",
+      "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+      "year": 2018,
+      "value": 63.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_bee546d1ee49",
+      "page": 22
+    },
+    {
+      "metric": "cat4",
+      "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+      "year": 2019,
+      "value": 76.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_2a5ce95d97a8",
+      "page": 24
+    },
+    {
+      "metric": "cat4",
+      "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+      "year": 2020,
+      "value": 72.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_aa2b0e71fd9d",
+      "page": 27
+    },
+    {
+      "metric": "cat4",
+      "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+      "year": 2021,
+      "value": 102.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_fff7d2339669",
+      "page": 27
+    },
+    {
+      "metric": "cat4",
+      "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+      "year": 2022,
+      "value": 45.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_3d4c84923cab",
+      "page": 29
+    },
+    {
+      "metric": "cat6",
+      "concept": "ghg.scope3.category6.business_travel",
+      "year": 2018,
+      "value": 34.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_d8d60fd98505",
+      "page": 22
+    },
+    {
+      "metric": "cat6",
+      "concept": "ghg.scope3.category6.business_travel",
+      "year": 2019,
+      "value": 38.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_b9d32cef6d6d",
+      "page": 24
+    },
+    {
+      "metric": "cat6",
+      "concept": "ghg.scope3.category6.business_travel",
+      "year": 2020,
+      "value": 17.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_56506f871975",
+      "page": 27
+    },
+    {
+      "metric": "cat6",
+      "concept": "ghg.scope3.category6.business_travel",
+      "year": 2021,
+      "value": 18.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_5051f6106084",
+      "page": 27
+    },
+    {
+      "metric": "cat6",
+      "concept": "ghg.scope3.category6.business_travel",
+      "year": 2022,
+      "value": 37.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_3455f43625db",
+      "page": 29
+    },
+    {
+      "metric": "cat9",
+      "concept": "ghg.scope3.category9.downstream_transportation_distribution",
+      "year": 2018,
+      "value": 11.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_931ff86c0988",
+      "page": 22
+    },
+    {
+      "metric": "cat9",
+      "concept": "ghg.scope3.category9.downstream_transportation_distribution",
+      "year": 2019,
+      "value": 13.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_be669096ca82",
+      "page": 24
+    },
+    {
+      "metric": "cat9",
+      "concept": "ghg.scope3.category9.downstream_transportation_distribution",
+      "year": 2020,
+      "value": 13.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_303fb4f76c86",
+      "page": 27
+    },
+    {
+      "metric": "cat9",
+      "concept": "ghg.scope3.category9.downstream_transportation_distribution",
+      "year": 2021,
+      "value": 15.0,
+      "unit": "1,000 tCO2",
+      "evidence_id": "ev_77060a9e5aab",
+      "page": 27
+    }
+  ],
+  "trends": {
+    "scope1": {
+      "first_year": 2018,
+      "first_value": 17.7,
+      "last_year": 2022,
+      "last_value": 21.1,
+      "pct_change": 19.2,
+      "evidence_ids": [
+        "ev_0b0bbb6d788b",
+        "ev_d817d2cbdb8e",
+        "ev_9860caae29cb",
+        "ev_9cc64e238689",
+        "ev_e73327c18a31"
+      ]
+    },
+    "scope2_location": {
+      "first_year": 2018,
+      "first_value": 73.1,
+      "last_year": 2019,
+      "last_value": 69.0,
+      "pct_change": -5.6,
+      "evidence_ids": [
+        "ev_482759b0aa55",
+        "ev_5e51927f0a85"
+      ]
+    },
+    "scope2_market": {
+      "first_year": 2018,
+      "first_value": 95.2,
+      "last_year": 2019,
+      "last_value": 83.0,
+      "pct_change": -12.8,
+      "evidence_ids": [
+        "ev_7fd544ee8e9d",
+        "ev_1ded939a4eb8"
+      ]
+    },
+    "cat1": {
+      "first_year": 2018,
+      "first_value": 2025.0,
+      "last_year": 2022,
+      "last_value": 2237.0,
+      "pct_change": 10.5,
+      "evidence_ids": [
+        "ev_db0c3e17538e",
+        "ev_e4b2f83e57a3",
+        "ev_db0474f7fb92",
+        "ev_679bb4eee8d9",
+        "ev_f4913df49967"
+      ]
+    },
+    "cat4": {
+      "first_year": 2018,
+      "first_value": 63.0,
+      "last_year": 2022,
+      "last_value": 45.0,
+      "pct_change": -28.6,
+      "evidence_ids": [
+        "ev_bee546d1ee49",
+        "ev_2a5ce95d97a8",
+        "ev_aa2b0e71fd9d",
+        "ev_fff7d2339669",
+        "ev_3d4c84923cab"
+      ]
+    },
+    "cat6": {
+      "first_year": 2018,
+      "first_value": 34.0,
+      "last_year": 2022,
+      "last_value": 37.0,
+      "pct_change": 8.8,
+      "evidence_ids": [
+        "ev_d8d60fd98505",
+        "ev_b9d32cef6d6d",
+        "ev_56506f871975",
+        "ev_5051f6106084",
+        "ev_3455f43625db"
+      ]
+    },
+    "cat9": {
+      "first_year": 2018,
+      "first_value": 11.0,
+      "last_year": 2021,
+      "last_value": 15.0,
+      "pct_change": 36.4,
+      "evidence_ids": [
+        "ev_931ff86c0988",
+        "ev_be669096ca82",
+        "ev_303fb4f76c86",
+        "ev_77060a9e5aab"
+      ]
+    }
+  },
+  "cat1_share": [
+    {
+      "year": 2018,
+      "cat1_value": 2025.0,
+      "captured_category_sum": 2133.0,
+      "share": 94.9,
+      "evidence_id": "ev_db0c3e17538e"
+    },
+    {
+      "year": 2019,
+      "cat1_value": 2618.0,
+      "captured_category_sum": 2745.0,
+      "share": 95.4,
+      "evidence_id": "ev_e4b2f83e57a3"
+    },
+    {
+      "year": 2020,
+      "cat1_value": 1815.0,
+      "captured_category_sum": 1917.0,
+      "share": 94.7,
+      "evidence_id": "ev_db0474f7fb92"
+    },
+    {
+      "year": 2021,
+      "cat1_value": 2783.0,
+      "captured_category_sum": 2918.0,
+      "share": 95.4,
+      "evidence_id": "ev_679bb4eee8d9"
+    },
+    {
+      "year": 2022,
+      "cat1_value": 2237.0,
+      "captured_category_sum": 2319.0,
+      "share": 96.5,
+      "evidence_id": "ev_f4913df49967"
+    }
+  ],
+  "score": {
+    "corporate_inventory_readiness": "medium-high",
+    "scope3_hotspot_screening_readiness": "high",
+    "product_lca_readiness": "low",
+    "auditability": "medium-high",
+    "main_blockers": [
+      "missing functional unit",
+      "missing product system boundary",
+      "missing allocation method",
+      "missing Scope 3 emission-factor/activity-data detail"
+    ]
+  },
+  "findings": [
+    {
+      "diagnosis_id": "D1",
+      "title": "Corporate GHG inventory evidence is auditable but not product-LCA-ready",
+      "severity": "medium",
+      "diagnosis": "The extracted ontology contains Scope 1 evidence for all five years (2018–2022), with Scope 1 increasing from 17.7 to 21.1 thousand tCO2 (19.2%). Scope 2 location/market-based evidence is source-grounded for 2018–2019, but later Scope 2 rows were not captured in this rule-provider pilot and need manual/LLM extraction validation.",
+      "lca_implication": "This is suitable for corporate inventory review and longitudinal disclosure analysis. It is not sufficient for product LCA because it is corporate-scope inventory, not product-specific foreground activity data with functional unit and system boundary.",
+      "evidence_ids": [
+        "ev_0b0bbb6d788b",
+        "ev_d817d2cbdb8e",
+        "ev_9860caae29cb",
+        "ev_9cc64e238689",
+        "ev_e73327c18a31",
+        "ev_482759b0aa55",
+        "ev_5e51927f0a85",
+        "ev_7fd544ee8e9d",
+        "ev_1ded939a4eb8"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ev_0b0bbb6d788b",
+          "year": 2018,
+          "concept": "ghg.scope1",
+          "page": 22,
+          "quote": "Scope 12 17.70 16.80 16.60",
+          "value": "17.70",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_d817d2cbdb8e",
+          "year": 2019,
+          "concept": "ghg.scope1",
+          "page": 24,
+          "quote": "Scope 12 17.6 17.7 16.8",
+          "value": "17.6",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_9860caae29cb",
+          "year": 2020,
+          "concept": "ghg.scope1",
+          "page": 27,
+          "quote": "Scope 12 19.1 17.6 17.7",
+          "value": "19.1",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_9cc64e238689",
+          "year": 2021,
+          "concept": "ghg.scope1",
+          "page": 27,
+          "quote": "Scope 12 21.5 19.1 17.6 19.7",
+          "value": "21.5",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_e73327c18a31",
+          "year": 2022,
+          "concept": "ghg.scope1",
+          "page": 29,
+          "quote": "Scope 12 21.1 21.5 19.1 21.5",
+          "value": "21.1",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_482759b0aa55",
+          "year": 2018,
+          "concept": "ghg.scope2.location_based",
+          "page": 22,
+          "quote": "Scope 2 (location based)3 73.10 70.00 66.70",
+          "value": "73.10",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_5e51927f0a85",
+          "year": 2019,
+          "concept": "ghg.scope2.location_based",
+          "page": 24,
+          "quote": "Scope 2 (location based)3 69.0 71.2 68.2",
+          "value": "69.0",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_7fd544ee8e9d",
+          "year": 2018,
+          "concept": "ghg.scope2.market_based",
+          "page": 22,
+          "quote": "Scope 2 (market based)4 95.20 92.70 95.60",
+          "value": "95.20",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_1ded939a4eb8",
+          "year": 2019,
+          "concept": "ghg.scope2.market_based",
+          "page": 24,
+          "quote": "Scope 2 (market based)4 83.0 87.5 91.5",
+          "value": "83.0",
+          "unit": "1,000 tCO2"
+        }
+      ],
+      "recommended_action": "Use the corporate inventory evidence as audit context; for product LCA, request product-level foreground flows, functional unit, product boundary, allocation rules and emission factors."
+    },
+    {
+      "diagnosis_id": "D2",
+      "title": "Purchased goods and services is the dominant captured Scope 3 category",
+      "severity": "high",
+      "diagnosis": "Across the captured Scope 3 category ontology, Category 1 purchased goods and services is consistently the largest category in every extracted year. Its share of the captured category sum ranges from 94.7% to 96.5%.",
+      "lca_implication": "For LCA/Scope 3 screening, upstream materials and purchased goods should be treated as the primary hotspot and first target for supplier data improvement.",
+      "evidence_ids": [
+        "ev_db0c3e17538e",
+        "ev_e4b2f83e57a3",
+        "ev_db0474f7fb92",
+        "ev_679bb4eee8d9",
+        "ev_f4913df49967",
+        "ev_bee546d1ee49",
+        "ev_2a5ce95d97a8",
+        "ev_aa2b0e71fd9d",
+        "ev_fff7d2339669",
+        "ev_3d4c84923cab",
+        "ev_d8d60fd98505",
+        "ev_b9d32cef6d6d",
+        "ev_56506f871975",
+        "ev_5051f6106084",
+        "ev_3455f43625db",
+        "ev_931ff86c0988",
+        "ev_be669096ca82",
+        "ev_303fb4f76c86",
+        "ev_77060a9e5aab"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ev_db0c3e17538e",
+          "year": 2018,
+          "concept": "ghg.scope3.category1.purchased_goods_and_services",
+          "page": 22,
+          "quote": "Category 1: CO2 emissions from purchased goods and services6 2,025 1,665 1,288",
+          "value": "2,025",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_e4b2f83e57a3",
+          "year": 2019,
+          "concept": "ghg.scope3.category1.purchased_goods_and_services",
+          "page": 24,
+          "quote": "Category 1: CO2 emissions from purchased goods and services6 2,618 2,025 1,665",
+          "value": "2,618",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_db0474f7fb92",
+          "year": 2020,
+          "concept": "ghg.scope3.category1.purchased_goods_and_services",
+          "page": 27,
+          "quote": "Category 1: CO2 emissions from purchased goods and services6 1,815 1,581 1,441",
+          "value": "1,815",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_679bb4eee8d9",
+          "year": 2021,
+          "concept": "ghg.scope3.category1.purchased_goods_and_services",
+          "page": 27,
+          "quote": "Category 1: CO2 emissions from purchased goods and services6 2,783 2,020 1,938",
+          "value": "2,783",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_f4913df49967",
+          "year": 2022,
+          "concept": "ghg.scope3.category1.purchased_goods_and_services",
+          "page": 29,
+          "quote": "Category 1: CO2 emissions from purchased goods and services7 2,237 1,656 1,694",
+          "value": "2,237",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_bee546d1ee49",
+          "year": 2018,
+          "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+          "page": 22,
+          "quote": "Category 4: CO2 emissions from upstream transportation and distribution7 63 60 49",
+          "value": "63",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_2a5ce95d97a8",
+          "year": 2019,
+          "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+          "page": 24,
+          "quote": "Category 4: CO2 emissions from upstream transportation and distribution7 76 63 60",
+          "value": "76",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_aa2b0e71fd9d",
+          "year": 2020,
+          "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+          "page": 27,
+          "quote": "Category 4: CO2 emissions from upstream transportation and distribution7 72 76 63",
+          "value": "72",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_fff7d2339669",
+          "year": 2021,
+          "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+          "page": 27,
+          "quote": "Category 4: CO2 emissions from upstream transportation and distribution7 102 100 105",
+          "value": "102",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_3d4c84923cab",
+          "year": 2022,
+          "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+          "page": 29,
+          "quote": "Category 4: CO2 emissions from upstream transportation and distribution8 45 41 40",
+          "value": "45",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_d8d60fd98505",
+          "year": 2018,
+          "concept": "ghg.scope3.category6.business_travel",
+          "page": 22,
+          "quote": "Category 6: CO2 emissions from business travel8 34 32 31",
+          "value": "34",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_b9d32cef6d6d",
+          "year": 2019,
+          "concept": "ghg.scope3.category6.business_travel",
+          "page": 24,
+          "quote": "Category 6: CO2 emissions from business travel8 38 34 32",
+          "value": "38",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_56506f871975",
+          "year": 2020,
+          "concept": "ghg.scope3.category6.business_travel",
+          "page": 27,
+          "quote": "Category 6: CO2 emissions from business travel8 17 38 34",
+          "value": "17",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_5051f6106084",
+          "year": 2021,
+          "concept": "ghg.scope3.category6.business_travel",
+          "page": 27,
+          "quote": "Category 6: CO2 emissions from business travel8 18 18 44",
+          "value": "18",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_3455f43625db",
+          "year": 2022,
+          "concept": "ghg.scope3.category6.business_travel",
+          "page": 29,
+          "quote": "Category 6: CO2 emissions from business travel9 37 18 15",
+          "value": "37",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_931ff86c0988",
+          "year": 2018,
+          "concept": "ghg.scope3.category9.downstream_transportation_distribution",
+          "page": 22,
+          "quote": "Category 9: CO2 emissions from downstream transportation and distribution9 11 11 9",
+          "value": "11",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_be669096ca82",
+          "year": 2019,
+          "concept": "ghg.scope3.category9.downstream_transportation_distribution",
+          "page": 24,
+          "quote": "Category 9: CO2 emissions from downstream transportation and distribution9 13 11 11",
+          "value": "13",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_303fb4f76c86",
+          "year": 2020,
+          "concept": "ghg.scope3.category9.downstream_transportation_distribution",
+          "page": 27,
+          "quote": "Category 9: CO2 emissions from downstream transportation and distribution9 13 13 11",
+          "value": "13",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_77060a9e5aab",
+          "year": 2021,
+          "concept": "ghg.scope3.category9.downstream_transportation_distribution",
+          "page": 27,
+          "quote": "Category 9: CO2 emissions from downstream transportation and distribution9 15 15 16",
+          "value": "15",
+          "unit": "1,000 tCO2"
+        }
+      ],
+      "recommended_action": "Prioritize supplier-specific activity data, material composition, procurement spend/activity split, and emission-factor provenance for Category 1."
+    },
+    {
+      "diagnosis_id": "D3",
+      "title": "Scope 3 category coverage is longitudinally useful, but method detail remains weak",
+      "severity": "high",
+      "diagnosis": "The ontology extracted Category 1, 4 and 6 for all five years, and Category 9 for four years. However, all extracted Scope 3 category metrics carry `method_missing` because the evidence spans provide category totals but not enough emission-factor or calculation-method detail.",
+      "lca_implication": "These rows are `scope3_evidence_ready` for disclosure benchmarking and hotspot screening, but they should not be reused directly as LCI foreground data without method and activity-data reconstruction.",
+      "evidence_ids": [
+        "ev_db0c3e17538e",
+        "ev_e4b2f83e57a3",
+        "ev_db0474f7fb92",
+        "ev_679bb4eee8d9",
+        "ev_f4913df49967",
+        "ev_bee546d1ee49",
+        "ev_2a5ce95d97a8",
+        "ev_aa2b0e71fd9d",
+        "ev_fff7d2339669",
+        "ev_3d4c84923cab",
+        "ev_d8d60fd98505",
+        "ev_b9d32cef6d6d",
+        "ev_56506f871975",
+        "ev_5051f6106084",
+        "ev_3455f43625db",
+        "ev_931ff86c0988",
+        "ev_be669096ca82",
+        "ev_303fb4f76c86",
+        "ev_77060a9e5aab"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ev_db0c3e17538e",
+          "year": 2018,
+          "concept": "ghg.scope3.category1.purchased_goods_and_services",
+          "page": 22,
+          "quote": "Category 1: CO2 emissions from purchased goods and services6 2,025 1,665 1,288",
+          "value": "2,025",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_e4b2f83e57a3",
+          "year": 2019,
+          "concept": "ghg.scope3.category1.purchased_goods_and_services",
+          "page": 24,
+          "quote": "Category 1: CO2 emissions from purchased goods and services6 2,618 2,025 1,665",
+          "value": "2,618",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_db0474f7fb92",
+          "year": 2020,
+          "concept": "ghg.scope3.category1.purchased_goods_and_services",
+          "page": 27,
+          "quote": "Category 1: CO2 emissions from purchased goods and services6 1,815 1,581 1,441",
+          "value": "1,815",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_679bb4eee8d9",
+          "year": 2021,
+          "concept": "ghg.scope3.category1.purchased_goods_and_services",
+          "page": 27,
+          "quote": "Category 1: CO2 emissions from purchased goods and services6 2,783 2,020 1,938",
+          "value": "2,783",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_f4913df49967",
+          "year": 2022,
+          "concept": "ghg.scope3.category1.purchased_goods_and_services",
+          "page": 29,
+          "quote": "Category 1: CO2 emissions from purchased goods and services7 2,237 1,656 1,694",
+          "value": "2,237",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_bee546d1ee49",
+          "year": 2018,
+          "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+          "page": 22,
+          "quote": "Category 4: CO2 emissions from upstream transportation and distribution7 63 60 49",
+          "value": "63",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_2a5ce95d97a8",
+          "year": 2019,
+          "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+          "page": 24,
+          "quote": "Category 4: CO2 emissions from upstream transportation and distribution7 76 63 60",
+          "value": "76",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_aa2b0e71fd9d",
+          "year": 2020,
+          "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+          "page": 27,
+          "quote": "Category 4: CO2 emissions from upstream transportation and distribution7 72 76 63",
+          "value": "72",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_fff7d2339669",
+          "year": 2021,
+          "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+          "page": 27,
+          "quote": "Category 4: CO2 emissions from upstream transportation and distribution7 102 100 105",
+          "value": "102",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_3d4c84923cab",
+          "year": 2022,
+          "concept": "ghg.scope3.category4.upstream_transportation_distribution",
+          "page": 29,
+          "quote": "Category 4: CO2 emissions from upstream transportation and distribution8 45 41 40",
+          "value": "45",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_d8d60fd98505",
+          "year": 2018,
+          "concept": "ghg.scope3.category6.business_travel",
+          "page": 22,
+          "quote": "Category 6: CO2 emissions from business travel8 34 32 31",
+          "value": "34",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_b9d32cef6d6d",
+          "year": 2019,
+          "concept": "ghg.scope3.category6.business_travel",
+          "page": 24,
+          "quote": "Category 6: CO2 emissions from business travel8 38 34 32",
+          "value": "38",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_56506f871975",
+          "year": 2020,
+          "concept": "ghg.scope3.category6.business_travel",
+          "page": 27,
+          "quote": "Category 6: CO2 emissions from business travel8 17 38 34",
+          "value": "17",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_5051f6106084",
+          "year": 2021,
+          "concept": "ghg.scope3.category6.business_travel",
+          "page": 27,
+          "quote": "Category 6: CO2 emissions from business travel8 18 18 44",
+          "value": "18",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_3455f43625db",
+          "year": 2022,
+          "concept": "ghg.scope3.category6.business_travel",
+          "page": 29,
+          "quote": "Category 6: CO2 emissions from business travel9 37 18 15",
+          "value": "37",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_931ff86c0988",
+          "year": 2018,
+          "concept": "ghg.scope3.category9.downstream_transportation_distribution",
+          "page": 22,
+          "quote": "Category 9: CO2 emissions from downstream transportation and distribution9 11 11 9",
+          "value": "11",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_be669096ca82",
+          "year": 2019,
+          "concept": "ghg.scope3.category9.downstream_transportation_distribution",
+          "page": 24,
+          "quote": "Category 9: CO2 emissions from downstream transportation and distribution9 13 11 11",
+          "value": "13",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_303fb4f76c86",
+          "year": 2020,
+          "concept": "ghg.scope3.category9.downstream_transportation_distribution",
+          "page": 27,
+          "quote": "Category 9: CO2 emissions from downstream transportation and distribution9 13 13 11",
+          "value": "13",
+          "unit": "1,000 tCO2"
+        },
+        {
+          "evidence_id": "ev_77060a9e5aab",
+          "year": 2021,
+          "concept": "ghg.scope3.category9.downstream_transportation_distribution",
+          "page": 27,
+          "quote": "Category 9: CO2 emissions from downstream transportation and distribution9 15 15 16",
+          "value": "15",
+          "unit": "1,000 tCO2"
+        }
+      ],
+      "recommended_action": "Add method-level extraction for emission factors, activity data, supplier-specific data, spend/activity method, and category-boundary notes; maintain a category-year completeness matrix."
+    },
+    {
+      "diagnosis_id": "D4",
+      "title": "Valmet explicitly frames value-chain impact as use-phase/customer-site dominated",
+      "severity": "high",
+      "diagnosis": "The 2020 and 2021 reports include source-grounded LCA/use-phase claims stating that around one percent of the environmental impact of Valmet’s entire value chain is emitted from own locations, based on life cycle analysis and market data on customer use phase.",
+      "lca_implication": "This is strong directional hotspot evidence: product use phase/customer operations likely dominate life-cycle impact. But the evidence is still `weak_signal_only` for product LCA because the extracted ontology flags missing functional unit, product system boundary and allocation method.",
+      "evidence_ids": [
+        "ev_37831ba12f99",
+        "ev_a0bed69c021f"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ev_37831ba12f99",
+          "year": 2020,
+          "concept": "lca.life_cycle_analysis_claim",
+          "page": 20,
+          "quote": "Based on life cycle analysis (LCA) and market data on the customer use phase of Valmet’s technology, we estimate that around one percent of the environmental impact of Valmet’s entire value chain is emitted from our own locations.",
+          "value": null,
+          "unit": null
+        },
+        {
+          "evidence_id": "ev_a0bed69c021f",
+          "year": 2021,
+          "concept": "lca.life_cycle_analysis_claim",
+          "page": 20,
+          "quote": "Based on life cycle analysis (LCA) and market data on the customer use phase of Valmet’s technology, we estimate that around one percent of the environmental impact of Valmet’s entire value chain is emitted from our own locations.",
+          "value": null,
+          "unit": null
+        }
+      ],
+      "recommended_action": "Convert the use-phase claim into product-family LCA templates: define functional unit, product family, use scenario, energy/water/process assumptions, lifetime, allocation and sensitivity ranges."
+    },
+    {
+      "diagnosis_id": "D5",
+      "title": "External limited assurance improves disclosure auditability but does not replace LCA critical review",
+      "severity": "medium",
+      "diagnosis": "The ontology captured limited-assurance / assurance statements across the five-year corpus. These statements support traceability of selected sustainability information, but the extracted spans do not prove that product-level LCA assumptions, use-phase models, or Scope 3 emission factors were critically reviewed.",
+      "lca_implication": "Assurance supports confidence in sustainability disclosure, but ISO 14040/14044-style product LCA still requires goal/scope definition, inventory modelling, impact assessment assumptions and critical review where applicable.",
+      "evidence_ids": [
+        "ev_957e7d86dd4e",
+        "ev_faaf1a420250",
+        "ev_8fda0855fca8",
+        "ev_cf99b5422e53",
+        "ev_598fe6711ee3"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ev_957e7d86dd4e",
+          "year": 2018,
+          "concept": "assurance.ghg_inventory_verification",
+          "page": 32,
+          "quote": "that we comply with ethical requirements and plan and perform the assurance engage- ment to obtain limited assurance.",
+          "value": null,
+          "unit": null
+        },
+        {
+          "evidence_id": "ev_faaf1a420250",
+          "year": 2019,
+          "concept": "assurance.ghg_inventory_verification",
+          "page": 39,
+          "quote": "that we comply with ethical re- quirements and plan and perform the assurance engagement to obtain limited assurance.",
+          "value": null,
+          "unit": null
+        },
+        {
+          "evidence_id": "ev_8fda0855fca8",
+          "year": 2020,
+          "concept": "assurance.ghg_inventory_verification",
+          "page": 42,
+          "quote": "that we comply with ethical requirements and plan and perform the assurance en- gagement to obtain limited assurance.",
+          "value": null,
+          "unit": null
+        },
+        {
+          "evidence_id": "ev_cf99b5422e53",
+          "year": 2021,
+          "concept": "assurance.ghg_inventory_verification",
+          "page": 45,
+          "quote": "that we comply with ethical requirements and plan and perform the assurance engagement to obtain limited assurance.",
+          "value": null,
+          "unit": null
+        },
+        {
+          "evidence_id": "ev_598fe6711ee3",
+          "year": 2022,
+          "concept": "assurance.ghg_inventory_verification",
+          "page": 44,
+          "quote": "Practitioner’s responsibility Our responsibility is to express a limited assurance conclusion on the Selected sustainability information based on the procedures we have performed and the evidence we have obtained.",
+          "value": null,
+          "unit": null
+        }
+      ],
+      "recommended_action": "Store assurance scope as a separate ontology object and map exactly which metrics are assured; do not inherit assurance from corporate disclosure to product LCA claims automatically."
+    },
+    {
+      "diagnosis_id": "D6",
+      "title": "Target/carbon-neutral language needs baseline and pathway evidence before LCA use",
+      "severity": "medium",
+      "diagnosis": "The extracted target/carbon-neutral claims in 2021–2022 are grounded, but the ontology flags `target_without_baseline`. They are useful sustainability strategy signals, not quantified LCA evidence.",
+      "lca_implication": "Targets should not be mixed with measured performance or inventory data. For LCA diagnostics, they only define future scenario context unless baseline, pathway, scope and reduction levers are quantified.",
+      "evidence_ids": [
+        "ev_0dd676e81054",
+        "ev_2f7f3f7c7dfb"
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ev_0dd676e81054",
+          "year": 2021,
+          "concept": "target.net_zero",
+          "page": 23,
+          "quote": "until 2021 ‒ Selected fossil-based product parts to be replaced with renewable or recyclable materials ‒ Enable carbon neutral production for all our customers by developing new process technologies and improve the energy efficiency of our current offering by 20 percen",
+          "value": null,
+          "unit": null
+        },
+        {
+          "evidence_id": "ev_2f7f3f7c7dfb",
+          "year": 2022,
+          "concept": "target.net_zero",
+          "page": 20,
+          "quote": "We strive in our locations and supply chain for efficient use of resources, renewable fuels and carbon neutral energy, and to minimize waste and prevent pollution.",
+          "value": null,
+          "unit": null
+        }
+      ],
+      "recommended_action": "Extract target baseline year, target scope, covered emissions, reduction pathway, offsets/neutralization approach and progress metrics as separate target ontology fields."
+    }
+  ]
+}

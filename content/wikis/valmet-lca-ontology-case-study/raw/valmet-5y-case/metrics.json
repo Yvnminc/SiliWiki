@@ -1,0 +1,34 @@
+{
+  "report_count": 5,
+  "evidence_count": 44,
+  "grounded_evidence_count": 44,
+  "grounded_evidence_rate": 1.0,
+  "missing_evidence_count": 2,
+  "canonical_concept_coverage": {
+    "ghg.scope1": 5,
+    "ghg.scope2.location_based": 2,
+    "ghg.scope2.market_based": 2,
+    "ghg.scope3.category1.purchased_goods_and_services": 5,
+    "ghg.scope3.category4.upstream_transportation_distribution": 5,
+    "ghg.scope3.category6.business_travel": 5,
+    "ghg.scope3.category9.downstream_transportation_distribution": 4,
+    "assurance.ghg_inventory_verification": 10,
+    "lca.life_cycle_analysis_claim": 2,
+    "missing.scope3_method": 2,
+    "target.net_zero": 2
+  },
+  "concept_type_distribution": {
+    "ghg_emission_metric": 9,
+    "scope3_category_metric": 19,
+    "assurance_statement": 10,
+    "lca_claim": 2,
+    "missing_disclosure": 2,
+    "target_claim": 2
+  },
+  "audit_flag_distribution": {
+    "method_missing": 21,
+    "functional_unit_missing": 2,
+    "target_without_baseline": 2
+  },
+  "false_ready_guard_violations": 0
+}

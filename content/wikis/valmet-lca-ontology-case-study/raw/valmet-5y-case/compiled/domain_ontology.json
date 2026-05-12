@@ -1,0 +1,395 @@
+[
+  {
+    "concept_id": "ghg.scope1",
+    "concept_type_id": "ghg_emission_metric",
+    "label": "Scope 1 emissions",
+    "definition": "Scope 1 emissions",
+    "aliases": [
+      "direct emissions",
+      "Scope 1 GHG emissions",
+      "Direct (Scope 1) GHG emissions"
+    ],
+    "standard_refs": [
+      "GHG Protocol Corporate Standard"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "ghg.scope2.unspecified",
+    "concept_type_id": "ghg_emission_metric",
+    "label": "Scope 2 emissions",
+    "definition": "Scope 2 emissions",
+    "aliases": [
+      "Scope 2 GHG emissions",
+      "electricity indirect emissions",
+      "indirect emissions (Scope 2)"
+    ],
+    "standard_refs": [
+      "GHG Protocol Corporate Standard"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "ghg.scope2.location_based",
+    "concept_type_id": "ghg_emission_metric",
+    "label": "Scope 2 location-based emissions",
+    "definition": "Scope 2 location-based emissions",
+    "aliases": [
+      "Scope 2 (location based)",
+      "location-based Scope 2"
+    ],
+    "standard_refs": [
+      "GHG Protocol Scope 2 Guidance"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "ghg.scope2.market_based",
+    "concept_type_id": "ghg_emission_metric",
+    "label": "Scope 2 market-based emissions",
+    "definition": "Scope 2 market-based emissions",
+    "aliases": [
+      "Scope 2 (market based)",
+      "market-based Scope 2",
+      "Scope 2 market based"
+    ],
+    "standard_refs": [
+      "GHG Protocol Scope 2 Guidance"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "ghg.scope3.total",
+    "concept_type_id": "ghg_emission_metric",
+    "label": "Scope 3 total emissions",
+    "definition": "Scope 3 total emissions",
+    "aliases": [
+      "Scope 3 GHG emissions",
+      "Other indirect (Scope 3) GHG emissions",
+      "Total Scope 3"
+    ],
+    "standard_refs": [
+      "GHG Protocol Scope 3 Standard"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "ghg.scope3.category1.purchased_goods_and_services",
+    "concept_type_id": "scope3_category_metric",
+    "label": "Scope 3 Category 1 - Purchased goods and services",
+    "definition": "Scope 3 Category 1 - Purchased goods and services",
+    "aliases": [
+      "purchased goods and services",
+      "procurement emissions",
+      "supplier goods emissions"
+    ],
+    "standard_refs": [
+      "GHG Protocol Scope 3 Standard"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "ghg.scope3.category4.upstream_transportation_distribution",
+    "concept_type_id": "scope3_category_metric",
+    "label": "Scope 3 Category 4 - Upstream transportation and distribution",
+    "definition": "Scope 3 Category 4 - Upstream transportation and distribution",
+    "aliases": [
+      "upstream transportation and distribution"
+    ],
+    "standard_refs": [
+      "GHG Protocol Scope 3 Standard"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "ghg.scope3.category6.business_travel",
+    "concept_type_id": "scope3_category_metric",
+    "label": "Scope 3 Category 6 - Business travel",
+    "definition": "Scope 3 Category 6 - Business travel",
+    "aliases": [
+      "business travel",
+      "business travel emissions"
+    ],
+    "standard_refs": [
+      "GHG Protocol Scope 3 Standard"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "ghg.scope3.category9.downstream_transportation_distribution",
+    "concept_type_id": "scope3_category_metric",
+    "label": "Scope 3 Category 9 - Downstream transportation and distribution",
+    "definition": "Scope 3 Category 9 - Downstream transportation and distribution",
+    "aliases": [
+      "downstream transportation and distribution"
+    ],
+    "standard_refs": [
+      "GHG Protocol Scope 3 Standard"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "ghg.scope3.category11.use_of_sold_products",
+    "concept_type_id": "scope3_category_metric",
+    "label": "Scope 3 Category 11 - Use of sold products",
+    "definition": "Scope 3 Category 11 - Use of sold products",
+    "aliases": [
+      "use of sold product",
+      "use of sold products",
+      "product use phase"
+    ],
+    "standard_refs": [
+      "GHG Protocol Scope 3 Standard"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "lca.life_cycle_analysis_claim",
+    "concept_type_id": "lca_claim",
+    "label": "Life cycle analysis claim",
+    "definition": "Life cycle analysis claim",
+    "aliases": [
+      "life cycle analysis",
+      "LCA",
+      "life-cycle assessment"
+    ],
+    "standard_refs": [
+      "ISO 14040/14044"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "lca.use_phase_impact_claim",
+    "concept_type_id": "lca_claim",
+    "label": "Use-phase impact claim",
+    "definition": "Use-phase impact claim",
+    "aliases": [
+      "use phase",
+      "used for production at customer sites",
+      "product use phase"
+    ],
+    "standard_refs": [
+      "ISO 14040/14044"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "target.net_zero",
+    "concept_type_id": "target_claim",
+    "label": "Net-zero target claim",
+    "definition": "Net-zero target claim",
+    "aliases": [
+      "net zero",
+      "net-zero",
+      "carbon neutral"
+    ],
+    "standard_refs": [
+      "SBTi / climate target disclosure"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "assurance.ghg_inventory_verification",
+    "concept_type_id": "assurance_statement",
+    "label": "GHG inventory assurance",
+    "definition": "GHG inventory assurance",
+    "aliases": [
+      "verified",
+      "verification",
+      "assurance",
+      "ISO 14064-3"
+    ],
+    "standard_refs": [
+      "ISO 14064-3"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "missing.scope3_method",
+    "concept_type_id": "missing_disclosure",
+    "label": "Missing Scope 3 method disclosure",
+    "definition": "Missing Scope 3 method disclosure",
+    "aliases": [
+      "emission factors not disclosed",
+      "supplier-specific activity data not disclosed"
+    ],
+    "standard_refs": [
+      "GHG Protocol Scope 3 Standard"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  },
+  {
+    "concept_id": "missing.functional_unit",
+    "concept_type_id": "missing_disclosure",
+    "label": "Missing functional unit",
+    "definition": "Missing functional unit",
+    "aliases": [
+      "functional unit not disclosed",
+      "no functional unit"
+    ],
+    "standard_refs": [
+      "ISO 14040/14044"
+    ],
+    "allowed_units": [
+      "kgCO2e",
+      "tCO2e",
+      "metric tons CO2e",
+      "MTCO2e",
+      "ktCO2e",
+      "KtCO2e",
+      "1,000 tCO2",
+      "1,000 tCO2e"
+    ],
+    "status": "active"
+  }
+]

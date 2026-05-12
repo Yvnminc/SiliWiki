@@ -1,0 +1,99 @@
+{
+  "slug": "valmet-lca-ontology-case-study",
+  "title": "Valmet 5-year LCA Ontology Case Study / Valmet 五年本体驱动 LCA 诊断",
+  "sub": "Ontology extraction · Evidence Objects · Scope 3 hotspot · 2026-05",
+  "description": "A five-year ontology-backed LCA diagnostic case study for Valmet sustainability reports, with every assessment grounded in extracted Evidence Objects.",
+  "logoText": "VAL",
+  "version": "v0.1",
+  "updated": "2026-05-13",
+  "accent": "#0f766e",
+  "accentSoft": "#ccfbf1",
+  "accentDark": "#115e59",
+  "disclaimer": "Research case study. Evidence is source-grounded but still requires expert review before external LCA or assurance use.",
+  "nav": [
+    {
+      "chip": "1",
+      "title": "Case",
+      "open": true,
+      "children": [
+        {
+          "anchor": "research-question",
+          "title": "Research question"
+        },
+        {
+          "anchor": "company-selection",
+          "title": "Company selection"
+        },
+        {
+          "anchor": "ontology-design",
+          "title": "Ontology design"
+        }
+      ]
+    },
+    {
+      "chip": "2",
+      "title": "Extraction",
+      "open": true,
+      "children": [
+        {
+          "anchor": "extraction-results",
+          "title": "Extraction results"
+        },
+        {
+          "anchor": "concept-coverage",
+          "title": "Concept coverage"
+        },
+        {
+          "anchor": "audit-flags",
+          "title": "Audit flags"
+        }
+      ]
+    },
+    {
+      "chip": "3",
+      "title": "LCA audit",
+      "open": true,
+      "children": [
+        {
+          "anchor": "lca-scorecard",
+          "title": "Scorecard"
+        },
+        {
+          "anchor": "metric-table",
+          "title": "Metric table"
+        },
+        {
+          "anchor": "diagnosis",
+          "title": "Diagnosis"
+        },
+        {
+          "anchor": "evidence-ledger",
+          "title": "Evidence ledger"
+        }
+      ]
+    },
+    {
+      "chip": "4",
+      "title": "Reproducibility",
+      "open": true,
+      "children": [
+        {
+          "anchor": "limitations",
+          "title": "Limitations"
+        },
+        {
+          "anchor": "raw-artifacts",
+          "title": "Raw artifacts"
+        },
+        {
+          "anchor": "next-steps",
+          "title": "Next steps"
+        },
+        {
+          "anchor": "changelog",
+          "title": "Changelog"
+        }
+      ]
+    }
+  ]
+}

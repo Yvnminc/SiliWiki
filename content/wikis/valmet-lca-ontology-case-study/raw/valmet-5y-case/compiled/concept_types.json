@@ -1,0 +1,168 @@
+[
+  {
+    "concept_type_id": "ghg_emission_metric",
+    "display_name": "GHG emission metric",
+    "definition": "A quantified GHG emissions disclosure with scope, value, unit, year and source grounding.",
+    "required_fields": [
+      "canonical_concept_id",
+      "source.quote"
+    ],
+    "optional_fields": [
+      "scope",
+      "scope3_category",
+      "value",
+      "unit",
+      "year",
+      "boundary",
+      "method"
+    ],
+    "validation_rules": [
+      "value_and_unit_should_appear_together",
+      "scope2_location_based_and_market_based_must_not_be_merged",
+      "source_quote_required"
+    ]
+  },
+  {
+    "concept_type_id": "scope3_category_metric",
+    "display_name": "Scope 3 category metric",
+    "definition": "A quantified or category-level Scope 3 disclosure.",
+    "required_fields": [
+      "canonical_concept_id",
+      "scope3_category",
+      "source.quote"
+    ],
+    "optional_fields": [
+      "value",
+      "unit",
+      "year",
+      "method",
+      "boundary"
+    ],
+    "validation_rules": [
+      "scope3_category_required",
+      "method_missing_should_be_flagged"
+    ]
+  },
+  {
+    "concept_type_id": "lca_claim",
+    "display_name": "LCA or life-cycle claim",
+    "definition": "A qualitative or quantitative statement about LCA, life-cycle analysis, use-phase impacts or value-chain environmental impacts.",
+    "required_fields": [
+      "source.quote"
+    ],
+    "optional_fields": [
+      "product_context",
+      "life_cycle_stage",
+      "value",
+      "unit",
+      "applicability"
+    ],
+    "validation_rules": [
+      "functional_unit_required_for_product_lca_ready"
+    ]
+  },
+  {
+    "concept_type_id": "energy_metric",
+    "display_name": "Energy metric",
+    "definition": "Energy consumption, renewable electricity or fuel disclosure.",
+    "required_fields": [
+      "source.quote"
+    ],
+    "optional_fields": [
+      "value",
+      "unit",
+      "energy_type",
+      "year"
+    ],
+    "validation_rules": [
+      "unit_required_when_value_present"
+    ]
+  },
+  {
+    "concept_type_id": "water_metric",
+    "display_name": "Water metric",
+    "definition": "Water withdrawal, discharge or consumption disclosure.",
+    "required_fields": [
+      "source.quote"
+    ],
+    "optional_fields": [
+      "value",
+      "unit",
+      "water_type",
+      "year",
+      "geography"
+    ],
+    "validation_rules": [
+      "unit_required_when_value_present"
+    ]
+  },
+  {
+    "concept_type_id": "waste_metric",
+    "display_name": "Waste metric",
+    "definition": "Waste generated, diverted, recycled or disposed disclosure.",
+    "required_fields": [
+      "source.quote"
+    ],
+    "optional_fields": [
+      "value",
+      "unit",
+      "waste_type",
+      "treatment",
+      "year"
+    ],
+    "validation_rules": [
+      "unit_required_when_value_present"
+    ]
+  },
+  {
+    "concept_type_id": "assurance_statement",
+    "display_name": "Assurance statement",
+    "definition": "Third-party verification or assurance statement for sustainability metrics.",
+    "required_fields": [
+      "source.quote"
+    ],
+    "optional_fields": [
+      "assurance_level",
+      "provider",
+      "assured_metrics",
+      "standard_ref"
+    ],
+    "validation_rules": [
+      "assurance_scope_should_be_preserved"
+    ]
+  },
+  {
+    "concept_type_id": "target_claim",
+    "display_name": "Target claim",
+    "definition": "A net-zero, emissions-reduction or other sustainability target claim.",
+    "required_fields": [
+      "source.quote"
+    ],
+    "optional_fields": [
+      "target_year",
+      "baseline_year",
+      "target_value",
+      "unit"
+    ],
+    "validation_rules": [
+      "target_without_baseline_should_be_flagged"
+    ]
+  },
+  {
+    "concept_type_id": "missing_disclosure",
+    "display_name": "Missing disclosure",
+    "definition": "A required or expected field, method, boundary or evidence item that is absent or insufficient.",
+    "required_fields": [
+      "expected_concept_id",
+      "missing_fields",
+      "source.quote"
+    ],
+    "optional_fields": [
+      "reason_expected",
+      "audit_implication"
+    ],
+    "validation_rules": [
+      "missing_evidence_is_first_class_output"
+    ]
+  }
+]

@@ -1,0 +1,265 @@
+[
+  {
+    "report_id": "valmet_2018_GRI_Supplement",
+    "company": "Valmet",
+    "report_year": 2018,
+    "file": "valmet_2018_GRI_Supplement.md",
+    "selected_chunks": [
+      {
+        "page": 22,
+        "score": 29,
+        "chars": 2800
+      },
+      {
+        "page": 32,
+        "score": 20,
+        "chars": 2800
+      },
+      {
+        "page": 7,
+        "score": 14,
+        "chars": 2042
+      },
+      {
+        "page": 33,
+        "score": 11,
+        "chars": 2546
+      },
+      {
+        "page": 3,
+        "score": 5,
+        "chars": 2800
+      },
+      {
+        "page": 16,
+        "score": 5,
+        "chars": 2800
+      }
+    ],
+    "evidence_count": 10,
+    "concepts": {
+      "ghg.scope1": 1,
+      "ghg.scope2.location_based": 1,
+      "ghg.scope2.market_based": 1,
+      "ghg.scope3.category1.purchased_goods_and_services": 1,
+      "ghg.scope3.category4.upstream_transportation_distribution": 1,
+      "ghg.scope3.category6.business_travel": 1,
+      "ghg.scope3.category9.downstream_transportation_distribution": 1,
+      "assurance.ghg_inventory_verification": 3
+    },
+    "audit_flags": {
+      "method_missing": 4
+    }
+  },
+  {
+    "report_id": "valmet_2019_GRI_Supplement",
+    "company": "Valmet",
+    "report_year": 2019,
+    "file": "valmet_2019_GRI_Supplement.md",
+    "selected_chunks": [
+      {
+        "page": 24,
+        "score": 27,
+        "chars": 2800
+      },
+      {
+        "page": 39,
+        "score": 18,
+        "chars": 2800
+      },
+      {
+        "page": 8,
+        "score": 15,
+        "chars": 2295
+      },
+      {
+        "page": 40,
+        "score": 10,
+        "chars": 2664
+      },
+      {
+        "page": 3,
+        "score": 5,
+        "chars": 2800
+      },
+      {
+        "page": 17,
+        "score": 5,
+        "chars": 2800
+      }
+    ],
+    "evidence_count": 10,
+    "concepts": {
+      "ghg.scope1": 1,
+      "ghg.scope2.location_based": 1,
+      "ghg.scope2.market_based": 1,
+      "ghg.scope3.category1.purchased_goods_and_services": 1,
+      "ghg.scope3.category4.upstream_transportation_distribution": 1,
+      "ghg.scope3.category6.business_travel": 1,
+      "ghg.scope3.category9.downstream_transportation_distribution": 1,
+      "assurance.ghg_inventory_verification": 3
+    },
+    "audit_flags": {
+      "method_missing": 4
+    }
+  },
+  {
+    "report_id": "valmet_2020_GRI_Supplement",
+    "company": "Valmet",
+    "report_year": 2020,
+    "file": "valmet_2020_GRI_Supplement.md",
+    "selected_chunks": [
+      {
+        "page": 27,
+        "score": 27,
+        "chars": 2800
+      },
+      {
+        "page": 42,
+        "score": 19,
+        "chars": 2800
+      },
+      {
+        "page": 10,
+        "score": 14,
+        "chars": 2177
+      },
+      {
+        "page": 43,
+        "score": 13,
+        "chars": 2800
+      },
+      {
+        "page": 20,
+        "score": 7,
+        "chars": 2800
+      },
+      {
+        "page": 3,
+        "score": 5,
+        "chars": 343
+      }
+    ],
+    "evidence_count": 9,
+    "concepts": {
+      "ghg.scope1": 1,
+      "ghg.scope3.category1.purchased_goods_and_services": 1,
+      "ghg.scope3.category4.upstream_transportation_distribution": 1,
+      "ghg.scope3.category6.business_travel": 1,
+      "ghg.scope3.category9.downstream_transportation_distribution": 1,
+      "assurance.ghg_inventory_verification": 2,
+      "lca.life_cycle_analysis_claim": 1,
+      "missing.scope3_method": 1
+    },
+    "audit_flags": {
+      "method_missing": 5,
+      "functional_unit_missing": 1
+    }
+  },
+  {
+    "report_id": "valmet_2021_GRI_Supplement",
+    "company": "Valmet",
+    "report_year": 2021,
+    "file": "valmet_2021_GRI_Supplement.md",
+    "selected_chunks": [
+      {
+        "page": 27,
+        "score": 31,
+        "chars": 2800
+      },
+      {
+        "page": 45,
+        "score": 19,
+        "chars": 2800
+      },
+      {
+        "page": 10,
+        "score": 14,
+        "chars": 2085
+      },
+      {
+        "page": 46,
+        "score": 11,
+        "chars": 2800
+      },
+      {
+        "page": 20,
+        "score": 7,
+        "chars": 2800
+      },
+      {
+        "page": 23,
+        "score": 5,
+        "chars": 2800
+      }
+    ],
+    "evidence_count": 8,
+    "concepts": {
+      "ghg.scope1": 1,
+      "ghg.scope3.category1.purchased_goods_and_services": 1,
+      "ghg.scope3.category4.upstream_transportation_distribution": 1,
+      "ghg.scope3.category6.business_travel": 1,
+      "ghg.scope3.category9.downstream_transportation_distribution": 1,
+      "assurance.ghg_inventory_verification": 1,
+      "lca.life_cycle_analysis_claim": 1,
+      "target.net_zero": 1
+    },
+    "audit_flags": {
+      "method_missing": 4,
+      "functional_unit_missing": 1,
+      "target_without_baseline": 1
+    }
+  },
+  {
+    "report_id": "valmet_2022_GRI_Supplement",
+    "company": "Valmet",
+    "report_year": 2022,
+    "file": "valmet_2022_GRI_Supplement.md",
+    "selected_chunks": [
+      {
+        "page": 29,
+        "score": 33,
+        "chars": 2800
+      },
+      {
+        "page": 44,
+        "score": 16,
+        "chars": 2800
+      },
+      {
+        "page": 10,
+        "score": 13,
+        "chars": 1530
+      },
+      {
+        "page": 20,
+        "score": 10,
+        "chars": 2800
+      },
+      {
+        "page": 5,
+        "score": 7,
+        "chars": 2800
+      },
+      {
+        "page": 28,
+        "score": 7,
+        "chars": 2800
+      }
+    ],
+    "evidence_count": 7,
+    "concepts": {
+      "ghg.scope1": 1,
+      "ghg.scope3.category1.purchased_goods_and_services": 1,
+      "ghg.scope3.category4.upstream_transportation_distribution": 1,
+      "ghg.scope3.category6.business_travel": 1,
+      "assurance.ghg_inventory_verification": 1,
+      "target.net_zero": 1,
+      "missing.scope3_method": 1
+    },
+    "audit_flags": {
+      "method_missing": 4,
+      "target_without_baseline": 1
+    }
+  }
+]
