@@ -1,0 +1,156 @@
+{
+  "extraction_schema_id": "r2l_extraction_v0.1_scope_ghg_lca",
+  "source_grounding_required": true,
+  "missing_evidence_enabled": true,
+  "extraction_classes": [
+    {
+      "extraction_class": "ghg_emission_metric",
+      "fields": [
+        "canonical_concept_id",
+        "source.quote",
+        "scope",
+        "scope3_category",
+        "value",
+        "unit",
+        "year",
+        "boundary",
+        "method"
+      ],
+      "validation_rules": [
+        "value_and_unit_should_appear_together",
+        "scope2_location_based_and_market_based_must_not_be_merged",
+        "source_quote_required"
+      ]
+    },
+    {
+      "extraction_class": "scope3_category_metric",
+      "fields": [
+        "canonical_concept_id",
+        "scope3_category",
+        "source.quote",
+        "value",
+        "unit",
+        "year",
+        "method",
+        "boundary"
+      ],
+      "validation_rules": [
+        "scope3_category_required",
+        "method_missing_should_be_flagged"
+      ]
+    },
+    {
+      "extraction_class": "lca_claim",
+      "fields": [
+        "source.quote",
+        "product_context",
+        "life_cycle_stage",
+        "value",
+        "unit",
+        "applicability"
+      ],
+      "validation_rules": [
+        "functional_unit_required_for_product_lca_ready"
+      ]
+    },
+    {
+      "extraction_class": "energy_metric",
+      "fields": [
+        "source.quote",
+        "value",
+        "unit",
+        "energy_type",
+        "year"
+      ],
+      "validation_rules": [
+        "unit_required_when_value_present"
+      ]
+    },
+    {
+      "extraction_class": "water_metric",
+      "fields": [
+        "source.quote",
+        "value",
+        "unit",
+        "water_type",
+        "year",
+        "geography"
+      ],
+      "validation_rules": [
+        "unit_required_when_value_present"
+      ]
+    },
+    {
+      "extraction_class": "waste_metric",
+      "fields": [
+        "source.quote",
+        "value",
+        "unit",
+        "waste_type",
+        "treatment",
+        "year"
+      ],
+      "validation_rules": [
+        "unit_required_when_value_present"
+      ]
+    },
+    {
+      "extraction_class": "assurance_statement",
+      "fields": [
+        "source.quote",
+        "assurance_level",
+        "provider",
+        "assured_metrics",
+        "standard_ref"
+      ],
+      "validation_rules": [
+        "assurance_scope_should_be_preserved"
+      ]
+    },
+    {
+      "extraction_class": "target_claim",
+      "fields": [
+        "source.quote",
+        "target_year",
+        "baseline_year",
+        "target_value",
+        "unit"
+      ],
+      "validation_rules": [
+        "target_without_baseline_should_be_flagged"
+      ]
+    },
+    {
+      "extraction_class": "missing_disclosure",
+      "fields": [
+        "expected_concept_id",
+        "missing_fields",
+        "source.quote",
+        "reason_expected",
+        "audit_implication"
+      ],
+      "validation_rules": [
+        "missing_evidence_is_first_class_output"
+      ]
+    }
+  ],
+  "target_concepts": [
+    "ghg.scope1",
+    "ghg.scope2.unspecified",
+    "ghg.scope2.location_based",
+    "ghg.scope2.market_based",
+    "ghg.scope3.total",
+    "ghg.scope3.category1.purchased_goods_and_services",
+    "ghg.scope3.category4.upstream_transportation_distribution",
+    "ghg.scope3.category6.business_travel",
+    "ghg.scope3.category9.downstream_transportation_distribution",
+    "ghg.scope3.category11.use_of_sold_products",
+    "lca.life_cycle_analysis_claim",
+    "lca.use_phase_impact_claim",
+    "target.net_zero",
+    "assurance.ghg_inventory_verification",
+    "missing.scope3_method",
+    "missing.functional_unit"
+  ],
+  "provider_default": "ontology-rule-r2l-v1"
+}

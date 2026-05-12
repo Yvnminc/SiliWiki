@@ -561,6 +561,123 @@ Ontology extraction 不等于一开始就建大图谱。更稳的顺序是：
 - 检查 source quote 是否非空；
 - 检查 `product_lca_ready` 是否有 functional unit。
 
+## 已完成的 5-report pilot {#pilot-5-report}
+
+根据这个框架，我已经把用户端流程实现成一个最小可运行闭环：
+
+```text
+Natural-language meta-ontology
+  → compiled concept types
+  → compiled domain ontology
+  → compiled extraction ontology
+  → LangExtract provider execution
+  → Evidence Objects JSONL
+  → metrics / report summaries
+  → SiliWiki publication
+```
+
+### 用户端输入
+
+用户端只需要给一段自然语言 meta-ontology，不需要手写 prompt、columns 或 LangExtract examples。当前 pilot 使用的输入在：[`raw/pilot-5-report/meta_ontology_definition.md`](raw/pilot-5-report/meta_ontology_definition.md)。
+
+这段 meta-ontology 指定：
+
+- 抽取 GHG emission metric、Scope 3 category metric、LCA claim、assurance statement、target claim、missing disclosure；
+- 每条 evidence 必须保留 source quote 和 source page；
+- Scope 2 location-based 和 market-based 不能合并；
+- materiality-only / target-only / intensity-only 不能误判为 product-LCA-ready；
+- missing evidence 是一等输出。
+
+### 后台自动拆解
+
+后台脚本将 natural-language meta-ontology 编译为三层文件：
+
+| 输出 | 文件 |
+| --- | --- |
+| Concept type definitions | [`raw/pilot-5-report/compiled/concept_types.json`](raw/pilot-5-report/compiled/concept_types.json) |
+| Domain ontology | [`raw/pilot-5-report/compiled/domain_ontology.json`](raw/pilot-5-report/compiled/domain_ontology.json) |
+| Extraction ontology | [`raw/pilot-5-report/compiled/extraction_ontology.json`](raw/pilot-5-report/compiled/extraction_ontology.json) |
+
+当前 domain ontology 覆盖：
+
+- Scope 1；
+- Scope 2 unspecified / location-based / market-based；
+- Scope 3 total；
+- Scope 3 Category 1 / 4 / 6 / 9 / 11；
+- LCA life-cycle claim / use-phase impact claim；
+- GHG assurance / ISO 14064-3；
+- missing Scope 3 method；
+- missing functional unit。
+
+### LangExtract 执行方式
+
+本轮使用一个 offline deterministic LangExtract provider：`ontology-rule-r2l-v1`。
+
+它仍然通过 LangExtract provider 接口运行，并输出 LangExtract annotated JSONL：[`raw/pilot-5-report/langextract_annotated.jsonl`](raw/pilot-5-report/langextract_annotated.jsonl)。
+
+需要明确：
+
+> 这次 pilot 验证的是 **meta-ontology → ontology layers → extraction execution → source-grounded evidence objects → validation metrics** 的系统闭环；不是 live LLM quality benchmark。
+
+后续只要把 provider 从 `ontology-rule-r2l-v1` 换成 Gemini / OpenAI / fine-tuned small model，就可以用同一套 ontology 和 validation layer 评估模型质量。
+
+### 5 篇 report
+
+本轮选了 5 篇 evidence density 较高的 sustainability reports：
+
+| Company | Report | Year | 选择原因 |
+| --- | --- | ---: | --- |
+| Valmet | GRI Supplement | 2019 | 明确包含 LCA claim、Scope 1/2、Scope 3 categories 1/4/6/9 |
+| Brixmor Property Group | Corporate Responsibility Report | 2022 | 有 GHG inventory boundary、assurance、Scope 1/2/3 表格 |
+| Boston Consulting Group | Annual Sustainability Report | 2023 | 有 GHG methodology、Scope 3 business travel、net-zero boundary |
+| Embraer | Responsibility Report | 2023 | 有 ISO 14064、Scope 1/2/3、Scope 3 category table、use-of-sold-product |
+| National Instruments | Corporate Impact Report | 2021 | 有 Scope 1–3 intensity、net-zero target、weak-signal case |
+
+### Pilot metrics
+
+| Metric | Result |
+| --- | ---: |
+| Reports | 5 |
+| Evidence Objects | 48 |
+| Grounded evidence count | 48 |
+| Grounded evidence rate | 1.00 |
+| Missing-evidence objects | 6 |
+| False-ready guard violations | 0 |
+
+Concept type distribution：
+
+| Concept type | Count |
+| --- | ---: |
+| `ghg_emission_metric` | 13 |
+| `scope3_category_metric` | 7 |
+| `assurance_statement` | 15 |
+| `missing_disclosure` | 6 |
+| `target_claim` | 7 |
+
+Audit flag distribution：
+
+| Audit flag | Count | Interpretation |
+| --- | ---: | --- |
+| `method_missing` | 13 | Scope 3 / category values often lack detailed emission factor or calculation-method evidence |
+| `target_without_baseline` | 7 | Net-zero or reduction claims frequently need baseline inspection |
+| `intensity_only` | 1 | Scope 1–3 intensity is useful but not equivalent to absolute inventory |
+
+Full outputs：
+
+- Evidence objects: [`raw/pilot-5-report/evidence_objects.jsonl`](raw/pilot-5-report/evidence_objects.jsonl)
+- Report summaries: [`raw/pilot-5-report/report_summaries.json`](raw/pilot-5-report/report_summaries.json)
+- Metrics: [`raw/pilot-5-report/metrics.json`](raw/pilot-5-report/metrics.json)
+- Run summary: [`raw/pilot-5-report/run_summary.md`](raw/pilot-5-report/run_summary.md)
+
+### 关键观察
+
+1. **用户端确实可以简化为 natural-language meta-ontology。** 后台可自动拆出 concept types、canonical domain concepts 和 extraction classes。
+2. **Source grounding 是可行的。** 48/48 evidence objects 都保留了 source quote 和 page。
+3. **Missing evidence 必须作为输出。** 6 条 missing disclosure 显示了 system 不只是“抽到什么”，也能记录“应该有但没有什么”。
+4. **False-ready guard 很重要。** 本轮没有任何 evidence 被标为 `product_lca_ready`；这符合 sustainability report 的数据边界，避免过度 claim。
+5. **规则 provider 暴露了 schema 问题。** 初始版本把 footnote marker（如 `Scope 12`）误读为 value，也把 GRI index 里的 `305` 误读为 emissions value；修复后加入了 regression tests。这说明 ontology extraction pipeline 必须有 validator 和 TDD，不然 source-grounded 也可能 field-level 错误。
+6. **下一步应该替换 live LLM provider。** 现在闭环已通，后续可以把 deterministic provider 替换为 Gemini/OpenAI，评估 LLM 在同一 ontology 下的 recall、precision、field accuracy 和 cost。
+
 ## 推荐命名体系 {#naming}
 
 为了论文和工程都清楚，建议统一使用下面这些词：
@@ -614,20 +731,19 @@ Ontology extraction 不等于一开始就建大图谱。更稳的顺序是：
 
 ## 下一步 {#next-steps}
 
-我建议接下来按这个顺序做：
+5-report MVP 已经跑通，所以接下来不是再证明“能不能跑”，而是把这个闭环升级成可发表的实验：
 
-1. 把 `ghg_emission_metric`、`lca_claim`、`missing_disclosure` 三类 concept type 固定下来；
-2. 为 Scope 1/2/3、Scope 3 categories、unit、boundary 写第一版 canonical concepts；
-3. 从这些 schema 自动生成 LangExtract prompt 和 examples；
-4. 在 Valmet 2019 + National Instruments 2021 + Brixmor 2022 三份报告上做 pilot；
-5. 输出 evidence_objects.jsonl；
-6. 做一个 validator 和 review table；
-7. 把错误归因回 ontology：缺字段、缺概念、单位污染、prompt 不清、模型误读、报告本身缺失；
-8. 再扩展到 10–20 份 pilot benchmark。
+1. **替换 live LLM provider**：用 Gemini / OpenAI 运行同一套 extraction ontology，与 `ontology-rule-r2l-v1` 的 deterministic baseline 对比；
+2. **建立 gold labels**：从 5-report pilot 扩展到 10–20 reports，并人工标注 Scope 1/2/3、LCA claim、assurance、missing disclosure；
+3. **加入 field-level metrics**：评估 value、unit、year、scope/category、page、source quote 的 accuracy；
+4. **加入 error taxonomy**：区分 ontology 缺概念、字段定义不清、table parsing 错误、model hallucination、报告缺失披露；
+5. **小模型路线**：用 ontology + reviewed evidence objects 训练/蒸馏 small extractor；
+6. **专家 review UI**：把 Evidence Object 变成可点击审核表，支持 accept / correct / reject；
+7. **扩展到 S-LCA**：加入 workers、value-chain actors、community、human rights、health & safety 等社会证据类型。
 
 最重要的是：
 
-> **不要先追求大规模抽取；先让 ontology、schema、evidence object、validator、review loop 成为闭环。**
+> **用户端保持简单：只输入 natural-language meta-ontology；复杂的 domain ontology、extraction ontology、LangExtract prompt、validation 和 review 全部后台自动生成。**
 
 ## References {#references}
 
@@ -635,4 +751,5 @@ Source notes and prior discussion anchors are maintained in [`raw/sources.md`](r
 
 ## Changelog
 
+- 2026-05-13: Added the implemented natural-language meta-ontology workflow and 5-report pilot results: compiled concept types, domain ontology, extraction ontology, LangExtract annotated JSONL, 48 grounded Evidence Objects, metrics and report summaries.
 - 2026-05-13: Created detailed ontology extraction framework wiki; positioned LangExtract as execution layer under meta-ontology / domain ontology / extraction ontology / evidence store; added data model, governance workflow, evaluation, MVP and paper framing.

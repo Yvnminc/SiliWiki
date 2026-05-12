@@ -2,6 +2,15 @@
 
 This source registry supports the ontology extraction framework wiki. It records project discussions, local SiliWiki pages, software documentation and standards used to define the architecture.
 
+## pilot-5-report-2026-05-13
+
+- Type: local experiment output
+- Date: 2026-05-13
+- Title: Natural-language meta-ontology to 5-report Report-to-LCA extraction pilot
+- Local outputs: raw/pilot-5-report/
+- Used by: `content.md#pilot-5-report`
+- Notes: Compiled a natural-language meta-ontology into concept types, domain ontology and extraction ontology; ran LangExtract through the offline deterministic provider `ontology-rule-r2l-v1` on five sustainability reports; produced 48 grounded Evidence Objects, 6 missing-evidence objects and 0 false-ready guard violations. This validates pipeline mechanics, not live LLM extraction quality.
+
 ## user-question-2026-05-13
 
 - Type: research direction from project owner

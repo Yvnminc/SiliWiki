@@ -1,0 +1,226 @@
+[
+  {
+    "report_id": "valmet_2019_GRI_Supplement",
+    "company": "Valmet",
+    "report_year": 2019,
+    "file": "valmet_2019_GRI_Supplement.md",
+    "selected_chunks": [
+      {
+        "page": 24,
+        "score": 27,
+        "chars": 2800
+      },
+      {
+        "page": 39,
+        "score": 18,
+        "chars": 2800
+      },
+      {
+        "page": 8,
+        "score": 15,
+        "chars": 2295
+      },
+      {
+        "page": 40,
+        "score": 10,
+        "chars": 2664
+      },
+      {
+        "page": 3,
+        "score": 5,
+        "chars": 2800
+      }
+    ],
+    "evidence_count": 10,
+    "concepts": {
+      "ghg.scope1": 1,
+      "ghg.scope2.location_based": 1,
+      "ghg.scope2.market_based": 1,
+      "ghg.scope3.category1.purchased_goods_and_services": 1,
+      "ghg.scope3.category4.upstream_transportation_distribution": 1,
+      "ghg.scope3.category6.business_travel": 1,
+      "ghg.scope3.category9.downstream_transportation_distribution": 1,
+      "assurance.ghg_inventory_verification": 3
+    },
+    "audit_flags": {
+      "method_missing": 4
+    }
+  },
+  {
+    "report_id": "brixmor-property-group-inc_2022_Corporate_Responsibility_Report_NYSE_BRX_2022",
+    "company": "Brixmor Property Group Inc",
+    "report_year": 2022,
+    "file": "brixmor-property-group-inc_2022_Corporate_Responsibility_Report_NYSE_BRX_2022.md",
+    "selected_chunks": [
+      {
+        "page": 46,
+        "score": 25,
+        "chars": 2800
+      },
+      {
+        "page": 53,
+        "score": 15,
+        "chars": 1810
+      },
+      {
+        "page": 11,
+        "score": 12,
+        "chars": 1016
+      },
+      {
+        "page": 48,
+        "score": 12,
+        "chars": 1016
+      },
+      {
+        "page": 57,
+        "score": 11,
+        "chars": 2094
+      }
+    ],
+    "evidence_count": 17,
+    "concepts": {
+      "assurance.ghg_inventory_verification": 9,
+      "ghg.scope1": 2,
+      "ghg.scope2.unspecified": 2,
+      "ghg.scope3.total": 2,
+      "missing.scope3_method": 2
+    },
+    "audit_flags": {
+      "method_missing": 2
+    }
+  },
+  {
+    "report_id": "boston-consulting-group_2023_Annual_Sustainability_Report",
+    "company": "Boston Consulting Group",
+    "report_year": 2023,
+    "file": "boston-consulting-group_2023_Annual_Sustainability_Report.md",
+    "selected_chunks": [
+      {
+        "page": 96,
+        "score": 21,
+        "chars": 2800
+      },
+      {
+        "page": 98,
+        "score": 16,
+        "chars": 1974
+      },
+      {
+        "page": 54,
+        "score": 13,
+        "chars": 2746
+      },
+      {
+        "page": 57,
+        "score": 13,
+        "chars": 2032
+      },
+      {
+        "page": 52,
+        "score": 11,
+        "chars": 2800
+      }
+    ],
+    "evidence_count": 10,
+    "concepts": {
+      "assurance.ghg_inventory_verification": 2,
+      "target.net_zero": 5,
+      "missing.scope3_method": 3
+    },
+    "audit_flags": {
+      "target_without_baseline": 5,
+      "method_missing": 3
+    }
+  },
+  {
+    "report_id": "embraer-sa_2023_Responsibility_Report_NYSE_ERJ_2023",
+    "company": "Embraer Sa",
+    "report_year": 2023,
+    "file": "embraer-sa_2023_Responsibility_Report_NYSE_ERJ_2023.md",
+    "selected_chunks": [
+      {
+        "page": 75,
+        "score": 24,
+        "chars": 2686
+      },
+      {
+        "page": 74,
+        "score": 13,
+        "chars": 1057
+      },
+      {
+        "page": 148,
+        "score": 9,
+        "chars": 2388
+      },
+      {
+        "page": 73,
+        "score": 8,
+        "chars": 1983
+      },
+      {
+        "page": 78,
+        "score": 4,
+        "chars": 1490
+      }
+    ],
+    "evidence_count": 7,
+    "concepts": {
+      "ghg.scope3.category1.purchased_goods_and_services": 1,
+      "ghg.scope3.category4.upstream_transportation_distribution": 1,
+      "ghg.scope3.category6.business_travel": 1,
+      "ghg.scope2.unspecified": 1,
+      "ghg.scope3.total": 1,
+      "ghg.scope1": 1,
+      "assurance.ghg_inventory_verification": 1
+    },
+    "audit_flags": {
+      "method_missing": 3
+    }
+  },
+  {
+    "report_id": "national-instruments-corp_2021_Corporate_Impact_Report_NASDAQ_NATI_2021",
+    "company": "National Instruments Corp",
+    "report_year": 2021,
+    "file": "national-instruments-corp_2021_Corporate_Impact_Report_NASDAQ_NATI_2021.md",
+    "selected_chunks": [
+      {
+        "page": 46,
+        "score": 20,
+        "chars": 2179
+      },
+      {
+        "page": 24,
+        "score": 9,
+        "chars": 2018
+      },
+      {
+        "page": 23,
+        "score": 4,
+        "chars": 2660
+      },
+      {
+        "page": 45,
+        "score": 2,
+        "chars": 1506
+      },
+      {
+        "page": 2,
+        "score": 1,
+        "chars": 1417
+      }
+    ],
+    "evidence_count": 4,
+    "concepts": {
+      "ghg.scope123.intensity": 1,
+      "missing.scope3_method": 1,
+      "target.net_zero": 2
+    },
+    "audit_flags": {
+      "intensity_only": 1,
+      "method_missing": 1,
+      "target_without_baseline": 2
+    }
+  }
+]

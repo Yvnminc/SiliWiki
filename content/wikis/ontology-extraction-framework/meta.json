@@ -62,6 +62,7 @@
       "children": [
         { "anchor": "meeting-connection", "title": "上周讨论连接" },
         { "anchor": "mvp", "title": "MVP" },
+        { "anchor": "pilot-5-report", "title": "5-report pilot" },
         { "anchor": "naming", "title": "命名体系" },
         { "anchor": "paper-framing", "title": "论文贡献" },
         { "anchor": "risks", "title": "风险边界" },
