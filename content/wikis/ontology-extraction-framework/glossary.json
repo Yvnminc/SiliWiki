@@ -1,0 +1,213 @@
+{
+  "version": "v0.2",
+  "updated": "2026-05-13",
+  "description": "Canonical terms for the Ontology Extraction Framework wiki.",
+  "categories": [
+    { "key": "architecture", "title": "Architecture", "color": "#5b3df5" },
+    { "key": "ontology", "title": "Ontology layers", "color": "#0f766e" },
+    { "key": "extraction", "title": "Extraction and evidence", "color": "#2563eb" },
+    { "key": "governance", "title": "Governance and evaluation", "color": "#b45309" }
+  ],
+  "keywords": [
+    {
+      "slug": "ontology-extraction-framework",
+      "display": "Ontology Extraction Framework",
+      "aliases": ["本体驱动信息抽取框架", "ontology-managed extraction"],
+      "category": "architecture",
+      "short": "A framework that uses ontology definitions to govern source-grounded information extraction from unstructured data.",
+      "definition": "An Ontology Extraction Framework defines concept types, canonical domain concepts, extraction schemas, validation rules, evidence objects and review workflows so unstructured text can be converted into auditable structured knowledge.",
+      "related": ["meta-ontology", "domain-ontology", "extraction-ontology", "evidence-object"],
+      "sources": ["raw/sources.md#user-question-2026-05-13"]
+    },
+    {
+      "slug": "langextract",
+      "display": "LangExtract",
+      "aliases": ["source-grounded extraction harness", "LangExtract-style extraction"],
+      "category": "extraction",
+      "short": "A source-grounded structured extraction library used as the execution layer.",
+      "definition": "LangExtract is positioned here as the extraction execution layer: it uses extraction classes, attributes, prompt rules and examples to extract structured instances from source text while preserving grounding spans.",
+      "related": ["extraction-ontology", "source-grounding", "evidence-object"],
+      "sources": ["raw/sources.md#langextract-skill", "raw/sources.md#google-langextract"]
+    },
+    {
+      "slug": "meta-ontology",
+      "display": "Meta-ontology",
+      "aliases": ["元本体", "concept type management layer"],
+      "category": "ontology",
+      "short": "The layer that defines how ontology concepts themselves are defined and governed.",
+      "definition": "A meta-ontology specifies concept type definitions, fields, required attributes, validation rules, extraction classes, examples, review policies, status and versioning. It manages the structure of domain ontologies rather than individual report facts.",
+      "related": ["concept-type", "domain-ontology", "ontology-versioning"],
+      "sources": ["raw/sources.md#user-question-2026-05-13", "raw/ontology-schema.md"]
+    },
+    {
+      "slug": "domain-ontology",
+      "display": "Domain ontology",
+      "aliases": ["领域本体", "canonical concept ontology"],
+      "category": "ontology",
+      "short": "The domain-specific concept system for LCA, GHG, Scope 3, units, standards and boundaries.",
+      "definition": "A domain ontology defines canonical concepts, aliases, hierarchy, standard references, expected fields, allowed units, extraction hints and audit notes for a professional domain such as LCA or GHG accounting.",
+      "related": ["canonical-concept", "unit-ontology", "ghg-scope-ontology"],
+      "sources": ["raw/sources.md#ghg-protocol-corporate-standard", "raw/sources.md#ghg-protocol-scope3-standard"]
+    },
+    {
+      "slug": "extraction-ontology",
+      "display": "Extraction ontology",
+      "aliases": ["抽取本体", "task extraction schema"],
+      "category": "ontology",
+      "short": "The task-specific subset of ontology used to generate extraction prompts and validation schemas.",
+      "definition": "An extraction ontology selects concept types, canonical concept filters, fields, source-grounding rules, missing-evidence behavior, LangExtract settings and post-validation steps for a specific extraction run.",
+      "related": ["langextract", "concept-type", "extraction-run"],
+      "sources": ["raw/ontology-schema.md"]
+    },
+    {
+      "slug": "concept-type",
+      "display": "Concept type",
+      "aliases": ["概念类型", "entity class", "schema class"],
+      "category": "ontology",
+      "short": "A schema definition for a family of extractable entities.",
+      "definition": "A concept type defines what fields, constraints, validation rules and review policies apply to a family of entities, such as GHG emission metrics, LCA claims or missing disclosures.",
+      "related": ["meta-ontology", "field-definition", "evidence-object"],
+      "sources": ["raw/ontology-schema.md"]
+    },
+    {
+      "slug": "canonical-concept",
+      "display": "Canonical concept",
+      "aliases": ["标准概念", "ontology concept"],
+      "category": "ontology",
+      "short": "A stable standard concept in the domain ontology.",
+      "definition": "A canonical concept is a normalized domain concept such as ghg.scope2.market_based or ghg.scope3.category1, with definition, aliases, parent concept, standard references and expected fields.",
+      "related": ["domain-ontology", "ontology-alignment", "concept-type"],
+      "sources": ["raw/ontology-schema.md"]
+    },
+    {
+      "slug": "field-definition",
+      "display": "Field definition",
+      "aliases": ["字段定义", "column schema"],
+      "category": "ontology",
+      "short": "The declared type, requirement and constraint for a field in a concept type.",
+      "definition": "A field definition states the name, type, requiredness, allowed values, dependency rules and description for one attribute in an extractable concept type.",
+      "related": ["concept-type", "validation-rule"],
+      "sources": ["raw/ontology-schema.md"]
+    },
+    {
+      "slug": "evidence-object",
+      "display": "Evidence Object",
+      "aliases": ["证据对象", "extracted entity", "source-grounded entity"],
+      "category": "extraction",
+      "short": "The atomic output of ontology-guided extraction.",
+      "definition": "An Evidence Object is an extracted entity bound to a concept type, canonical concept, source quote, page, fields, applicability label, missing fields, audit flags, confidence, review status and ontology version.",
+      "related": ["source-grounding", "provenance", "review-ledger"],
+      "sources": ["raw/sources.md#report-to-lca-evidence-wiki", "raw/ontology-schema.md"]
+    },
+    {
+      "slug": "source-grounding",
+      "display": "Source grounding",
+      "aliases": ["source-grounded extraction", "来源锚定", "证据锚定"],
+      "category": "extraction",
+      "short": "Binding an extraction to the exact source text or page that supports it.",
+      "definition": "Source grounding records the original quote, page, section, file and optionally character interval that support an extracted entity, making unsupported outputs visible and reviewable.",
+      "related": ["provenance", "evidence-object", "auditability"],
+      "sources": ["raw/sources.md#langextract-skill", "raw/sources.md#report-to-lca-evidence-wiki"]
+    },
+    {
+      "slug": "missing-evidence",
+      "display": "Missing evidence",
+      "aliases": ["缺失证据", "missing disclosure", "disclosure gap"],
+      "category": "extraction",
+      "short": "A required or expected disclosure that is absent or insufficient in the source document.",
+      "definition": "Missing evidence is treated as a first-class output when a report lacks expected support for a concept, field, method, unit, boundary or baseline. The system records the gap rather than inventing a value.",
+      "related": ["audit-flag", "false-ready-rate", "evidence-object"],
+      "sources": ["raw/sources.md#meeting-2026-05-06", "raw/ontology-schema.md"]
+    },
+    {
+      "slug": "expert-heuristic",
+      "display": "Expert heuristic",
+      "aliases": ["专家经验", "domain heuristic", "professional rule"],
+      "category": "governance",
+      "short": "A domain expert rule made explicit in ontology, validation or review logic.",
+      "definition": "An expert heuristic is a professional judgment such as 'materiality statements are not quantified inventory' or 'product LCA readiness requires a functional unit', represented as ontology constraints, validation rules, applicability rules or audit flags.",
+      "related": ["validation-rule", "applicability-rule", "professional-agent"],
+      "sources": ["raw/sources.md#user-question-2026-05-13", "raw/sources.md#iso-14040-14044"]
+    },
+    {
+      "slug": "validation-rule",
+      "display": "Validation rule",
+      "aliases": ["验证规则", "schema constraint"],
+      "category": "governance",
+      "short": "A machine-checkable rule that tests extracted fields or concept mappings.",
+      "definition": "A validation rule checks constraints such as required fields, unit compatibility, Scope 3 category presence, source quote availability and separation of location-based versus market-based emissions.",
+      "related": ["field-definition", "expert-heuristic", "audit-flag"],
+      "sources": ["raw/ontology-schema.md"]
+    },
+    {
+      "slug": "applicability-rule",
+      "display": "Applicability rule",
+      "aliases": ["适用性规则", "readiness rule"],
+      "category": "governance",
+      "short": "A rule that determines what task an extracted evidence object can safely support.",
+      "definition": "An applicability rule maps evidence quality and completeness to labels such as product_lca_ready, screening_lca_ready, corporate_inventory_ready, scope3_evidence_ready, weak_signal_only or review_required.",
+      "related": ["false-ready-rate", "expert-heuristic", "evidence-object"],
+      "sources": ["raw/sources.md#report-to-lca-evidence-wiki", "raw/sources.md#iso-14040-14044"]
+    },
+    {
+      "slug": "false-ready-rate",
+      "display": "False-ready rate",
+      "aliases": ["误判可用率", "unsafe readiness rate"],
+      "category": "governance",
+      "short": "The rate at which weak or insufficient evidence is incorrectly marked as ready for a stronger task.",
+      "definition": "False-ready rate measures dangerous overclaiming, such as marking weak narrative disclosure as product_lca_ready when expert review says it lacks functional unit, boundary, method or inventory detail.",
+      "related": ["applicability-rule", "missing-evidence", "auditability"],
+      "sources": ["raw/sources.md#report-to-lca-evidence-wiki"]
+    },
+    {
+      "slug": "review-ledger",
+      "display": "Review ledger",
+      "aliases": ["审核账本", "expert review log"],
+      "category": "governance",
+      "short": "An append-only record of expert decisions and corrections on extracted evidence.",
+      "definition": "A review ledger records reviewer, evidence ID, decision, corrections, notes and timestamp so ontology extraction quality can be audited and errors can feed back into ontology refinement.",
+      "related": ["evidence-object", "ontology-change-log", "auditability"],
+      "sources": ["raw/ontology-schema.md"]
+    },
+    {
+      "slug": "ontology-versioning",
+      "display": "Ontology versioning",
+      "aliases": ["本体版本管理", "schema versioning"],
+      "category": "governance",
+      "short": "Recording which ontology version produced or validated each extraction.",
+      "definition": "Ontology versioning makes concept definitions, field schemas, validation rules and extracted evidence reproducible by recording version IDs in concept definitions, extraction runs and evidence objects.",
+      "related": ["meta-ontology", "ontology-change-log", "extraction-run"],
+      "sources": ["raw/ontology-schema.md"]
+    },
+    {
+      "slug": "ontology-change-log",
+      "display": "Ontology change log",
+      "aliases": ["本体变更日志", "schema changelog"],
+      "category": "governance",
+      "short": "A record of ontology edits and their rationale.",
+      "definition": "An ontology change log records what changed, which objects were affected, why the change was made, and which version came before and after the change.",
+      "related": ["ontology-versioning", "review-ledger"],
+      "sources": ["raw/ontology-schema.md"]
+    },
+    {
+      "slug": "professional-agent",
+      "display": "Professional agent",
+      "aliases": ["专业化 agent", "domain-constrained agent"],
+      "category": "architecture",
+      "short": "An agent whose behavior is constrained by domain ontology, validation, evidence and review workflows.",
+      "definition": "A professional agent is not merely a general LLM with a domain prompt; it operationalizes expert heuristics through ontology, schemas, validation rules, source grounding, missing-evidence detection and human review loops.",
+      "related": ["expert-heuristic", "ontology-extraction-framework"],
+      "sources": ["raw/sources.md#user-question-2026-05-13"]
+    },
+    {
+      "slug": "lazy-knowledge-graph",
+      "display": "Lazy Knowledge Graph",
+      "aliases": ["lazy KG", "按需知识图谱", "局部知识图谱"],
+      "category": "architecture",
+      "short": "A graph generated on demand from retrieved evidence objects rather than pre-materializing all possible edges.",
+      "definition": "A Lazy Knowledge Graph stores evidence objects, metadata, embeddings and provenance first, then dynamically creates local graph nodes and edges for a query, comparison or visualization task.",
+      "related": ["evidence-object", "domain-ontology", "ontology-alignment"],
+      "sources": ["raw/sources.md#report-to-lca-evidence-wiki", "raw/sources.md#peng-2024"]
+    }
+  ]
+}

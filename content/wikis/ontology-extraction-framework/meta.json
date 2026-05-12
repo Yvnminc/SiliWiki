@@ -1,0 +1,73 @@
+{
+  "slug": "ontology-extraction-framework",
+  "title": "Ontology Extraction Framework / 本体驱动信息抽取框架",
+  "sub": "Meta-ontology · LangExtract · Evidence Objects · Expert heuristics · 2026-05",
+  "description": "一篇详细 wiki：解释如何把 LangExtract-style source-grounded extraction 升级为由 meta-ontology、domain ontology、extraction ontology 和 evidence store 管理的专业信息抽取框架。",
+  "logoText": "ONT",
+  "version": "v0.2",
+  "updated": "2026-05-13",
+  "accent": "#5b3df5",
+  "accentSoft": "#ece8ff",
+  "accentDark": "#3720c9",
+  "disclaimer": "本页面是研究架构与方法论设计，用于 Report-to-LCA Evidence Engine 与通用 unstructured-data extraction 框架；具体标准解释和 LCA 判断需要专家复核。",
+  "nav": [
+    {
+      "chip": "0",
+      "title": "Framing",
+      "open": true,
+      "children": [
+        { "anchor": "one-sentence-answer", "title": "一句话答案" },
+        { "anchor": "problem", "title": "背景问题" },
+        { "anchor": "core-judgement", "title": "核心判断" }
+      ]
+    },
+    {
+      "chip": "1",
+      "title": "Architecture",
+      "open": true,
+      "color": "purple",
+      "children": [
+        { "anchor": "langextract-positioning", "title": "LangExtract 定位" },
+        { "anchor": "four-layer-architecture", "title": "四层本体架构" },
+        { "anchor": "data-model", "title": "推荐数据模型" }
+      ]
+    },
+    {
+      "chip": "2",
+      "title": "Professionalization",
+      "open": true,
+      "color": "green",
+      "children": [
+        { "anchor": "expert-heuristics", "title": "Expert heuristic" },
+        { "anchor": "transparency", "title": "透明性" },
+        { "anchor": "business-understanding", "title": "业务理解" }
+      ]
+    },
+    {
+      "chip": "3",
+      "title": "Operations",
+      "open": true,
+      "color": "accent",
+      "children": [
+        { "anchor": "management-workflow", "title": "管理流程" },
+        { "anchor": "kg-relationship", "title": "KG 关系" },
+        { "anchor": "evaluation", "title": "Evaluation" }
+      ]
+    },
+    {
+      "chip": "4",
+      "title": "Execution",
+      "open": true,
+      "color": "orange",
+      "children": [
+        { "anchor": "meeting-connection", "title": "上周讨论连接" },
+        { "anchor": "mvp", "title": "MVP" },
+        { "anchor": "naming", "title": "命名体系" },
+        { "anchor": "paper-framing", "title": "论文贡献" },
+        { "anchor": "risks", "title": "风险边界" },
+        { "anchor": "next-steps", "title": "下一步" },
+        { "anchor": "references", "title": "References" }
+      ]
+    }
+  ]
+}
