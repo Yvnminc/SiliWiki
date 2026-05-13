@@ -207,9 +207,24 @@ async function renderWiki(slug) {
   }
 }
 
+function stripExplicitHeadingAnchor(heading) {
+  const match = heading.textContent.match(/\s*\{#([A-Za-z0-9_-]+)\}\s*$/);
+  if (!match) return '';
+
+  const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
+  let lastText = null;
+  while (walker.nextNode()) lastText = walker.currentNode;
+  if (lastText) {
+    lastText.nodeValue = lastText.nodeValue.replace(/\s*\{#[A-Za-z0-9_-]+\}\s*$/, '');
+  }
+  return match[1];
+}
+
 function prepareArticle(article, slug) {
   const used = new Map();
   article.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(heading => {
+    const explicitId = stripExplicitHeadingAnchor(heading);
+    if (explicitId) heading.id = explicitId;
     if (!heading.id) heading.id = headingToAnchor(heading.textContent, used);
   });
   article.querySelectorAll('img[src], a[href]').forEach(el => {
