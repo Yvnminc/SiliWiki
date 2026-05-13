@@ -17,6 +17,11 @@
       "key": "evidence",
       "title": "Evidence and review",
       "color": "#ea580c"
+    },
+    {
+      "key": "company",
+      "title": "Company and business model",
+      "color": "#2563eb"
     }
   ],
   "keywords": [
@@ -171,6 +176,64 @@
       ],
       "sources": [
         "raw/sources.md#diagnostic-findings"
+      ]
+    },
+    {
+      "slug": "valmet",
+      "display": "Valmet",
+      "aliases": [
+        "Valmet Oyj"
+      ],
+      "category": "company",
+      "short": "A Finnish listed process-industry technology, automation and services company.",
+      "definition": "In this case study, Valmet is treated as a B2B process-industry technology and lifecycle service company whose environmental relevance spans own operations, supply chain and customer use phase.",
+      "related": [
+        "customer-use-phase-leverage",
+        "scope3-hotspot-screening"
+      ],
+      "sources": [
+        "raw/sources.md#valmet-company-profile",
+        "raw/sources.md#valmet-2022-company-context"
+      ]
+    },
+    {
+      "slug": "customer-use-phase-leverage",
+      "display": "Customer use-phase leverage",
+      "aliases": [
+        "客户使用阶段杠杆",
+        "use-phase leverage"
+      ],
+      "category": "company",
+      "short": "The environmental influence created when a company's technology affects customer-site operations.",
+      "definition": "For Valmet, customer use-phase leverage captures the idea that major value-chain environmental impacts may occur when customers use Valmet technologies in production, so LCA interpretation must model customer-site scenarios rather than only own operations.",
+      "related": [
+        "product-lca-readiness",
+        "functional-unit",
+        "valmet"
+      ],
+      "sources": [
+        "raw/sources.md#valmet-2020-2021-use-phase-context",
+        "raw/sources.md#diagnostic-findings"
+      ]
+    },
+    {
+      "slug": "company-assessment-ontology",
+      "display": "Company assessment ontology",
+      "aliases": [
+        "公司评价本体",
+        "业务画像本体"
+      ],
+      "category": "ontology",
+      "short": "Ontology fields for turning business understanding into auditable extraction targets.",
+      "definition": "A company assessment ontology stores company type, business model, lifecycle role, environmental leverage, disclosure maturity, LCA readiness and missing-evidence flags so expert business judgement can be reused by specialized agents.",
+      "related": [
+        "ontology-extraction",
+        "evidence-object",
+        "valmet"
+      ],
+      "sources": [
+        "raw/sources.md#framework-wiki",
+        "raw/sources.md#valmet-company-profile"
       ]
     }
   ]
