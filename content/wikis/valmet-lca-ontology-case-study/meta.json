@@ -1,65 +1,65 @@
 {
   "slug": "valmet-lca-ontology-case-study",
-  "title": "Valmet 五年本体驱动 LCA 诊断",
-  "sub": "公司画像 · Ontology extraction · Evidence Objects · Scope 3 hotspot · 2026-05",
-  "description": "一份中文 Valmet 五年本体驱动 LCA case study：从公司画像、业务模式、Scope 3 热点、LCA claim、assurance 与 missing evidence 出发，展示 ontology-managed extraction 如何把企业披露转成可审计证据对象。",
-  "logoText": "VAL",
-  "version": "v0.2",
+  "title": "Valmet 2018–2022 LCA 专家评估报告",
+  "sub": "专家问题链 · 迭代证据审查 · Scope 3 hotspot · Product LCA readiness · 2026-05",
+  "description": "一份基于 Valmet 2018–2022 五年公开 GRI Supplement 的 LCA 专家评估报告。Ontology extraction 作为证据工具，用 44 条 source-grounded Evidence Objects 支撑公司级碳盘查、Scope 3 热点、产品 LCA readiness、assurance 与 missing evidence 的专业判断。",
+  "logoText": "LCA",
+  "version": "v0.3",
   "updated": "2026-05-13",
   "accent": "#0f766e",
   "accentSoft": "#ccfbf1",
   "accentDark": "#115e59",
-  "disclaimer": "研究型 case study。证据来自 source-grounded extraction 与公开/本地报告文本，但在外部 LCA、投资或 assurance 场景使用前仍需要专家复核。",
+  "disclaimer": "研究型 LCA 专家评估报告。证据来自 Valmet 公开/本地报告文本和 source-grounded Evidence Objects；不构成正式 ISO 14040/14044 critical review、第三方 assurance conclusion 或投资建议。",
   "nav": [
     {
       "chip": "1",
-      "title": "问题与公司",
+      "title": "专家评估框架",
       "open": true,
       "children": [
         {
-          "anchor": "research-question",
-          "title": "研究问题"
+          "anchor": "scope-boundary",
+          "title": "评估对象与边界"
         },
         {
-          "anchor": "company-profile",
-          "title": "公司画像"
+          "anchor": "expert-question-chain",
+          "title": "专家问题链"
         },
         {
-          "anchor": "company-selection",
-          "title": "为什么选择 Valmet"
+          "anchor": "iterative-review",
+          "title": "迭代式证据审查"
         },
         {
-          "anchor": "company-assessment",
-          "title": "公司评价"
-        },
-        {
-          "anchor": "ontology-design",
-          "title": "Ontology 设计"
+          "anchor": "company-context",
+          "title": "公司与业务背景"
         }
       ]
     },
     {
       "chip": "2",
-      "title": "抽取结果",
+      "title": "证据与数据质量",
       "open": true,
       "children": [
         {
-          "anchor": "extraction-results",
-          "title": "Extraction run"
+          "anchor": "evidence-base",
+          "title": "证据基础"
+        },
+        {
+          "anchor": "evidence-types",
+          "title": "证据类型分布"
         },
         {
           "anchor": "concept-coverage",
-          "title": "概念覆盖"
+          "title": "标准概念覆盖"
         },
         {
-          "anchor": "audit-flags",
-          "title": "审计标记"
+          "anchor": "cat1-share",
+          "title": "Category 1 主导性"
         }
       ]
     },
     {
       "chip": "3",
-      "title": "LCA 诊断",
+      "title": "LCA 专业判断",
       "open": true,
       "children": [
         {
@@ -72,30 +72,34 @@
         },
         {
           "anchor": "diagnosis",
-          "title": "诊断结论"
+          "title": "D1–D6 专家诊断"
         },
         {
-          "anchor": "evidence-ledger",
-          "title": "证据台账"
+          "anchor": "recommendations",
+          "title": "对 Valmet 的建议"
         }
       ]
     },
     {
       "chip": "4",
-      "title": "复现与迭代",
+      "title": "证据台账与迭代",
       "open": true,
       "children": [
         {
+          "anchor": "agent-implication",
+          "title": "Ontology agent 启示"
+        },
+        {
+          "anchor": "evidence-ledger",
+          "title": "完整证据台账"
+        },
+        {
           "anchor": "limitations",
-          "title": "方法限制"
+          "title": "限制与下一轮"
         },
         {
           "anchor": "raw-artifacts",
           "title": "可复现文件"
-        },
-        {
-          "anchor": "next-steps",
-          "title": "下一步"
         },
         {
           "anchor": "changelog",

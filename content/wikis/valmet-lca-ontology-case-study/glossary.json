@@ -1,99 +1,120 @@
 {
-  "version": "v0.1",
+  "version": "v0.2",
   "updated": "2026-05-13",
-  "description": "Canonical terms for the Valmet five-year ontology-backed LCA case study.",
+  "description": "Canonical terms for the Valmet 2018–2022 LCA expert assessment report.",
   "categories": [
     {
-      "key": "ontology",
-      "title": "Ontology extraction",
+      "key": "expert-assessment",
+      "title": "LCA expert assessment",
       "color": "#0f766e"
     },
     {
       "key": "lca",
-      "title": "LCA audit",
+      "title": "LCA readiness",
       "color": "#7c3aed"
     },
     {
       "key": "evidence",
-      "title": "Evidence and review",
+      "title": "Evidence and audit",
       "color": "#ea580c"
     },
     {
       "key": "company",
-      "title": "Company and business model",
+      "title": "Company and value-chain context",
       "color": "#2563eb"
     }
   ],
   "keywords": [
     {
+      "slug": "lca-expert-assessment",
+      "display": "LCA expert assessment",
+      "aliases": [
+        "LCA 专家评估",
+        "expert LCA review"
+      ],
+      "category": "expert-assessment",
+      "short": "A source-grounded professional assessment of LCA readiness and disclosure usefulness.",
+      "definition": "In this report, LCA expert assessment means using professional LCA questions to evaluate what Valmet's public disclosures can and cannot support, with every finding traced to Evidence Objects.",
+      "related": [
+        "expert-question-chain",
+        "evidence-backed-finding",
+        "product-lca-readiness"
+      ],
+      "sources": [
+        "raw/sources.md#expert-report-method"
+      ]
+    },
+    {
+      "slug": "expert-question-chain",
+      "display": "Expert question chain",
+      "aliases": [
+        "专家问题链",
+        "iterative expert questions"
+      ],
+      "category": "expert-assessment",
+      "short": "The sequence of LCA questions that drives evidence collection and diagnosis.",
+      "definition": "The question chain starts from corporate inventory, Scope 3 hotspots, product LCA readiness, value-chain leverage, assurance and targets, then iterates based on missing evidence.",
+      "related": [
+        "iterative-ontology-audit",
+        "evidence-object"
+      ],
+      "sources": [
+        "raw/sources.md#diagnostic-findings"
+      ]
+    },
+    {
+      "slug": "iterative-ontology-audit",
+      "display": "Iterative ontology evidence audit",
+      "aliases": [
+        "迭代式 ontology 审查",
+        "iterative evidence review"
+      ],
+      "category": "expert-assessment",
+      "short": "A loop of expert question, ontology extraction, evidence judgement, missing-field flagging and ontology refinement.",
+      "definition": "This report uses ontology extraction as the evidence layer in an iterative LCA review process: expert questions define evidence needs, extraction produces Evidence Objects, audit flags expose gaps, and the ontology is refined for the next round.",
+      "related": [
+        "expert-question-chain",
+        "method-missing"
+      ],
+      "sources": [
+        "raw/sources.md#expert-report-method"
+      ]
+    },
+    {
       "slug": "evidence-object",
       "display": "Evidence Object",
       "aliases": [
         "source-grounded evidence",
-        "extracted entity"
+        "extracted entity",
+        "证据对象"
       ],
       "category": "evidence",
       "short": "A typed, source-grounded extraction instance.",
-      "definition": "In this case study, an Evidence Object stores concept type, canonical concept, value, unit, year, source file, page, quote, applicability, missing fields, audit flags and review status.",
+      "definition": "An Evidence Object stores concept type, canonical concept, value, unit, year, source file, page, quote, applicability, missing fields, audit flags and review status.",
       "related": [
-        "ontology-extraction",
-        "source-grounding"
+        "evidence-backed-finding",
+        "ontology-extraction"
       ],
       "sources": [
         "raw/sources.md#valmet-case-output"
       ]
     },
     {
-      "slug": "ontology-extraction",
-      "display": "Ontology extraction",
+      "slug": "evidence-backed-finding",
+      "display": "Evidence-backed finding",
       "aliases": [
-        "ontology-managed extraction",
-        "本体驱动抽取"
+        "证据支撑诊断",
+        "ontology-backed finding"
       ],
-      "category": "ontology",
-      "short": "Information extraction governed by explicit ontology definitions and validation rules.",
-      "definition": "Ontology extraction compiles a meta-ontology into domain and extraction ontologies, then converts source-grounded spans into Evidence Objects that can be audited and reused.",
+      "category": "evidence",
+      "short": "A professional diagnostic claim linked to Evidence Object IDs.",
+      "definition": "A finding is evidence-backed only when its claim, LCA implication and recommendation can be traced to specific Evidence Objects with source quotes and pages.",
       "related": [
         "evidence-object",
-        "extraction-ontology"
+        "lca-expert-assessment"
       ],
       "sources": [
-        "raw/sources.md#framework-wiki"
-      ]
-    },
-    {
-      "slug": "extraction-ontology",
-      "display": "Extraction ontology",
-      "aliases": [
-        "task ontology",
-        "operational ontology"
-      ],
-      "category": "ontology",
-      "short": "The operational schema for a particular extraction run.",
-      "definition": "The extraction ontology defines target classes, fields, required grounding, validators and audit flags for one extraction task; here it projects LCA/GHG concepts onto Valmet 2018–2022 reports.",
-      "related": [
-        "ontology-extraction",
-        "domain-ontology"
-      ],
-      "sources": [
-        "raw/sources.md#valmet-case-output"
-      ]
-    },
-    {
-      "slug": "domain-ontology",
-      "display": "Domain ontology",
-      "aliases": [
-        "professional ontology",
-        "领域本体"
-      ],
-      "category": "ontology",
-      "short": "The stable professional concept map behind extraction.",
-      "definition": "The domain ontology defines canonical GHG/LCA concepts such as Scope 1, Scope 2 location-based, Scope 3 Category 1, LCA claim, assurance and missing disclosures.",
-      "related": [
-        "extraction-ontology"
-      ],
-      "sources": [
-        "raw/sources.md#valmet-case-output"
+        "raw/sources.md#diagnostic-findings"
       ]
     },
     {
@@ -103,27 +124,11 @@
         "公司碳盘查可用性"
       ],
       "category": "lca",
-      "short": "How usable a report is for corporate GHG inventory review.",
+      "short": "How usable the disclosures are for corporate GHG inventory review.",
       "definition": "A readiness assessment for company-level GHG inventory and disclosure trend analysis. It does not imply product-level LCA readiness.",
       "related": [
-        "product-lca-readiness"
-      ],
-      "sources": [
-        "raw/sources.md#diagnostic-findings"
-      ]
-    },
-    {
-      "slug": "product-lca-readiness",
-      "display": "Product LCA readiness",
-      "aliases": [
-        "产品 LCA 可用性"
-      ],
-      "category": "lca",
-      "short": "Whether evidence is sufficient for product-level LCA modelling.",
-      "definition": "Product LCA readiness requires functional unit, product system boundary, foreground flows, allocation, method and source-grounded values. This Valmet case is rated low because those elements are missing.",
-      "related": [
-        "functional-unit",
-        "scope3-hotspot-screening"
+        "product-lca-readiness",
+        "auditability"
       ],
       "sources": [
         "raw/sources.md#diagnostic-findings"
@@ -137,9 +142,27 @@
       ],
       "category": "lca",
       "short": "Using Scope 3 category evidence to identify likely priority areas.",
-      "definition": "The Valmet case uses Category 1/4/6/9 source-grounded rows to identify purchased goods and services as the dominant captured Scope 3 hotspot.",
+      "definition": "The Valmet assessment uses Category 1/4/6/9 Evidence Objects to identify purchased goods and services as the dominant captured Scope 3 hotspot.",
       "related": [
-        "method-missing"
+        "method-missing",
+        "supplier-material-data"
+      ],
+      "sources": [
+        "raw/sources.md#diagnostic-findings"
+      ]
+    },
+    {
+      "slug": "product-lca-readiness",
+      "display": "Product LCA readiness",
+      "aliases": [
+        "产品 LCA 可用性"
+      ],
+      "category": "lca",
+      "short": "Whether evidence is sufficient for product-level LCA modelling.",
+      "definition": "Product LCA readiness requires functional unit, product system boundary, foreground flows, allocation, method and source-grounded values. This Valmet case is rated low because those elements are missing from public disclosures.",
+      "related": [
+        "functional-unit",
+        "customer-use-phase-leverage"
       ],
       "sources": [
         "raw/sources.md#diagnostic-findings"
@@ -156,7 +179,8 @@
       "short": "Audit flag for missing calculation-method detail.",
       "definition": "An audit flag indicating that a row has values and units but lacks enough emission-factor, activity-data or calculation-method detail for direct LCI reuse.",
       "related": [
-        "evidence-object"
+        "scope3-hotspot-screening",
+        "iterative-ontology-audit"
       ],
       "sources": [
         "raw/sources.md#valmet-case-output"
@@ -170,30 +194,12 @@
       ],
       "category": "lca",
       "short": "The quantified reference unit of a product LCA study.",
-      "definition": "Functional unit defines the quantified performance basis for product LCA. The extracted Valmet LCA/use-phase claims do not provide a functional unit, which blocks product-LCA-ready interpretation.",
+      "definition": "Functional unit defines the quantified performance basis for product LCA. The extracted Valmet LCA/use-phase claims do not provide a functional unit, blocking product-LCA-ready interpretation.",
       "related": [
         "product-lca-readiness"
       ],
       "sources": [
         "raw/sources.md#diagnostic-findings"
-      ]
-    },
-    {
-      "slug": "valmet",
-      "display": "Valmet",
-      "aliases": [
-        "Valmet Oyj"
-      ],
-      "category": "company",
-      "short": "A Finnish listed process-industry technology, automation and services company.",
-      "definition": "In this case study, Valmet is treated as a B2B process-industry technology and lifecycle service company whose environmental relevance spans own operations, supply chain and customer use phase.",
-      "related": [
-        "customer-use-phase-leverage",
-        "scope3-hotspot-screening"
-      ],
-      "sources": [
-        "raw/sources.md#valmet-company-profile",
-        "raw/sources.md#valmet-2022-company-context"
       ]
     },
     {
@@ -204,7 +210,7 @@
         "use-phase leverage"
       ],
       "category": "company",
-      "short": "The environmental influence created when a company's technology affects customer-site operations.",
+      "short": "The environmental influence created when Valmet technologies affect customer-site operations.",
       "definition": "For Valmet, customer use-phase leverage captures the idea that major value-chain environmental impacts may occur when customers use Valmet technologies in production, so LCA interpretation must model customer-site scenarios rather than only own operations.",
       "related": [
         "product-lca-readiness",
@@ -212,28 +218,43 @@
         "valmet"
       ],
       "sources": [
-        "raw/sources.md#valmet-2020-2021-use-phase-context",
-        "raw/sources.md#diagnostic-findings"
+        "raw/sources.md#valmet-2020-2021-use-phase-context"
       ]
     },
     {
-      "slug": "company-assessment-ontology",
-      "display": "Company assessment ontology",
+      "slug": "valmet",
+      "display": "Valmet",
       "aliases": [
-        "公司评价本体",
-        "业务画像本体"
+        "Valmet Oyj"
       ],
-      "category": "ontology",
-      "short": "Ontology fields for turning business understanding into auditable extraction targets.",
-      "definition": "A company assessment ontology stores company type, business model, lifecycle role, environmental leverage, disclosure maturity, LCA readiness and missing-evidence flags so expert business judgement can be reused by specialized agents.",
+      "category": "company",
+      "short": "A Finnish listed process-industry technology, automation and services company.",
+      "definition": "In this report, Valmet is treated as a B2B process-industry technology and lifecycle service company whose environmental relevance spans own operations, supply chain and customer use phase.",
       "related": [
-        "ontology-extraction",
-        "evidence-object",
-        "valmet"
+        "customer-use-phase-leverage",
+        "scope3-hotspot-screening"
       ],
       "sources": [
-        "raw/sources.md#framework-wiki",
-        "raw/sources.md#valmet-company-profile"
+        "raw/sources.md#valmet-company-profile",
+        "raw/sources.md#valmet-2022-company-context"
+      ]
+    },
+    {
+      "slug": "supplier-material-data",
+      "display": "Supplier/material data layer",
+      "aliases": [
+        "供应商材料数据层",
+        "supplier-specific activity data"
+      ],
+      "category": "lca",
+      "short": "The next evidence layer needed to move from Scope 3 screening to LCA modelling.",
+      "definition": "For Valmet, supplier/material data would connect Category 1 purchased goods and services to material composition, activity quantities, supplier-specific factors and emission-factor provenance.",
+      "related": [
+        "scope3-hotspot-screening",
+        "method-missing"
+      ],
+      "sources": [
+        "raw/sources.md#diagnostic-findings"
       ]
     }
   ]
