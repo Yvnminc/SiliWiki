@@ -1,6 +1,6 @@
 {
-  "version": "v0.2",
-  "updated": "2026-05-12",
+  "version": "v0.3",
+  "updated": "2026-05-20",
   "description": "Canonical terms for the Report-to-LCA Evidence Engine research proposal.",
   "categories": [
     {
@@ -22,6 +22,16 @@
       "key": "audit",
       "title": "Auditability and risk",
       "color": "#b45309"
+    },
+    {
+      "key": "paper",
+      "title": "Paper framing",
+      "color": "#1e3a8a"
+    },
+    {
+      "key": "experiment",
+      "title": "Experimental design",
+      "color": "#9333ea"
     }
   ],
   "keywords": [
@@ -520,6 +530,180 @@
       ],
       "sources": [
         "raw/sources.md#meeting-2026-05-06"
+      ]
+    },
+    {
+      "slug": "ontology-managed-extraction",
+      "display": "Ontology-managed extraction",
+      "aliases": [
+        "ontology-guided extraction",
+        "本体管理抽取"
+      ],
+      "category": "extraction",
+      "short": "Extraction governed by domain ontology, validation rules and readiness guards.",
+      "definition": "Ontology-managed extraction uses compiled concept types, canonical concepts, required fields, validators and audit flags to constrain how report text is converted into evidence objects.",
+      "related": [
+        "evidence-object",
+        "false-ready-guard",
+        "readiness-label"
+      ],
+      "sources": [
+        "raw/sources.md#paper-draft-2026-05-20"
+      ]
+    },
+    {
+      "slug": "source-grounded-extraction",
+      "display": "Source-grounded extraction",
+      "aliases": [
+        "grounded extraction",
+        "source grounding",
+        "源文本可追溯抽取"
+      ],
+      "category": "audit",
+      "short": "Extraction where each accepted output is tied to an original source quote or page.",
+      "definition": "Source-grounded extraction requires extracted evidence to retain the report quote, page or section that supports it, making unsupported or hallucinated outputs reviewable.",
+      "related": [
+        "provenance",
+        "auditability",
+        "evidence-span"
+      ],
+      "sources": [
+        "raw/sources.md#gao-2023-rag-survey",
+        "raw/sources.md#min-2023-factscore"
+      ]
+    },
+    {
+      "slug": "false-ready-guard",
+      "display": "False-ready guard",
+      "aliases": [
+        "readiness guard",
+        "误判可用性保护"
+      ],
+      "category": "evaluation",
+      "short": "A validation rule preventing weak disclosures from being labelled product-LCA-ready.",
+      "definition": "A false-ready guard blocks product-LCA-ready labels unless required fields such as functional unit, product boundary, value, unit, method and source quote are present.",
+      "related": [
+        "false-ready-rate",
+        "product-lca-ready",
+        "readiness-label"
+      ],
+      "sources": [
+        "raw/sources.md#paper-draft-2026-05-20",
+        "raw/sources.md#baseline-100-report-rule-2026-05-20"
+      ]
+    },
+    {
+      "slug": "readiness-label",
+      "display": "Readiness label",
+      "aliases": [
+        "applicability label",
+        "LCA-readiness label",
+        "适用性标签"
+      ],
+      "category": "evaluation",
+      "short": "A label stating what an evidence object can and cannot support.",
+      "definition": "Readiness labels distinguish weak signals, corporate inventory evidence, Scope 3 evidence, screening-ready evidence, product-LCA-ready evidence and missing evidence.",
+      "related": [
+        "applicability",
+        "product-lca-ready",
+        "missing-evidence"
+      ],
+      "sources": [
+        "raw/sources.md#paper-draft-2026-05-20"
+      ]
+    },
+    {
+      "slug": "product-lca-ready",
+      "display": "Product-LCA-ready evidence",
+      "aliases": [
+        "产品级 LCA 可用证据"
+      ],
+      "category": "evaluation",
+      "short": "Evidence that satisfies the minimum fields needed for product-level LCA use.",
+      "definition": "Product-LCA-ready evidence requires at least a functional unit or reference flow, product/system boundary, value, unit, method, time context and source quote. Corporate GHG disclosure alone is insufficient.",
+      "related": [
+        "false-ready-guard",
+        "readiness-label",
+        "functional-unit"
+      ],
+      "sources": [
+        "raw/sources.md#iso-14040-14044",
+        "raw/sources.md#paper-draft-2026-05-20"
+      ]
+    },
+    {
+      "slug": "gold-set",
+      "display": "Gold set",
+      "aliases": [
+        "gold standard",
+        "人工标注评测集"
+      ],
+      "category": "experiment",
+      "short": "Human-labelled evidence spans and fields used to evaluate extraction conditions.",
+      "definition": "The Report-to-LCA gold set labels evidence class, canonical concept, source quote, page, value, unit, year, boundary, method, missing fields, audit flags and readiness label for sampled reports or chunks.",
+      "related": [
+        "benchmark",
+        "expert-review",
+        "evaluation-metrics"
+      ],
+      "sources": [
+        "raw/sources.md#paper-draft-2026-05-20"
+      ]
+    },
+    {
+      "slug": "llm-only-baseline",
+      "display": "LLM-only baseline",
+      "aliases": [
+        "vanilla LLM baseline",
+        "普通 LLM 抽取基线"
+      ],
+      "category": "experiment",
+      "short": "A baseline where an LLM extracts structured evidence without compiled ontology constraints.",
+      "definition": "The LLM-only baseline uses the same report chunks as the proposed method but does not apply the full domain ontology, missing-evidence policy or false-ready guards, making it useful for measuring overclaiming and hallucination risk.",
+      "related": [
+        "ontology-managed-extraction",
+        "false-ready-rate"
+      ],
+      "sources": [
+        "raw/sources.md#paper-draft-2026-05-20"
+      ]
+    },
+    {
+      "slug": "rule-baseline",
+      "display": "Rule baseline",
+      "aliases": [
+        "deterministic baseline",
+        "规则基线"
+      ],
+      "category": "experiment",
+      "short": "A deterministic pattern-based extraction condition used for mechanics and regression testing.",
+      "definition": "The rule baseline extracts known GHG, Scope 3, assurance, target and missing-disclosure patterns with low cost and reproducible behavior, but is expected to have limited recall.",
+      "related": [
+        "llm-only-baseline",
+        "ontology-managed-extraction"
+      ],
+      "sources": [
+        "raw/sources.md#baseline-100-report-rule-2026-05-20"
+      ]
+    },
+    {
+      "slug": "missing-disclosure-object",
+      "display": "Missing-disclosure object",
+      "aliases": [
+        "missing evidence object",
+        "缺失披露对象"
+      ],
+      "category": "audit",
+      "short": "An evidence object representing a missing or insufficient methodological disclosure.",
+      "definition": "A missing-disclosure object records that a report lacks an expected method, boundary, functional unit, emission-factor provenance, baseline or assurance-scope detail; this absence is treated as an auditable finding.",
+      "related": [
+        "missing-evidence",
+        "audit-flag",
+        "readiness-label"
+      ],
+      "sources": [
+        "raw/sources.md#paper-draft-2026-05-20",
+        "raw/sources.md#baseline-100-report-rule-2026-05-20"
       ]
     }
   ]

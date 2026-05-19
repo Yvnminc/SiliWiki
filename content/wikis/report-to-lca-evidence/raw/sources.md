@@ -148,3 +148,184 @@ This source registry supports the Report-to-LCA Evidence Engine research proposa
 - Organization: GreenDelta
 - URL: https://www.openlca.org/
 - Notes: Candidate LCA modeling and database environment for downstream integration.
+
+## literature-refresh-2026-05-20
+- Type: literature review update
+- Date: 2026-05-20
+- Notes: Research-paper framing update after targeted review of automated LCA / LCI, LCA ontologies and knowledge graphs, ESG/climate disclosure NLP, GHG extraction benchmarks, structured LLM extraction, grounding and hallucination evaluation.
+
+## paper-draft-2026-05-20
+- Type: research paper draft
+- Title: From Sustainability Reports to LCA-Ready Evidence: Ontology-Managed, Source-Grounded Extraction for Auditable Life Cycle Assessment Data Preparation
+- Local artifact: raw/research-paper-draft-2026-05-20.md
+- Notes: Full draft with abstract, related work, method, experimental design, preliminary 100-report baseline, limitations and references.
+
+## baseline-100-report-rule-2026-05-20
+- Type: preliminary experiment artifact
+- Title: 100-report Report-to-LCA rule baseline analysis
+- Local artifact: raw/baseline-100-report-rule-2026-05-20.md
+- Notes: Deterministic rule-provider baseline over 100 high-signal corporate reports; produced 1,211 grounded Evidence Objects and 359 missing-disclosure objects with zero false-ready guard violations.
+
+## kock-2023
+- Type: review paper
+- Title: Automation of Life Cycle Assessment—A Critical Review of Developments in the Field of Life Cycle Inventory Analysis
+- Authors: Benjamin Köck et al.
+- Venue: Sustainability, 2023
+- DOI: https://doi.org/10.3390/su15065531
+- Notes: Establishes LCI automation and data collection as a key bottleneck.
+
+## cashman-2016
+- Type: paper
+- Title: Mining Available Data from the United States Environmental Protection Agency to Support Rapid Life Cycle Inventory Modeling of Chemical Manufacturing
+- Venue: Environmental Science & Technology, 2016
+- DOI: https://doi.org/10.1021/acs.est.6b02160
+- Notes: Example of mining public data to accelerate LCI modelling.
+
+## mittal-2018
+- Type: paper
+- Title: Toward Automated Inventory Modeling in Life Cycle Assessment: The Utility of Semantic Data Modeling to Predict Real-World Chemical Production
+- Venue: ACS Sustainable Chemistry & Engineering, 2018
+- DOI: https://doi.org/10.1021/acssuschemeng.7b03379
+- Notes: Motivates semantic data modelling for automated LCI.
+
+## zhang-semantic-2015
+- Type: paper
+- Title: LCA-oriented semantic representation for the product life cycle
+- Venue: Journal of Cleaner Production, 2015
+- DOI: https://doi.org/10.1016/j.jclepro.2014.08.053
+- Notes: Semantic representation foundation for product-life-cycle data.
+
+## ghose-2022
+- Type: paper
+- Title: A core ontology for modeling life cycle sustainability assessment on the Semantic Web
+- Venue: Journal of Industrial Ecology, 2022
+- DOI: https://doi.org/10.1111/jiec.13220
+- Notes: Core ontology for LCSA and Semantic Web interoperability.
+
+## wang-2022-knowledge-enriched-lca
+- Type: paper
+- Title: A Knowledge-enriched Framework for Life Cycle Assessment in Manufacturing
+- Venue: Procedia CIRP, 2022
+- DOI: https://doi.org/10.1016/j.procir.2022.02.010
+- Notes: Knowledge-enriched LCA framework for manufacturing.
+
+## saad-2023-neo4j-lci
+- Type: paper
+- Title: A graph database for life cycle inventory using Neo4j
+- Venue: Journal of Cleaner Production, 2023
+- DOI: https://doi.org/10.1016/j.jclepro.2023.136344
+- Notes: Supports graph database representation of LCI data.
+
+## gkousis-2026-lci-llm-review
+- Type: review paper
+- Title: Machine learning and large language models for life cycle inventory compilation: Current situation and future developments
+- Venue: Renewable and Sustainable Energy Reviews, 2026
+- DOI: https://doi.org/10.1016/j.rser.2025.116577
+- Notes: Recent review of ML and LLMs for LCI compilation.
+
+## preuss-you-2026-ai-agents-lca
+- Type: paper
+- Title: Automating Life Cycle Assessments through Artificial Intelligence Agents and Integrated Assessment Models
+- Authors: Michael Preuss and Fengqi You
+- Venue: Environmental Science & Technology, 2026
+- DOI: https://doi.org/10.1021/acs.est.5c14493
+- Notes: AI-agent and integrated-assessment perspective on LCA automation.
+
+## luccioni-2020-sustainability-nlp
+- Type: paper
+- Title: Analyzing Sustainability Reports Using Natural Language Processing
+- Authors: Alexandra Sasha Luccioni, Emily Baylor, Nicolas Duchêne
+- Venue: arXiv, 2020
+- URL: https://arxiv.org/abs/2011.08073
+- Notes: Early direct NLP study on sustainability reports.
+
+## climatebert-2022
+- Type: paper
+- Title: ClimateBERT: A Pretrained Language Model for Climate-Related Text
+- Venue: SSRN, 2022
+- DOI: https://doi.org/10.2139/ssrn.4229146
+- Notes: Climate-specific language model for climate-related text tasks.
+
+## bingler-2022-cheap-talk
+- Type: paper
+- Title: Cheap talk and cherry-picking: What ClimateBERT has to say on corporate climate risk disclosures
+- Venue: Finance Research Letters, 2022
+- DOI: https://doi.org/10.1016/j.frl.2022.102776
+- Notes: Corporate climate disclosure quality and cherry-picking analysis.
+
+## climatebert-netzero-2023
+- Type: paper
+- Title: ClimateBERT-NetZero: Detecting and Assessing Net Zero and Reduction Targets
+- Venue: EMNLP, 2023
+- DOI: https://doi.org/10.18653/v1/2023.emnlp-main.975
+- Notes: Net-zero and reduction-target detection and assessment.
+
+## bronzini-2024-glitter-gold
+- Type: paper
+- Title: Glitter or Gold? Deriving Structured Insights from Sustainability Reports via Large Language Models
+- Venue: EPJ Data Science, 2024
+- DOI: https://doi.org/10.1140/epjds/s13688-024-00481-2
+- Notes: LLM-based structured insight extraction from sustainability reports.
+
+## beck-2025-ghg-benchmark
+- Type: benchmark paper
+- Title: Addressing data gaps in sustainability reporting: A benchmark dataset for greenhouse gas emission extraction
+- Venue: Scientific Data, 2025
+- DOI: https://doi.org/10.1038/s41597-025-05664-8
+- Notes: GHG extraction benchmark from sustainability reports.
+
+## weichel-2025-table-extraction
+- Type: paper
+- Title: Robust Table Information Extraction from Sustainability Reports: A Time-Aware Hybrid Two-Step Approach
+- Venue: ClimateNLP, 2025
+- DOI: https://doi.org/10.18653/v1/2025.climatenlp-1.16
+- Notes: Sustainability-report table extraction for emissions-related data.
+
+## ong-2025-greenwashing
+- Type: paper
+- Title: Towards Robust ESG Analysis Against Greenwashing Risks: Aspect-Action Analysis with Cross-Category Generalization
+- Venue: ACL, 2025
+- DOI: https://doi.org/10.18653/v1/2025.acl-long.723
+- Notes: ESG greenwashing risk analysis using aspect-action framing.
+
+## chuang-2025-judging-washing
+- Type: paper
+- Title: Judging It, Washing It: Scoring and Greenwashing Corporate Climate Disclosures using Large Language Models
+- Venue: ClimateNLP, 2025
+- DOI: https://doi.org/10.18653/v1/2025.climatenlp-1.2
+- Notes: LLM scoring and greenwashing of corporate climate disclosures.
+
+## coen-2022-talk-walk
+- Type: paper
+- Title: Are corporate climate efforts genuine? An empirical analysis of the climate ‘talk–walk’ hypothesis
+- Venue: Business Strategy and the Environment, 2022
+- DOI: https://doi.org/10.1002/bse.3063
+- Notes: Machine-aided analysis of corporate climate talk versus emissions performance.
+
+## zhu-2024-llm-kg
+- Type: review paper
+- Title: LLMs for knowledge graph construction and reasoning: recent capabilities and future opportunities
+- Venue: World Wide Web, 2024
+- DOI: https://doi.org/10.1007/s11280-024-01297-w
+- Notes: Broader support for LLM-assisted knowledge graph construction.
+
+## gao-2023-rag-survey
+- Type: survey paper
+- Title: Retrieval-Augmented Generation for Large Language Models: A Survey
+- Venue: arXiv, 2023
+- URL: https://arxiv.org/abs/2312.10997
+- Notes: Background for source-grounded / retrieval-augmented generation.
+
+## ji-2023-hallucination-survey
+- Type: survey paper
+- Title: Survey of Hallucination in Natural Language Generation
+- Venue: ACM Computing Surveys, 2023
+- DOI: https://doi.org/10.1145/3571730
+- Notes: Background for hallucination and unsupported output risk.
+
+## min-2023-factscore
+- Type: paper
+- Title: FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation
+- Venue: arXiv, 2023
+- URL: https://arxiv.org/abs/2305.14251
+- Notes: Factual precision evaluation using atomic facts and source support.

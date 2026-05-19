@@ -1,379 +1,245 @@
-# Report-to-LCA Evidence Engine / 可审计报告到 LCA 证据引擎
+# Report-to-LCA Evidence Engine / 从企业报告到可审计 LCA 证据
 
-这篇浓缩版文章总结 2026-05-06 与马老师讨论后确定的研究设计：**不把企业 Sustainability Report 直接当成完整产品级 LCA 数据库，而是把它转化为可计算、可检索、可审计的 LCA / Scope 3 / S-LCA 证据层**。
+这篇 wiki 记录当前 paper 的核心故事、系统方法和实验设计：**企业 sustainability reports 不是 product LCA 数据库，但可以被转化为 source-grounded、ontology-managed、可审计的 LCA-relevant Evidence Objects**。
 
 <div class="tldr">
 <strong>TL;DR</strong><br>
-本研究的核心贡献是一个 <strong>ontology-guided, provenance-aware Evidence Engine</strong>：从企业 sustainability reports 中抽取 ESG、供应链、Scope 3 与 S-LCA 相关证据，生成带来源、页码、原文、metadata、embedding 和适用性判断的 Evidence Objects；再通过 schema matching、lazy knowledge graph、missing-evidence detection 和 audit ledger，评估这些证据能否支持 LCA 相关任务，并识别披露缺口与 greenwashing risk indicators。
+这篇文章的核心不是“用 AI 自动算 LCA”，而是提出一个 <strong>ontology-managed Report-to-LCA evidence layer</strong>：从企业 ESG / CSR / sustainability reports 中抽取 GHG、Scope 3、assurance、target、life-cycle claim 与 missing disclosure，并把每一条输出绑定到 source quote、page、canonical concept、missing fields、audit flags 和 readiness label。目标是防止 LLM 把普通 corporate disclosure 误判成 product-LCA-ready data，同时让 LCA 专家更快地审计报告到底能支持什么、缺什么、不能 claim 什么。
 </div>
 
-## 核心定位 {#core-positioning}
+## Paper thesis {#thesis}
 
-这项研究不声称：
+这篇 paper 最稳的 thesis statement 是：
 
-> sustainability reports 可以自动完成严格的 product-level LCA。
+> Corporate sustainability reports are valuable but unsafe intermediate evidence sources for LCA. Ontology-managed, source-grounded extraction can convert them into auditable LCA-relevant evidence objects while explicitly exposing missing methodological evidence and preventing unsupported product-LCA readiness claims.
 
-原因很简单：企业可持续发展报告通常缺少产品级 functional unit、foreground activity data、allocation rules、emission factors、系统边界和可复核的 LCI 明细。直接从报告生成完整 LCA，claim 太强，也容易被 reviewer 质疑。
+中文翻译：
 
-本研究真正解决的是更基础也更可评估的问题：
+> 企业可持续发展报告很有价值，但不能直接当成产品级 LCA 数据。我们的方法把它们转成可追溯、可验证、可审计的 LCA 相关证据对象，同时显式标记缺失的方法学信息，防止普通 ESG 披露被误判为 product-LCA-ready。
 
-> **如何把不可审计的文字报告，转化为可计算、可追溯、可复核的 sustainability evidence layer。**
+这比“LLM extracts LCA data from reports”更准确，也更能抗审稿质疑。
 
-这个 evidence layer 可以服务于四类任务：
+## Why this matters {#why-this-matters}
 
-1. **LCA / LCI applicability assessment**：判断报告证据能否支持 full LCA、screening LCA、corporate inventory 或仅作为 weak signal。
-2. **Scope 3 / supply-chain evidence mining**：识别采购、物流、使用阶段、报废阶段、supplier engagement 等价值链证据。
-3. **Social LCA evidence collection**：抽取 worker、supplier、community、consumer、human rights 等 S-LCA 相关证据。
-4. **Auditability / greenwashing review**：标记缺失披露、边界不清、强叙事弱数据、target 与 performance 脱节、Scope 3 空洞化等风险信号。
+LCA 的瓶颈不只是计算，而是 **data preparation and evidence qualification**：
 
-一句话：**不是 report-to-LCA result，而是 report-to-LCA evidence。**
+- corporate reports 有大量 Scope 1/2/3、energy、water、waste、net-zero、assurance 和 life-cycle language；
+- 但报告通常缺少 product-level functional unit、system boundary、allocation method、foreground activity data、emission factor provenance；
+- LLM 可以读这些报告，但容易把 narrative smoothing 成“看似完整”的结构化数据；
+- LCA 需要的是 conservatism：有证据就抽，没证据就显式标记 missing evidence，而不是补全。
 
-## 研究问题 {#research-questions}
+因此本研究的价值是建立一层 **audit-first converter**：不让报告直接跳到 LCA result，而是先进入 evidence ledger。
 
-### Main RQ
+## Literature gap {#literature-gap}
 
-> How can an ontology-guided and provenance-aware Evidence Engine extract, structure, and evaluate LCA-relevant evidence from corporate sustainability reports?
+现有文献大致分成三类，但中间缺了一层。
 
-中文：
+| Research stream | Existing strength | Gap for this paper |
+| --- | --- | --- |
+| Automated LCA / LCI compilation | 证明 LCI 数据收集与建模是自动化瓶颈；已有 semantic model、KG、LLM-for-LCI work | 多数面向结构化数据库、scientific literature 或 process data，不处理 corporate report 的 auditability 和 missing method |
+| ESG / climate disclosure NLP | 能做 sustainability report classification、ClimateBERT、net-zero detection、GHG extraction、greenwashing scoring | 多数停留在 disclosure / scoring，不检查 functional unit、product boundary、allocation、LCA readiness |
+| LLM grounding / structured extraction | 强调 RAG、factuality、source-grounded extraction、hallucination evaluation | 一般不懂 LCA 约束；grounded quote 仍可能被错误解释成 product-LCA-ready |
 
-> 如何构建一个由 ontology 约束、由 provenance 支撑的 Evidence Engine，将企业 sustainability reports 转换为可审计、可评估、可用于 LCA 相关任务的结构化证据？
+我们的 gap 是：
 
-### RQ1 — Extraction accuracy
+> **从 sustainability report disclosure 到 LCA-ready / not-ready evidence judgement 的 ontology-managed audit layer。**
 
-系统能否准确抽取 LCA / Scope 3 / S-LCA 相关 concept、claim、指标、数值、单位、年份、边界和 evidence span？
+## Method overview {#method}
 
-### RQ2 — Concept and schema matching
-
-抽出的 evidence 能否正确匹配到 Scope 3 categories、S-LCA stakeholder categories、LCA inventory concepts、NAICS sector context 和自建 ontology / glossary？
-
-### RQ3 — Applicability evaluation
-
-每条 evidence 到底能支持什么任务？是 product-level LCA ready、screening LCA ready、corporate inventory ready、Scope 3 evidence ready、S-LCA evidence ready，还是只能作为 weak signal？
-
-### RQ4 — Grounding and auditability
-
-要求每个系统输出都能回到原报告的 page、section、quote 或 table cell，能否减少 unsupported claim，并提升专家复核效率？
-
-### RQ5 — Disclosure gap and greenwashing risk indicators
-
-系统能否识别“报告中本该披露但缺失的证据”，以及模糊 claim、无边界数据、target-only narrative、Scope 3 omission 等可复核风险信号？
-
-## 使用的数据 {#data}
-
-本研究的数据分成三层：候选语料、pilot benchmark 和人工标注 gold standard。
-
-| 层级 | 数据用途 | 建议规模 | 说明 |
-| --- | --- | --- | --- |
-| Candidate corpus | 长期语料池与系统压力测试 | 最高约 20,000 份 sustainability reports | 不作为第一阶段实验要求；用于验证未来可扩展性 |
-| Pilot benchmark | 第一篇论文 / proposal demo | 10–20 份 reports | 覆盖 3 个左右 NAICS sector，每个 sector 3–6 家公司 |
-| Gold standard subset | 精准评估 extraction / matching / auditability | 每份报告抽样标注重点章节 | 只标 Scope 3、energy、materials、water、waste、supplier、S-LCA、targets 等高价值区域 |
-
-### 为什么先小样本
-
-当前阶段不需要一开始处理 20,000 份报告。PhD proposal 和方法论文最关键的是证明：
-
-- schema 定义清楚；
-- extraction pipeline 跑得通；
-- evidence object 可复核；
-- metrics 可计算；
-- 小样本实验能证明方法优于 baseline；
-- 后续可扩展到大规模。
-
-### 数据单位
-
-| Unit | 示例字段 |
-| --- | --- |
-| Report | company, year, NAICS, sector, reporting framework, assurance status |
-| Page / section | page number, section title, table marker, chunk id |
-| Evidence span | raw quote, table cell, bounding box if available |
-| Evidence object | concept, value, unit, boundary, source, confidence, applicability, audit flags |
-| Report-level summary | coverage, missing categories, disclosure risk, reviewer notes |
-
-## 架构设计 {#architecture}
-
-系统的核心不是先做一个巨大的 knowledge graph，而是先生成高质量 **Evidence Objects**。Knowledge graph 采用 lazy loading：平时只保存 evidence、metadata、embedding 和 provenance；需要查询、比较或可视化时，再动态生成局部图。
+系统不是让 LLM 自由总结报告，而是用 meta-ontology 编译出 extraction ontology、canonical concepts、validation rules 和 false-ready guards。
 
 ```mermaid
 flowchart TD
-    A[Corporate sustainability reports<br/>PDF / HTML / text] --> B[Document parsing<br/>page, section, table, chunk]
-    B --> C[Ontology / glossary guided extraction]
-    C --> D[Evidence Object generation]
-    D --> E[CSV / database storage]
-    D --> F[Metadata + provenance ledger]
-    D --> G[Embedding index]
-    G --> H[Top-k retrieval]
-    H --> I[Lazy local knowledge graph]
-    D --> J[Scope 3 / S-LCA / LCA schema matching]
-    J --> K[Applicability scoring]
-    F --> L[Auditability checker]
-    K --> M[Audit table + disclosure gap report]
-    L --> M
-    I --> N[Expert review / visual inspection]
-    M --> N
+    A[Corporate sustainability reports<br/>PDF / HTML / Markdown] --> B[Page-aware chunking<br/>section, table, page anchor]
+    B --> C[Meta-ontology<br/>concept types, required fields]
+    C --> D[Compiled extraction ontology<br/>classes, concepts, examples, validators]
+    D --> E[Source-grounded extraction<br/>rule / LLM-only / ontology-managed]
+    E --> F[Evidence Objects<br/>quote, page, value, unit, concept]
+    F --> G[Validation guards<br/>missing fields, false-ready checks]
+    G --> H[Evidence ledger + dashboard]
+    H --> I[Expert review<br/>gold labels, corrections, paper tables]
 ```
 
-### 模块说明
+核心设计原则：
 
-| 模块 | 作用 | 输出 |
-| --- | --- | --- |
-| Document parser | 把 PDF / HTML 转成 page-aware text、table、section、chunk | chunks, pages, sections |
-| Glossary / ontology extractor | 抽取报告中的关键 concepts、claims、metrics、entities | concept candidates |
-| Evidence object builder | 把 concept 与原文证据、来源、metadata 绑定 | structured evidence objects |
-| Embedding index | 将 evidence / concept 转成 vector，支持相似度计算 | embeddings |
-| Schema matcher | 映射到 Scope 3、S-LCA、LCA ontology、NAICS context | schema labels |
-| Applicability evaluator | 判断证据可用于哪类 LCA 任务 | applicability score |
-| Auditability checker | 检查证据链、缺失字段、claim 支持程度 | audit flags |
-| Lazy KG visualizer | 按 top-k 动态生成局部知识图谱 | local graph |
+1. **No evidence, no claim.** 没有 source quote 的输出不能作为 evidence。
+2. **Missing evidence is evidence.** 缺 functional unit、method、boundary 本身就是审计发现。
+3. **Corporate GHG evidence ≠ product LCA readiness.** Scope 3 或 assurance 不自动等于 product-LCA-ready。
+4. **Ontology constrains interpretation.** number、target、assurance、method、boundary 的意义必须由 domain ontology 判断。
 
-## Evidence Object schema {#evidence-object}
+## Evidence Object schema {#evidence-object-schema}
 
-Evidence Object 是系统的原子单位。每条证据都必须能回答四个问题：
-
-1. **它说了什么？** concept / claim / value / unit / boundary。
-2. **它从哪里来？** report、page、section、quote、chunk id。
-3. **它能用来做什么？** LCA / Scope 3 / S-LCA applicability。
-4. **它有什么问题？** missing fields、confidence、risk flags、review status。
-
-示例 schema：
+Evidence Object 是系统的原子单位。每条 evidence 至少要记录：
 
 ```json
 {
-  "report_id": "company_a_2024",
-  "company": "Company A",
-  "report_year": 2024,
-  "naics_code": "2211",
-  "sector": "Utilities",
-  "concept": "purchased goods and services emissions",
-  "schema_match": "Scope 3 Category 1",
-  "evidence_text": "The company engaged suppliers to reduce upstream emissions...",
+  "evidence_id": "stable id",
+  "report_id": "company_year_report",
+  "company": "Company name",
+  "report_year": 2023,
   "source_page": 42,
-  "source_section": "Value chain emissions",
-  "source_chunk_id": "p42_c03",
-  "evidence_type": "qualitative",
-  "value": null,
-  "unit": null,
+  "source_quote": "Exact text span from the report",
+  "evidence_class": "scope3_category_metric",
+  "canonical_concept_id": "ghg.scope3.category1.purchased_goods_and_services",
+  "value": "2618",
+  "unit": "tCO2e",
+  "year": 2023,
+  "method": null,
   "boundary": "upstream value chain",
-  "similarity_score": 0.78,
-  "confidence": 0.82,
-  "applicability": "weak_signal_only",
-  "missing_fields": ["quantified activity data", "emission factor", "supplier-specific boundary"],
-  "audit_flags": ["method_missing", "weak_evidence"],
-  "greenwashing_risk_indicator": "medium",
-  "review_status": "pending"
+  "missing_fields": ["emission_factor_provenance", "product_boundary"],
+  "audit_flags": ["method_missing"],
+  "readiness_label": "scope3_evidence_ready"
 }
 ```
 
-这类结构让系统避免“自由文本回答”，转而输出可验证的 evidence ledger。
+这让输出变成 ledger，而不是聊天式答案。
 
-## 方法设计 {#methods}
+## Readiness ladder {#readiness-ladder}
 
-### 1. Ontology / glossary-guided extraction
+报告证据不是二元的 usable / unusable，而是一条 readiness ladder：
 
-报告文本不是让 LLM 自由总结，而是在 glossary / ontology / schema 约束下抽取。系统关注的不是普通关键词，而是 **evidence-bearing concepts**：能支持 LCA、Scope 3、S-LCA 或 audit review 的概念、指标、claim 和证据片段。
+| Readiness label | Meaning | Typical required evidence |
+| --- | --- | --- |
+| `weak_signal_only` | 只有叙事、承诺、政策、life-cycle language | quote + concept |
+| `corporate_inventory_ready` | 可支持企业层面的 GHG inventory review | value + unit + scope + year + source |
+| `scope3_evidence_ready` | 可支持 Scope 3 / supply-chain screening | Scope 3 category + value or materiality + boundary context |
+| `screening_ready` | 可用于粗筛或 hotspot identification | enough field context, but assumptions still needed |
+| `product_lca_ready` | 可直接支持产品级 LCA | functional unit + product boundary + value + unit + method + source quote |
+| `missing_evidence` | 应披露但缺失或不足 | missing field + audit implication + source context |
 
-抽取对象包括：
+本研究的关键不是让更多东西变成 `product_lca_ready`，而是准确判断大多数 corporate disclosures 为什么还不到这个级别。
 
-- environmental metrics：emissions、energy、water、waste、materials；
-- Scope 3 categories：purchased goods、transport、business travel、use of sold products、end-of-life；
-- S-LCA topics：workers、local community、value-chain actors、consumers、human rights；
-- report claims：net zero、carbon neutrality、supplier engagement、circularity、sustainable materials；
-- audit cues：baseline、boundary、method、assurance、target progress、omitted categories。
+## Preliminary 100-report baseline {#preliminary-baseline}
 
-### 2. Provenance-first grounding
+我们已经跑了一个 100-report high-signal deterministic rule-provider baseline。这个结果用于验证 pipeline mechanics、evidence density 和 demo feasibility；不是最终 LLM-quality benchmark。
 
-每个输出必须有来源：report file、page、section、quote 或 table cell。系统不追求消除 hallucination，而是通过 provenance-first design 将 unsupported outputs 暴露出来。
+| Metric | Value |
+| --- | ---: |
+| Reports | 100 |
+| Selected chunks | 800 |
+| Evidence Objects | 1,211 |
+| Average evidence / report | 12.11 |
+| Median evidence / report | 11 |
+| Grounded evidence rate | 100% |
+| Missing disclosure objects | 359 |
+| Missing share | 29.64% |
+| False-ready guard violations | 0 |
 
-原则：
+Report-level coverage：
 
-> No evidence, no claim. Missing evidence is itself an output.
+| Signal | Reports with signal |
+| --- | ---: |
+| Scope 3 total or specific category | 43 / 100 |
+| Specific Scope 3 categories | 34 / 100 |
+| LCA / life-cycle claim | 24 / 100 |
+| Assurance statement | 76 / 100 |
+| Target claims | 68 / 100 |
+| Missing Scope 3 method signal | 97 / 100 |
+| Missing functional unit signal | 21 / 100 |
 
-如果报告没有 Scope 3 数据，系统不编造，而是输出：
+Interpretation：
 
-```text
-Expected evidence: Scope 3 category-level disclosure
-Status: Missing / insufficient
-Audit implication: disclosure gap
-```
+- 报告里有大量 climate disclosure 和 assurance，但不代表 product LCA readiness；
+- target、assurance、Scope 3 disclosure 很多，method / functional unit / boundary 缺口也很多；
+- 这证明系统的产品定位更像 **LCA / sustainability disclosure audit assistant**，不是自动 LCA calculator；
+- zero false-ready guard violations 说明 conservative readiness guard 是可实现的。
 
-### 3. Embedding + lazy knowledge graph
+## Experimental design {#experimental-design}
 
-所有 Evidence Objects 会保存 embedding，支持相似度检索和 concept matching。但系统不预先生成全量图，因为如果 20,000 份报告、每份 500 个 concepts，两两连接会产生不可控的边数量。
+正式 paper 要跑三组对照。
 
-采用 lazy loading：
+| Condition | Description | Purpose |
+| --- | --- | --- |
+| C1 Rule baseline | deterministic rule provider | mechanics sanity check, low-cost lower bound, regression testing |
+| C2 LLM-only | same chunks, generic LLM structured extraction without compiled ontology constraints | test hallucination, over-readiness, target-vs-measured-data confusion |
+| C3 Ontology-managed | meta-ontology + canonical concepts + validators + false-ready guards + missing evidence objects | proposed method |
 
-1. 先保存 CSV / database + embedding + metadata；
-2. 查询时取 top-k evidence / concepts；
-3. 只在局部节点上计算 similarity edges；
-4. 动态生成 local knowledge graph；
-5. 给专家可视化检查。
+Gold set 建议：
 
-例如 top-100 节点最多约 10,000 条边，可计算、可解释、可展示。
+- stronger paper version: **100 reports or 300–500 LCA-relevant chunks**；
+- 覆盖 manufacturing、chemicals/materials、energy/utilities、transport/logistics、tech/services、finance/property、consumer goods；
+- 包含 clean table、messy markdown、短 CSR report、长 integrated report；
+- 每条 gold label 包含 evidence class、canonical concept、source quote、page、value/unit/year、boundary/method、missing fields、audit flags、readiness label。
 
-### 4. NAICS-aware comparison
+## Evaluation metrics {#evaluation-metrics}
 
-不同行业的 sustainability report 披露强度差异很大。Energy、manufacturing、technology、education、financial services 的 Scope 3 和 supply-chain evidence 不应简单横向比较。
+不只看 extraction F1。核心指标应该覆盖四层。
 
-因此实验采用 NAICS 做 sector control：
-
-- within-sector comparison：同一 NAICS sector 内比较 disclosure quality；
-- cross-sector pattern：观察行业间证据覆盖差异；
-- fair baseline：与已有 NAICS-based 方法进行更公平比较。
-
-### 5. Human-in-the-loop audit
-
-专家不是被替代，而是从“全篇手动阅读”转为“审核结构化 evidence ledger”。系统负责预抽取、预匹配、预标记；专家负责复核、修正、确认 gold labels。
-
-## 实验设计 {#experiments}
-
-实验不追求一次跑完整 20,000 份报告，而是先完成一个最小可验证闭环。
-
-### Experiment 1 — Extraction accuracy
-
-**目标：** 评估系统从报告中抽取 LCA-relevant evidence 的准确率。
-
-| 设置 | 内容 |
+| Metric group | Metrics |
 | --- | --- |
-| Input | 10–20 份 sustainability reports 的重点章节 |
-| Gold labels | concept、evidence span、page、value、unit、boundary、schema label |
-| Baselines | keyword/rule-based, vanilla LLM, RAG+LLM, ontology-guided pipeline |
-| Metrics | precision, recall, F1, evidence span accuracy, page accuracy, hallucinated evidence rate |
+| Extraction quality | evidence precision / recall / F1; class macro-F1; concept accuracy; value / unit / year accuracy |
+| Grounding and auditability | exact quote match; page traceability; unsupported evidence rate; duplicate / merged evidence error |
+| LCA-readiness safety | false-ready rate; target-vs-measured-data confusion; assurance-scope overgeneralization |
+| Missing evidence | missing functional unit recall; missing boundary recall; missing method recall; missing emission-factor provenance recall |
+| Operations | runtime/report; cost/report; chunks/report; token count; retry count; cache hit rate |
 
-### Experiment 2 — Schema matching and concept grounding
+主假设：
 
-**目标：** 评估 evidence 到 Scope 3 / S-LCA / LCA schema 的映射质量。
+> C3 ontology-managed extraction should reduce false-ready claims and improve missing-evidence recall while preserving competitive extraction quality and source grounding.
 
-| 任务 | 指标 |
+如果 C2 LLM-only 抽得更多，但把 target、assurance、generic LCA language 误判为 LCA-ready，那么 C3 更 scientifically defensible。
+
+## Research-paper draft {#paper-draft}
+
+当前完整 paper draft 已写入 raw：
+
+- [`raw/research-paper-draft-2026-05-20.md`](raw/research-paper-draft-2026-05-20.md)
+
+Draft 内容包括：
+
+- abstract；
+- introduction；
+- related work；
+- why this research is necessary；
+- ontology-managed extraction method；
+- data and gold-set design；
+- C1 / C2 / C3 experimental design；
+- preliminary 100-report baseline；
+- discussion；
+- limitations；
+- ethics；
+- references；
+- appendix with proposed paper tables and figures。
+
+## Research value {#research-value}
+
+这项研究的价值在于它把“报告抽取”从一般 NLP 任务推进到 LCA 研究需要的证据治理任务。
+
+1. **Scientific conservatism:** 不把 corporate disclosure 过度解释为 product LCA data。
+2. **Auditability:** 每条 evidence 都保留 quote、page、concept、field、flag，专家能复核。
+3. **Missingness as signal:** 缺 method、functional unit、boundary 是输出，不是静默失败。
+4. **Ontology-managed interpretation:** LCA 概念、GHG scope、assurance、target、readiness 由 schema 约束，而不是自由文本判断。
+5. **Benchmarkable method:** 可以通过 gold set、C1/C2/C3 对照、false-ready rate、missing-evidence recall 做科学评估。
+
+## Limitations {#limitations}
+
+| Limitation | Handling |
 | --- | --- |
-| Scope 3 category matching | top-1 / top-3 accuracy |
-| S-LCA stakeholder/topic matching | macro-F1 |
-| NAICS-aware concept matching | within-sector accuracy |
-| Similarity threshold tuning | precision-recall curve |
+| Sustainability reports are not product LCA inventories | Use readiness labels and false-ready guards |
+| PDF-to-markdown conversion can damage tables and footnotes | Validate value/unit/year at field level; inspect table-heavy cases |
+| Source grounding does not guarantee correctness | Combine grounding with ontology constraints and gold labels |
+| Missing data cannot be recovered if not disclosed | Represent missing disclosure explicitly |
+| High-signal baseline is not representative | Use stratified gold set for final claims |
+| LLM outputs vary by model and prompt | Cache by chunk hash + prompt version + model; log provider settings |
 
-### Experiment 3 — Applicability evaluation
+## Next experimental milestone {#next-milestone}
 
-**目标：** 判断抽取出的 evidence 到底能用于哪类 LCA 任务。
+下一步应该直接进入 evaluation harness：
 
-| Applicability label | 含义 |
-| --- | --- |
-| `product_lca_ready` | 可直接支持产品级 LCA；预计很少 |
-| `screening_lca_ready` | 可用于粗略 screening，需要 assumptions |
-| `corporate_inventory_ready` | 可用于企业级环境 inventory |
-| `scope3_evidence_ready` | 可用于 Scope 3 / supply-chain evidence |
-| `social_lca_evidence_ready` | 可用于 S-LCA evidence collection |
-| `weak_signal_only` | 只有叙事、目标或政策，不可直接量化 |
-| `not_applicable` | 与 LCA / S-LCA 任务无关 |
-
-关键指标：applicability accuracy、macro-F1、false-ready rate、expert agreement、confidence calibration。
-
-### Experiment 4 — Auditability and provenance
-
-**目标：** 验证 provenance-aware pipeline 是否让专家更容易复核系统输出。
-
-| 指标 | 含义 |
-| --- | --- |
-| provenance completeness | 输出中包含 page / quote / source 的比例 |
-| citation correctness | 引用页码和原文是否真实支持输出 |
-| evidence-claim support | quote 是否足以支持 claim |
-| reviewer time | 专家接受/拒绝一条 evidence 的时间 |
-| correction distance | 每条 evidence 需要修正的字段数量 |
-
-### Experiment 5 — Disclosure gap and greenwashing risk indicators
-
-**目标：** 不做法律意义上的 greenwashing 判决，而是识别可复核风险信号。
-
-| Risk indicator | 例子 |
-| --- | --- |
-| `scope3_missing` | value-chain-heavy sector 但没有 Scope 3 table |
-| `target_without_baseline` | “net zero by 2050” 但无 baseline |
-| `intensity_only` | 只报强度下降，不报绝对排放 |
-| `boundary_unclear` | 组织边界或 operational boundary 不明 |
-| `method_missing` | 无 emission factor / accounting method |
-| `selective_category` | 只报容易的 Scope 3 类别，遗漏 purchased goods |
-| `weak_evidence` | 强 claim 只有模糊叙事，无数据 |
-
-## 预期输出 {#outputs}
-
-系统最终输出不是一篇普通总结，而是可审计的数据产品。
-
-### 1. Evidence table
-
-每一行是一条 Evidence Object，包含 source、concept、schema、applicability、missing fields 和 audit flags。
-
-### 2. Report-level audit summary
-
-每份报告生成：
-
-```text
-Company: A
-Sector: Utilities
-Report year: 2024
-Scope 3 evidence coverage: partial
-Strongest evidence: Scope 1/2 quantified emissions with assurance
-Weakest evidence: supplier-specific activity data missing
-Disclosure gap: Scope 3 Category 1 method not disclosed
-Greenwashing risk indicators: medium
-Reviewer action: inspect pages 42, 58, 91
-```
-
-### 3. Lazy KG visualization
-
-按 query 或 company 动态生成局部 graph，用于展示 company、concept、Scope 3 category、evidence span、risk flag 之间的关系。
-
-### 4. Benchmark and metrics
-
-生成一个 report-to-evidence benchmark，用来比较不同 pipeline 在 accuracy、efficiency、grounding、auditability 和 cost 上的表现。
-
-## 当前结论 {#conclusions}
-
-这次方法整合后的研究结论可以浓缩成五点：
-
-1. **研究 claim 必须降级。** Sustainability reports 不能被直接当成严格 product-level LCA 数据源；更合理的定位是 LCA-relevant evidence source。
-2. **核心贡献是 Evidence Object，不是大模型回答。** 论文的原子单位应该是带 provenance、metadata、embedding、schema label 和 applicability 的 structured evidence object。
-3. **Missing evidence 是有价值输出。** Scope 3 披露缺失、边界缺失、method 缺失不能由模型补齐，而应被显式标记为 disclosure gap。
-4. **Lazy KG 是正确架构。** 不应提前构建全量知识图谱；先保存 evidence + embedding，需要时按 top-k 动态生成局部图，才能兼顾成本和可解释性。
-5. **实验应先小后大。** 当前阶段用 10–20 份报告建立 gold standard、验证 pipeline 和评价指标，比直接跑 20,000 份报告更有学术说服力。
-
-因此，这条研究线最稳的 thesis statement 是：
-
-> An ontology-guided, provenance-aware Evidence Engine can transform corporate sustainability reports into auditable LCA-relevant evidence objects, enabling more reliable extraction, applicability assessment, disclosure-gap detection, and expert review than free-form LLM summarization.
-
-## 边界与限制 {#limitations}
-
-| 限制 | 处理方式 |
-| --- | --- |
-| 报告通常不是产品级 LCA 数据 | 用 applicability labels 防止 overclaim |
-| Greenwashing 判断敏感 | 只输出 risk indicators，交给专家复核 |
-| LLM hallucination 不能彻底消除 | 强制 provenance；无证据则不输出 claim |
-| Gold labels 成本高 | 先做 focused annotation，不全量标注整本报告 |
-| 披露格式差异大 | 使用 ontology + NAICS sector control |
-| API/token 成本高 | 小样本实验优先；大规模阶段申请 HDR Support Scheme |
-
-## 下一阶段工作 {#next-stage}
-
-最优先的不是继续堆功能，而是完成可评估闭环：
-
-1. 固定 Evidence Object schema；
-2. 选定 10–20 份 pilot reports；
-3. 写 annotation guideline；
-4. 人工标注 Scope 3 / supply chain / energy / materials / S-LCA 重点区域；
-5. 跑 keyword、vanilla LLM、RAG+LLM、ontology-guided pipeline 四组 baseline；
-6. 输出 extraction、matching、applicability、auditability、efficiency 五组指标；
-7. 做一个 report-level audit table 和 lazy KG demo；
-8. 申请 HDR Support Scheme 覆盖 API/token 成本。
+1. 固定 gold annotation schema；
+2. 选 100-report / 300–500 chunk gold set；
+3. 实现统一 runner：`rule`, `llm_only`, `ontology_managed`；
+4. 加缓存、retry、errors.jsonl、cost/time logging；
+5. 跑 C1/C2/C3；
+6. 生成 main results table、safety table、error taxonomy；
+7. 用正式结果替换 draft 中 preliminary-only 的 Results 部分。
 
 ## References {#references}
 
-Source details are maintained in [`raw/sources.md`](raw/sources.md). The full earlier proposal draft is stored in [`raw/proposal-full.md`](raw/proposal-full.md), and the schema draft is stored in [`raw/extraction-schema.md`](raw/extraction-schema.md).
+Sources and literature anchors are maintained in [`raw/sources.md`](raw/sources.md). Earlier proposal artifacts remain available in [`raw/proposal-full.md`](raw/proposal-full.md) and [`raw/extraction-schema.md`](raw/extraction-schema.md). The 2026-05-20 full research paper draft is stored in [`raw/research-paper-draft-2026-05-20.md`](raw/research-paper-draft-2026-05-20.md).
 
-Key source groups:
+## Changelog {#changelog}
 
-- Meeting transcript: 2026-05-06 LCA Evidence Engine research discussion with Ma.
-- LLM / Agentic LCA literature: Preuss et al. 2024; Tu et al. 2024; Zhang et al. 2025; Kumar et al. 2025.
-- KG / ontology / matching: Peng et al. 2024; Agentic LCA wiki.
-- Reporting frameworks: GHG Protocol Corporate Standard, GHG Protocol Scope 3 Standard, GRI, IFRS S1/S2, ESRS.
-- LCA / S-LCA frameworks: ISO 14040/14044, UNEP S-LCA Guidelines, Brightway, openLCA.
-
-## Changelog
-
+- 2026-05-20: Updated page from proposal/method note into paper-facing wiki; added literature-grounded story, 100-report baseline, C1/C2/C3 experimental design, readiness ladder, and full research-paper draft under raw.
 - 2026-05-12: Rewritten as a condensed methods article after the 2026-05-06 meeting, emphasizing Evidence Objects, provenance-first extraction, lazy KG, pilot benchmark design, NAICS-aware evaluation and disclosure-gap audit.
 - 2026-05-06: Created initial proposal wiki for Report-to-LCA Evidence Engine.

@@ -1,93 +1,59 @@
 {
   "slug": "report-to-lca-evidence",
-  "title": "Report-to-LCA Evidence Engine / 可审计报告到 LCA 证据引擎",
-  "sub": "Condensed methods article · Sustainability reports · Evidence Objects · Lazy KG · Auditability · 2026-05",
-  "description": "一篇浓缩方法文章：将企业 sustainability reports 转换为带 provenance 的 LCA / Scope 3 / S-LCA 结构化证据层，并设计 extraction、matching、applicability、auditability 与 disclosure-gap 实验。",
+  "title": "Report-to-LCA Evidence Engine / 从企业报告到可审计 LCA 证据",
+  "sub": "Ontology-managed extraction · Source grounding · Missing evidence · False-ready guards · 100-report baseline · 2026-05",
+  "description": "将企业 sustainability reports 转换为 source-grounded、ontology-managed、可审计的 LCA-relevant Evidence Objects；用 missing evidence 和 false-ready guards 防止普通 ESG 披露被误判为 product-LCA-ready。",
   "logoText": "R2L",
-  "version": "v0.2",
-  "updated": "2026-05-12",
+  "version": "v0.3",
+  "updated": "2026-05-20",
   "accent": "#2563eb",
   "accentSoft": "#dbeafe",
   "accentDark": "#1e3a8a",
-  "disclaimer": "本页面是研究设计与方法论浓缩文章，不包含未授权企业报告原文或私有数据。Greenwashing 相关输出仅作为可复核风险信号，不构成法律或声誉判断。",
+  "disclaimer": "本页面是研究设计与方法论页面，不构成 product carbon footprint 或 LCA 认证结论。Greenwashing / readiness 相关输出仅作为可复核风险信号，不构成法律或声誉判断。",
   "nav": [
     {
       "chip": "0",
-      "title": "Framing",
+      "title": "Story",
       "open": true,
       "children": [
-        {
-          "anchor": "core-positioning",
-          "title": "核心定位"
-        },
-        {
-          "anchor": "research-questions",
-          "title": "研究问题"
-        },
-        {
-          "anchor": "data",
-          "title": "使用的数据"
-        }
+        { "anchor": "thesis", "title": "Paper thesis" },
+        { "anchor": "why-this-matters", "title": "Why this matters" },
+        { "anchor": "literature-gap", "title": "Literature gap" }
       ]
     },
     {
       "chip": "1",
-      "title": "System",
+      "title": "Method",
       "open": true,
       "color": "green",
       "children": [
-        {
-          "anchor": "architecture",
-          "title": "架构设计"
-        },
-        {
-          "anchor": "evidence-object",
-          "title": "Evidence Object"
-        },
-        {
-          "anchor": "methods",
-          "title": "方法设计"
-        }
+        { "anchor": "method", "title": "Method overview" },
+        { "anchor": "evidence-object-schema", "title": "Evidence Object" },
+        { "anchor": "readiness-ladder", "title": "Readiness ladder" }
       ]
     },
     {
       "chip": "2",
-      "title": "Evaluation",
+      "title": "Experiment",
       "open": true,
       "color": "purple",
       "children": [
-        {
-          "anchor": "experiments",
-          "title": "实验设计"
-        },
-        {
-          "anchor": "outputs",
-          "title": "预期输出"
-        },
-        {
-          "anchor": "conclusions",
-          "title": "当前结论"
-        }
+        { "anchor": "preliminary-baseline", "title": "100-report baseline" },
+        { "anchor": "experimental-design", "title": "Experimental design" },
+        { "anchor": "evaluation-metrics", "title": "Evaluation metrics" }
       ]
     },
     {
       "chip": "3",
-      "title": "Execution",
+      "title": "Paper",
       "open": true,
       "color": "accent",
       "children": [
-        {
-          "anchor": "limitations",
-          "title": "边界与限制"
-        },
-        {
-          "anchor": "next-stage",
-          "title": "下一阶段"
-        },
-        {
-          "anchor": "references",
-          "title": "References"
-        }
+        { "anchor": "paper-draft", "title": "Paper draft" },
+        { "anchor": "research-value", "title": "Research value" },
+        { "anchor": "limitations", "title": "Limitations" },
+        { "anchor": "next-milestone", "title": "Next milestone" },
+        { "anchor": "references", "title": "References" }
       ]
     }
   ]
